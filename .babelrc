@@ -1,0 +1,24 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "modules": false,
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/react",
+    "@babel/stage-0"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    [
+      "@babel/transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
+  ]
+}
