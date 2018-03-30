@@ -3,8 +3,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   devtool: 'cheap-module-source-map',
-  entry: ['./src/index.jsx'],
+  entry: './src/index.jsx',
   output: {
     pathinfo: true,
     filename: 'static/js/bundle.js',
@@ -22,7 +23,7 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /\.(js|jsx|mjs)$/,
+            test: /\.(js|jsx)$/,
             include: path.resolve(__dirname, 'src'),
             exclude: [/[/\\\\]node_modules[/\\\\]/],
             use: [
@@ -37,7 +38,7 @@ module.exports = {
             ],
           },
           {
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx)$/, /\.html$/, /\.json$/],
             loader: 'file-loader',
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
@@ -52,9 +53,7 @@ module.exports = {
       inject: true,
       template: './index.html',
     }),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   node: {
@@ -68,7 +67,6 @@ module.exports = {
     hints: false,
   },
   devServer: {
-    disableHostCheck: false,
     compress: true,
     clientLogLevel: 'none',
     hot: true,
