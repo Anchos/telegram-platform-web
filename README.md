@@ -10,6 +10,13 @@ $ brew install yarn
 $ yarn install
 ```
 
+#### WINDOWS
+Install *Node.JS* && Install *Yarn*
+```cmd
+cd [cloned git]
+yarn
+```
+
 ## Run
 
 * `yarn start`
