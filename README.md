@@ -1,32 +1,29 @@
+<!--
+  Don't touch this file or I will find you and cut your fingers.
+-->
+
 ## Installation
 
-### Install
-
-#### OSX
+You’ll need to have [Node](https://nodejs.org) on your local development machine. It's preferable to use [Yarn](https://yarnpkg.com) to manage dependencies, running scripts, etc.
 
 ```sh
-$ brew install node
-$ brew install yarn
 $ yarn install
 ```
 
-#### WINDOWS
-Install *Node.JS* && Install *Yarn*
-```cmd
-cd [cloned git]
-yarn
+Or if you are don't want to use Yarn (not recommended).
+
+```sh
+$ npm install
 ```
 
-## Run
+## Available scripts
 
-* `yarn start`
+### `yarn start` or `npm start`
 
-Runs the app in development mode.
-
+Runs the app in development mode.<br>
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
-The page will automatically reload if you make changes to the code.
-
+The page will automatically reload if you make changes to the code.<br>
 You will see the build errors in the console.
 
 ### `yarn build` or `npm run build`
