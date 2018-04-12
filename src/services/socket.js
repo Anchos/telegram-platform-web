@@ -1,60 +1,145 @@
-/**
- * Wrapper concept
- */
+import { EventEmitter } from 'eventemitter3';
+// import { isPromise } from 'helpers';
 
-import { EventEmitter } from 'events';
-
-export const OPEN = 'OPEN';
-export const ERROR = 'ERROR';
-export const CLOSE = 'CLOSE';
+export const SOCKET_EVENTS = [
+  'open',
+  'message',
+  'error',
+  'close',
+  'disconnect',
+];
 
 class Socket {
-  constructor(url) {
-    this.socket = new WebSocket(url);
+  constructor(socket) {
     this.emitter = new EventEmitter();
+    this.wrappedListeners = new WeakMap();
 
-    this.registerBaseListeners();
+    this.pendingSend = [];
+    this.pendingRequests = {};
+    this.requestId = 0;
+    this.requestTimeout = 10000;
+
+    this.bindSocket(socket);
   }
 
-  registerBaseListeners() {
-    this.socket.onmessage = event => {
-      const message = JSON.parse(event.data);
+  bindSocket(socket) {
+    if (socket) {
+      this.socket = socket;
 
-      this.emitter.emit(message.type, message.data);
-    };
+      this.socket.onopen = event => {
+        this.emit('open', event);
+      };
 
-    this.socket.onopen = event => {
-      this.emitter.emit(OPEN, event);
-    };
+      this.socket.onmessage = event => {
+        this.emit('message', event);
+        this.handleMessage(event);
+      };
 
-    this.socket.onerror = event => {
-      this.emitter.emit(ERROR, event);
-    };
+      this.socket.onerror = event => {
+        this.emit('error', event);
+      };
 
-    this.socket.onclose = event => {
-      this.emitter.emit(CLOSE, event);
-    };
+      this.socket.onclose = event => {
+        this.emit('close', event);
+        this.emit('disconnect', event);
+      };
+    }
   }
 
-  emit(eventName, data) {
-    this.socket.send(
-      JSON.stringify({
-        type: eventName,
-        data,
-      }),
-    );
+  send(data) {
+    if (this.isConnected()) {
+      this.socket.send(data);
+    } else {
+      this.pendingSend.push(data);
+    }
   }
 
-  close(code, reason) {
-    this.socket.close(code, reason);
+  disconnect(...args) {
+    if (this.socket) {
+      this.socket.close(...args);
+    }
+  }
+
+  handleMessage(event) {
+    try {
+      const data = JSON.parse(event.data);
+
+      this.pendingRequests[data.id].resolve(data);
+      clearTimeout(this.pendingRequests[data.id].timer);
+      delete this.pendingRequests[data.id];
+    } catch (error) {}
+  }
+
+  request(data = {}) {
+    if (data) {
+      this.requestId += 1;
+
+      data.id = this.requestId;
+
+      const request = new Promise((resolve, reject) => {
+        const pendingRequest = {
+          resolve,
+          reject,
+        };
+
+        this.pendingRequests[data.id] = pendingRequest;
+
+        // if (this.requestTimeout > 0) {
+        //   pendingRequest.timer = setTimeout(() => {
+        //     reject(new Error('Request timed out'));
+
+        //     delete this.pendingRequests[data.i];
+        //   }, this.requestTimeout);
+        // }
+      });
+
+      this.send(JSON.stringify(data));
+
+      return request;
+    }
+
+    return null;
+  }
+
+  abort() {
+    Object.keys(this.pendingRequests).forEach(id => {
+      this.pendingRequests[id].reject(new Error('Request was aborted'));
+    });
+
+    this.pendingRequests = {};
+    this.pendingSend = [];
+  }
+
+  isConnecting() {
+    return this.socket && this.socket.readyState === this.socket.CONNECTING;
+  }
+
+  isConnected() {
+    return this.socket && this.socket.readyState === this.socket.OPEN;
   }
 
   on(eventName, listener) {
-    this.emitter.addListener(eventName, listener);
+    this.emitter.on(eventName, listener);
+
+    return this;
+  }
+
+  once(eventName, listener) {
+    this.emitter.once(eventName, listener);
+
+    return this;
+  }
+
+  emit(eventName, ...args) {
+    this.emitter.emit(eventName, ...args);
+
+    return this;
   }
 
   off(eventName, listener) {
-    this.emitter.removeListener(eventName, listener);
+    this.emitter.off(eventName, listener);
+
+    return this;
   }
 }
 
