@@ -28,8 +28,6 @@ You will see the build errors in the console.
 
 ### `yarn build` or `npm run build`
 
-:warning: **Not implemented yet.**
-
 Builds the app for production to the build folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 

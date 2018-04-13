@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "start": "cross-env NODE_ENV=development webpack-dev-server"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,8 @@
     "@babel/preset-stage-0": "^7.0.0-beta.44",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "compression-webpack-plugin": "^1.1.11",
     "cross-env": "^5.1.4",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
