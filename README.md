@@ -1,16 +1,16 @@
 <!--
-  Don't touch this file or I will find you and cut your fingers.
+  Don’t touch this file or I will find you and cut your fingers.
 -->
 
 ## Installation
 
-You’ll need to have [Node](https://nodejs.org) on your local development machine. It's preferable to use [Yarn](https://yarnpkg.com) to manage dependencies, running scripts, etc.
+You’ll need to have [Node](https://nodejs.org) on your local development machine. It’s preferable to use [Yarn](https://yarnpkg.com) to manage dependencies, running scripts, etc.
 
 ```sh
 $ yarn install
 ```
 
-Or if you are don't want to use Yarn (not recommended).
+Or if you are don’t want to use Yarn (not recommended).
 
 ```sh
 $ npm install
@@ -32,3 +32,7 @@ Builds the app for production to the build folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.
+
+### `yarn deploy:production` or `npm run deploy:production`
+
+Deploys the application to production server and runs build script.

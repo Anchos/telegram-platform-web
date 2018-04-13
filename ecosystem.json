@@ -1,0 +1,12 @@
+{
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": "159.65.126.202",
+      "ref": "origin/master",
+      "repo": "git@github.com:m-2k/telegram-platform-web.git",
+      "path": "/var/www/frontend",
+      "post-deploy": "yarn install && yarn build"
+    }
+  }
+}
