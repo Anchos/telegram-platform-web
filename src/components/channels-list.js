@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Table } from "reactstrap";
 
-import { getActiveChannels, fetchData } from "~/store/data";
+import { getActiveFilteredChannels, fetchData } from "~/store/data";
 
 const mapStateToProps = createStructuredSelector({
-  channels: getActiveChannels,
+  channels: getActiveFilteredChannels,
 });
 
 class ChannelsListView extends React.Component {
@@ -18,9 +18,10 @@ class ChannelsListView extends React.Component {
     return (
       <thead>
         <tr>
+          <th />
           <th>Name</th>
           <th>Link</th>
-          <th>Member count</th>
+          <th style={{ whiteSpace: "nowrap" }}>Member count</th>
         </tr>
       </thead>
     );
@@ -31,6 +32,9 @@ class ChannelsListView extends React.Component {
       <tbody>
         {this.props.channels.map(channel => (
           <tr key={channel.link}>
+            <td>
+              <img src={channel.photo} width={32} height={32} className="rounded-circle" />
+            </td>
             <td>{channel.name}</td>
             <td>
               <a href={`https://t.me/${channel.link}`} target="_blank">

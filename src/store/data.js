@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import { createAction, createReducer } from "redux-act";
 import { countBy, pipe, toPairs, map } from "ramda";
 import { createSelector } from "reselect";
@@ -8,6 +9,8 @@ import { createSelector } from "reselect";
 export const fetchDataRequest = createAction();
 export const fetchDataSuccess = createAction();
 export const toggleCategory = createAction();
+export const setQuery = createAction();
+export const setSubsRange = createAction();
 
 // =======================
 // Reducers
@@ -30,12 +33,29 @@ export const channels = createReducer({}, [])
   .on(fetchDataRequest, () => [])
   .on(fetchDataSuccess, (_, channels) => channels);
 
+// prettier-ignore
+const query = createReducer({}, "")
+  .on(setQuery, (_, query) => query);
+
+// prettier-ignore
+const subsRange = createReducer({}, { min: 0, max: null })
+  .on(setSubsRange, (_, range) => range);
+
+export const filters = combineReducers({
+  query,
+  subsRange,
+});
+
 // =======================
 // Selectors
 
 export const getCategories = state => state.categories;
 export const getActiveCategory = state => state.activeCategory;
 export const getChannels = state => state.channels;
+export const getFilters = state => state.filters;
+
+export const getQuery = createSelector(getFilters, filters => filters.query.toLowerCase());
+export const getJustSubsRange = createSelector(getFilters, filters => filters.subsRange);
 
 export const getActiveChannels = createSelector(
   [getActiveCategory, getChannels],
@@ -43,6 +63,29 @@ export const getActiveChannels = createSelector(
     if (!activeCategory) return channels;
     return channels.filter(channel => channel.category === activeCategory);
   },
+);
+
+// prettier-ignore
+export const getMaxSubsRange = createSelector(
+  [getActiveChannels],
+  channels => Math.max(...channels.map(channel => channel.members)),
+);
+
+export const getSubsRange = createSelector(
+  [getJustSubsRange, getMaxSubsRange],
+  ({ min, max }, defaultMax) => ({ min, max: max === null ? defaultMax : max }),
+);
+
+export const getActiveFilteredChannels = createSelector(
+  [getActiveChannels, getQuery, getSubsRange],
+  (channels, query, subsRange) =>
+    channels
+      .filter(
+        channel =>
+          channel.name.toLowerCase().includes(query) || channel.link.toLowerCase().includes(query),
+      )
+      .filter(channel => channel.members >= subsRange.min)
+      .filter(channel => channel.members <= subsRange.max),
 );
 
 // =======================
