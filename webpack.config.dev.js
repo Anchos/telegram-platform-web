@@ -1,78 +1,37 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+
+const { HotModuleReplacementPlugin } = require("webpack");
+const HTMLPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
-  entry: './src/index.jsx',
-  output: {
-    pathinfo: true,
-    filename: 'static/js/bundle.js',
-    chunkFilename: 'static/js/[name].chunk.js',
-    publicPath: '/',
-  },
+  mode: "development",
+
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    extensions: ['.js', '.json', '.jsx'],
+    alias: {
+      "~": path.resolve(__dirname, "src"),
+    },
   },
+
   module: {
-    strictExportPresence: true,
     rules: [
-      { parser: { requireEnsure: false } },
       {
-        oneOf: [
+        test: /\.js$/,
+        include: path.resolve(__dirname, "src"),
+        exclude: [/[/\\\\]node_modules[/\\\\]/],
+        use: [
+          "thread-loader",
           {
-            test: /\.(js|jsx)$/,
-            include: path.resolve(__dirname, 'src'),
-            exclude: [/[/\\\\]node_modules[/\\\\]/],
-            use: [
-              'thread-loader',
-              {
-                loader: 'babel-loader',
-                options: {
-                  cacheDirectory: true,
-                  highlightCode: true,
-                },
-              },
-            ],
-          },
-          {
-            exclude: [/\.(js|jsx)$/, /\.html$/, /\.json$/],
-            loader: 'file-loader',
+            loader: "babel-loader",
             options: {
-              name: 'static/media/[name].[hash:8].[ext]',
+              cacheDirectory: true,
+              highlightCode: true,
             },
           },
         ],
       },
+      { test: /\.css$/, use: ["style-loader", "css-loader"] },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: './index.html',
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  ],
-  node: {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty',
-  },
-  performance: {
-    hints: false,
-  },
-  devServer: {
-    compress: true,
-    clientLogLevel: 'none',
-    hot: true,
-    publicPath: '/',
-    historyApiFallback: {
-      disableDotRule: true,
-    },
-  },
+
+  plugins: [new HTMLPlugin(), new HotModuleReplacementPlugin()],
 };
