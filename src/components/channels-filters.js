@@ -47,15 +47,15 @@ class ChannelsFiltersView extends React.Component {
 
     return (
       <Row className="my-3 py-3">
-        <Col md={6}>
+        <Col md={4}>
           <Input
             placeholder="Search..."
             value={this.props.query}
             onChange={this.handleQueryChange}
           />
         </Col>
-        <Col md={6} className="d-flex align-items-center">
-          <div className="mr-3">Subscribers</div>
+        <Col md={4} className="d-flex align-items-center pr-4">
+          <div className="mr-3">Members</div>
           <div className="flex-fill">
             <InputRange
               minValue={0}
@@ -63,6 +63,12 @@ class ChannelsFiltersView extends React.Component {
               value={this.state.subsRange}
               onChange={this.handleSubsRangeChange}
             />
+          </div>
+        </Col>
+        <Col md={4} className="d-flex align-items-center pl-4">
+          <div className="mr-3">Cost</div>
+          <div className="flex-fill">
+            <InputRange minValue={0} maxValue={20} value={{ min: 5, max: 15 }} />
           </div>
         </Col>
       </Row>

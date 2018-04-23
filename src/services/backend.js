@@ -1,3 +1,5 @@
+import fakeData from "./fake-data";
+
 const LSPrevMessageId = "prevMessageId";
 
 function getNextMessageId() {
@@ -60,6 +62,10 @@ export class Backend {
   }
 
   request(data) {
+    if (data.action === "FETCH") {
+      return Promise.resolve(fakeData);
+    }
+
     const messageId = getNextMessageId();
     const message = { ...data, id: messageId };
 
