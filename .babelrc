@@ -1,24 +1,12 @@
 {
   "presets": [
-    [
-      "@babel/env",
-      {
-        "modules": false,
-        "useBuiltIns": "usage"
-      }
-    ],
-    "@babel/react",
-    "@babel/stage-0"
+    ["@babel/env", { "modules": false, "useBuiltIns": "usage" } ],
+    "@babel/react"
   ],
   "plugins": [
     "react-hot-loader/babel",
-    [
-      "@babel/transform-runtime",
-      {
-        "helpers": false,
-        "polyfill": false,
-        "regenerator": true
-      }
-    ]
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/proposal-class-properties",
+    ["@babel/transform-runtime", { "helpers": false, "polyfill": false, "regenerator": true }]
   ]
 }
