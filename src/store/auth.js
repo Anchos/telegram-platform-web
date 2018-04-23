@@ -78,7 +78,7 @@ export const auth = () => (dispatch, getState, { backend, storage, authPopup }) 
 export const logout = () => (dispatch, getState, { storage }) => {
   storage.removeUser();
   storage.removeSessionId();
-  dispatch(removeSession());
-  dispatch(removeUser());
+  dispatch(justRemoveSession());
+  dispatch(justRemoveUser());
   dispatch(auth());
 };

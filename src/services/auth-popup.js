@@ -9,7 +9,7 @@ export class AuthPopup {
     this.hide();
 
     const url = telegramURL({ sessionId, connectionId });
-    this.popup = window.open(url);
+    this.popup = window.open(url, "", "");
   }
 
   hide() {
