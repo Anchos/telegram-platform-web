@@ -19,12 +19,14 @@ import {
 const category = createReducer({}, "")
   .on(toggleCategory, (state, name) => state === name ? "" : name);
 
+const page = createField(0, setPage)
+  .on(prevPage, page => page - 1)
+  .on(nextPage, page => page + 1);
+
 export const data = combineReducers({
   categories: createField([], setCategories),
   items: createField([], setItems),
-  page: createField(0, setPage)
-    .on(prevPage, page => page - 1)
-    .on(nextPage, page => page + 1),
+  page,
   meta: createField({ totalChannels: 0, maxMembers: Infinity }, setMeta),
   filters: combineReducers({
     query: createField("", setQuery),
