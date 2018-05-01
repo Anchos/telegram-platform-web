@@ -5,14 +5,14 @@ function telegramURL({ sessionId, connectionId }) {
 export class AuthPopup {
   popup = null;
 
-  open({ sessionId, connectionId }) {
+  open = ({ sessionId, connectionId }) => {
     this.hide();
 
     const url = telegramURL({ sessionId, connectionId });
     this.popup = window.open(url, "", "");
-  }
+  };
 
-  hide() {
+  hide = () => {
     this.popup && this.popup.close();
-  }
+  };
 }

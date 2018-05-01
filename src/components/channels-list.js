@@ -1,61 +1,68 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 
-import { getActiveFilteredChannels, fetchData } from "~/store/data";
+import { fetchData, nextPage, prevPage } from "~/store/data/actions";
+import { getItems, getPage, getIsThereNextPage, getIsTherePrevPage } from "~/store/data/selectors";
 
 const mapStateToProps = createStructuredSelector({
-  channels: getActiveFilteredChannels,
+  channels: getItems,
+  page: getPage,
+  isTherePrevPage: getIsTherePrevPage,
+  isThereNextPage: getIsThereNextPage,
 });
 
-class ChannelsListView extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(fetchData());
-  }
+const ChannelsListView = ({ channels, page, isThereNextPage, isTherePrevPage, dispatch }) => {
+  const pagination = (
+    <div className="d-flex my-3">
+      <Button color="primary" disabled={!isTherePrevPage} onClick={() => dispatch(prevPage())}>
+        Prev
+      </Button>
+      <div className="text-center" style={{ width: "100%" }}>
+        {page + 1}
+      </div>
+      <Button color="primary" disabled={!isThereNextPage} onClick={() => dispatch(nextPage())}>
+        Next
+      </Button>
+    </div>
+  );
 
-  renderHeader() {
-    return (
-      <thead>
-        <tr>
-          <th />
-          <th>Name</th>
-          <th>Link</th>
-          <th style={{ whiteSpace: "nowrap" }}>Member count</th>
-        </tr>
-      </thead>
-    );
-  }
+  return (
+    <>
+      {pagination}
 
-  renderContent() {
-    return (
-      <tbody>
-        {this.props.channels.map(channel => (
-          <tr key={channel.link}>
-            <td>
-              <img src={channel.photo} width={32} height={32} className="rounded-circle" />
-            </td>
-            <td>{channel.name}</td>
-            <td>
-              <a href={`https://t.me/${channel.link}`} target="_blank">
-                @{channel.link}
-              </a>
-            </td>
-            <td>{channel.members}</td>
-          </tr>
-        ))}
-      </tbody>
-    );
-  }
-
-  render() {
-    return (
       <Table>
-        {this.renderHeader()}
-        {this.renderContent()}
+        <thead>
+          <tr>
+            <th />
+            <th>Name</th>
+            <th>Link</th>
+            <th style={{ whiteSpace: "nowrap" }}>Member count</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {channels.map(channel => (
+            <tr key={channel.link}>
+              <td>
+                <img src={channel.photo} width={32} height={32} className="rounded-circle" />
+              </td>
+              <td>{channel.name}</td>
+              <td>
+                <a href={`https://t.me/${channel.link}`} target="_blank">
+                  @{channel.link}
+                </a>
+              </td>
+              <td>{channel.members}</td>
+            </tr>
+          ))}
+        </tbody>
       </Table>
-    );
-  }
-}
+
+      {pagination}
+    </>
+  );
+};
 
 export const ChannelsList = connect(mapStateToProps)(ChannelsListView);

@@ -7,43 +7,48 @@ import { Input, Label, Row, Col } from "reactstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
-import { setQuery, setSubsRange, getQuery, getSubsRange, getMaxSubsRange } from "~/store/data";
+import { setQuery, setMembers } from "~/store/data/actions";
+import { getQuery, getMembers, getMaxMembers } from "~/store/data/selectors";
 
 const mapStateToProps = createStructuredSelector({
   query: getQuery,
-  subsRange: getSubsRange,
-  maxSubsRange: getMaxSubsRange,
+  members: getMembers,
+  maxMembers: getMaxMembers,
 });
 
 class ChannelsFiltersView extends React.Component {
   state = {
-    subsRange: this.props.subsRange,
+    members: this.props.members,
   };
 
   componentWillReceiveProps(nextProps) {
     if (
-      this.props.subsRange.min !== nextProps.subsRange.min ||
-      this.props.subsRange.max !== nextProps.subsRange.max
+      this.props.members.min !== nextProps.members.min ||
+      this.props.members.max !== nextProps.members.max
     ) {
-      this.setState({ subsRange: nextProps.subsRange });
+      this.setState({ members: nextProps.members });
     }
   }
 
-  updateSubsRange = debounce(() => {
-    this.props.dispatch(setSubsRange(this.state.subsRange));
-  }, 200);
+  // updateMembers = debounce(() => {
+  //   this.props.dispatch(setMembers(this.state.members));
+  // }, 200);
+
+  updateMembers = () => {
+    this.props.dispatch(setMembers(this.state.members));
+  };
 
   handleQueryChange = event => {
     this.props.dispatch(setQuery(event.target.value));
   };
 
-  handleSubsRangeChange = subsRange => {
-    this.setState({ subsRange });
-    this.updateSubsRange();
+  handleMembersChange = members => {
+    this.setState({ members });
+    this.updateMembers();
   };
 
   render() {
-    if (this.props.maxSubsRange <= 0) return null;
+    if (this.props.maxMembers <= 0) return null;
 
     return (
       <Row className="my-3 py-3">
@@ -59,9 +64,9 @@ class ChannelsFiltersView extends React.Component {
           <div className="flex-fill">
             <InputRange
               minValue={0}
-              maxValue={this.props.maxSubsRange}
-              value={this.state.subsRange}
-              onChange={this.handleSubsRangeChange}
+              maxValue={this.props.maxMembers}
+              value={this.state.members}
+              onChange={this.handleMembersChange}
             />
           </div>
         </Col>

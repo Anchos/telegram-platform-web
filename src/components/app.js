@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { createSelector, createStructuredSelector } from "reselect";
 
-import { getSession } from "~/store/auth";
+import { getSession } from "~/store/auth/selectors";
 
 import { List } from "~/pages/list";
 import { Header } from "~/components/header";
