@@ -25,6 +25,7 @@ ede-projects.el
 smex-items
 company-statistics-cache.el
 anaconda-mode/
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
