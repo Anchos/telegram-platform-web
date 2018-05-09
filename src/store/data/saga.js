@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 import { setSession } from "~/store/auth/actions";
 
-import { getQuery, getMembers, getCategory, getPage, getPageSize } from "./selectors";
+import { getQuery, getMembers, getAdvertisingCost, getCategory, getPage, getPageSize } from './selectors'
 import {
   fetchData,
   setItems,
@@ -14,8 +14,8 @@ import {
   setMeta,
   setPage,
   nextPage,
-  prevPage,
-} from "./actions";
+  prevPage, setAdvertisingCost,
+} from './actions'
 
 // prettier-ignore
 const getMembersForResponse = createSelector(
@@ -23,16 +23,22 @@ const getMembersForResponse = createSelector(
   ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
 );
 
+const getAdvertisingCostForResponse = createSelector(
+  getAdvertisingCost,
+  ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
+)
+
 function* fetchDataSaga(_, { backend }) {
   const { channels, categories, maxMembers, totalChannels } = yield call(backend.getChannels, {
     name: yield select(getQuery),
     category: yield select(getCategory),
     members: yield select(getMembersForResponse),
+    advertisingCost: yield select(getAdvertisingCostForResponse),
     count: yield select(getPageSize),
     offset: (yield select(getPage)) * (yield select(getPageSize)),
   });
 
-  yield put(setMeta({ maxMembers, totalChannels }));
+  yield put(setMeta({ maxMembers, totalChannels, maxAdvertisingCost: 300e3 }));
   yield put(setCategories(categories));
   yield put(setItems(channels));
 }
@@ -56,6 +62,7 @@ export function* data(services) {
     takeLatest(fetchData, fetchDataSaga, services),
     debounce(200, setQuery, refetchDataSaga, undefined, services),
     debounce(200, setMembers, refetchDataSaga, undefined, services),
+    debounce(200, setAdvertisingCost, refetchDataSaga, undefined, services),
     takeEvery(toggleCategory, refetchDataSaga, undefined, services),
     takeEvery(setPage, fetchDataSaga, undefined, services),
     takeEvery(nextPage, fetchDataSaga, undefined, services),

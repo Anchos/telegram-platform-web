@@ -14,9 +14,9 @@ export class Backend {
         connectionId: message.connection_id,
       }));
 
-  getChannels = ({ count, offset, name, category, members } = {}) =>
+  getChannels = ({ count, offset, name, category, members, advertisingCost } = {}) =>
     this.socket
-      .request({ action: "FETCH", type: "CHANNELS", count, offset, name, category, members })
+      .request({ action: "FETCH", type: "CHANNELS", count, offset, name, category, members, advertisingCost })
       .then(message => ({
         channels: message.data.channels,
         categories: message.data.categories,
