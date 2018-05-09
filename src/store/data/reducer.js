@@ -13,7 +13,7 @@ import {
   setPage,
   prevPage,
   nextPage,
-  setAdvertisingCost,
+  setCost,
 } from './actions'
 
 // prettier-ignore
@@ -28,11 +28,11 @@ export const data = combineReducers({
   categories: createField([], setCategories),
   items: createField([], setItems),
   page,
-  meta: createField({ totalChannels: 0, maxMembers: Infinity, maxAdvertisingCost: Infinity }, setMeta),
+  meta: createField({ totalChannels: 0, maxMembers: Infinity, maxCost: Infinity }, setMeta),
   filters: combineReducers({
     query: createField("", setQuery),
     members: createField({ min: 0, max: null }, setMembers),
-    advertisingCost: createField({min: 0, max: null}, setAdvertisingCost),
+    cost: createField({min: 0, max: null}, setCost),
     category,
   }),
 });

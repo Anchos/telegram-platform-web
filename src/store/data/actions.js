@@ -9,7 +9,7 @@ export const setMeta = createAction();
 
 export const setQuery = createAction();
 export const setMembers = createAction();
-export const setAdvertisingCost = createAction();
+export const setCost = createAction();
 export const toggleCategory = createAction();
 
 export const setPage = createAction();

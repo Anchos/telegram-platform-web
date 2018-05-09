@@ -7,10 +7,10 @@ import { Input, Label, Row, Col } from "reactstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
-import { setQuery, setMembers, setAdvertisingCost } from "~/store/data/actions";
+import { setQuery, setMembers, setCost } from "~/store/data/actions";
 import {
   getQuery, getMembers, getMaxMembers,
-  getAdvertisingCost, getMaxAdvertisingCost
+  getCost, getMaxCost
 } from "~/store/data/selectors";
 
 export const ChannelsFilters = connect(
@@ -18,10 +18,10 @@ export const ChannelsFilters = connect(
     query: getQuery,
     members: getMembers,
     maxMembers: getMaxMembers,
-    advertisingCost: getAdvertisingCost,
-    maxAdvertisingCost: getMaxAdvertisingCost
+    cost: getCost,
+    maxCost: getMaxCost
   }),
-)(({ query, members, maxMembers, advertisingCost, maxAdvertisingCost, dispatch }) => (
+)(({ query, members, maxMembers, cost, maxCost, dispatch }) => (
   <Row className="my-3 py-3">
     <Col md={4}>
       <Input
@@ -46,9 +46,9 @@ export const ChannelsFilters = connect(
       <div className="flex-fill">
         <InputRange
           minValue={0}
-          maxValue={maxAdvertisingCost}
-          value={advertisingCost}
-          onChange={(advertisingCost) => dispatch(setAdvertisingCost(advertisingCost))}
+          maxValue={maxCost}
+          value={cost}
+          onChange={(cost) => dispatch(setCost(cost))}
         />
       </div>
     </Col>

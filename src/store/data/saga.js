@@ -3,18 +3,19 @@ import { createSelector } from "reselect";
 
 import { setSession } from "~/store/auth/actions";
 
-import { getQuery, getMembers, getAdvertisingCost, getCategory, getPage, getPageSize } from './selectors'
+import { getQuery, getMembers, getCost, getCategory, getPage, getPageSize } from './selectors'
 import {
   fetchData,
   setItems,
   setCategories,
+  setCost,
   setMembers,
   setQuery,
   toggleCategory,
   setMeta,
   setPage,
   nextPage,
-  prevPage, setAdvertisingCost,
+  prevPage,
 } from './actions'
 
 // prettier-ignore
@@ -23,8 +24,8 @@ const getMembersForResponse = createSelector(
   ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
 );
 
-const getAdvertisingCostForResponse = createSelector(
-  getAdvertisingCost,
+const getCostForResponse = createSelector(
+  getCost,
   ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
 )
 
@@ -33,12 +34,12 @@ function* fetchDataSaga(_, { backend }) {
     name: yield select(getQuery),
     category: yield select(getCategory),
     members: yield select(getMembersForResponse),
-    advertisingCost: yield select(getAdvertisingCostForResponse),
+    cost: yield select(getCostForResponse),
     count: yield select(getPageSize),
     offset: (yield select(getPage)) * (yield select(getPageSize)),
   });
 
-  yield put(setMeta({ maxMembers, totalChannels, maxAdvertisingCost: 300e3 }));
+  yield put(setMeta({ maxMembers, totalChannels, maxCost: 300e3 }));
   yield put(setCategories(categories));
   yield put(setItems(channels));
 }
@@ -62,7 +63,7 @@ export function* data(services) {
     takeLatest(fetchData, fetchDataSaga, services),
     debounce(200, setQuery, refetchDataSaga, undefined, services),
     debounce(200, setMembers, refetchDataSaga, undefined, services),
-    debounce(200, setAdvertisingCost, refetchDataSaga, undefined, services),
+    debounce(200, setCost, refetchDataSaga, undefined, services),
     takeEvery(toggleCategory, refetchDataSaga, undefined, services),
     takeEvery(setPage, fetchDataSaga, undefined, services),
     takeEvery(nextPage, fetchDataSaga, undefined, services),
