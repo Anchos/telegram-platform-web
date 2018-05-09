@@ -19,15 +19,13 @@ import {
 } from './actions'
 
 // prettier-ignore
-const getMembersForResponse = createSelector(
-  getMembers,
-  ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
+const getRangeForResponse = getter => createSelector(
+  getter,
+  ({min, max}) => max === Infinity ? [] : [min, max]
 );
 
-const getCostForResponse = createSelector(
-  getCost,
-  ({ min, max }) => [min, max === Infinity ? Number.MAX_VALUE : max]
-)
+const getMembersForResponse = getRangeForResponse(getMembers);
+const getCostForResponse = getRangeForResponse(getCost);
 
 function* fetchDataSaga(_, { backend }) {
   const { channels, categories, maxMembers, totalChannels } = yield call(backend.getChannels, {
