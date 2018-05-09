@@ -27,6 +27,6 @@ export class Backend {
   awaitUser = () =>
     this.socket.once(message => message.action === "AUTH").then(message => ({
       name: message.first_name,
-      avatar: message.avatar,
+      avatar: message.photo,
     }));
 }
