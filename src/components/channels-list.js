@@ -44,14 +44,14 @@ const ChannelsListView = ({ channels, page, isThereNextPage, isTherePrevPage, di
 
         <tbody>
           {channels.map(channel => (
-            <tr key={channel.link}>
+            <tr key={channel.username}>
               <td>
                 <img src={channel.photo} width={32} height={32} className="rounded-circle" />
               </td>
-              <td>{channel.name}</td>
+              <td>{channel.title}</td>
               <td>
-                <a href={`https://t.me/${channel.link}`} target="_blank">
-                  @{channel.link}
+                <a href={`https://t.me/${channel.username}`} target="_blank">
+                  @{channel.username}
                 </a>
               </td>
               <td>{channel.members}</td>
