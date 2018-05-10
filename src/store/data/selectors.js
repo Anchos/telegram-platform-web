@@ -6,7 +6,7 @@ export const getFilters = state => state.data.filters;
 export const getMeta = state => state.data.meta;
 export const getPage = state => state.data.page;
 
-export const getTotalChannels = createSelector(getMeta, meta => meta.totalChannels);
+export const getTotalChannels = createSelector(getMeta, meta => meta.total);
 export const getMaxMembers = createSelector(getMeta, meta => meta.maxMembers);
 export const getMaxCost = createSelector(getMeta, meta => meta.maxCost);
 
@@ -30,5 +30,5 @@ export const getPageSize = () => 10;
 export const getIsTherePrevPage = createSelector(getPage, page => page > 0);
 export const getIsThereNextPage = createSelector(
   [getPage, getMeta, getPageSize],
-  (page, meta, pageSize) => (page + 1) * pageSize < meta.totalChannels,
+  (page, meta, pageSize) => (page + 1) * pageSize < meta.total,
 );

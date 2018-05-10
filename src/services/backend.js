@@ -21,7 +21,7 @@ export class Backend {
         channels: message.data.items,
         categories: message.data.categories,
         maxMembers: message.data.max_members,
-        totalChannels: message.data.total_channels,
+        total: message.data.total,
       }));
 
   awaitUser = () =>

@@ -28,7 +28,7 @@ export const data = combineReducers({
   categories: createField([], setCategories),
   items: createField([], setItems),
   page,
-  meta: createField({ totalChannels: 0, maxMembers: Infinity, maxCost: Infinity }, setMeta),
+  meta: createField({ total: 0, maxMembers: Infinity, maxCost: Infinity }, setMeta),
   filters: combineReducers({
     query: createField("", setQuery),
     members: createField({ min: 0, max: null }, setMembers),
