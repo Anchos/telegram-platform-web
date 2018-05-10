@@ -37,7 +37,7 @@ function* fetchDataSaga(_, { backend }) {
     offset: (yield select(getPage)) * (yield select(getPageSize)),
   });
 
-  yield put(setMeta({ maxMembers, totalChannels, maxCost }));
+  yield put(setMeta({ maxMembers, totalChannels, maxCost: 300e3 }));
   yield put(setCategories(categories));
   yield put(setItems(channels));
 }

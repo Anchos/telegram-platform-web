@@ -18,7 +18,7 @@ export class Backend {
     this.socket
       .request({ action: "FETCH", type: "CHANNELS", count, offset, title, category, members, cost })
       .then(message => ({
-        channels: message.data.channels,
+        channels: message.data.items,
         categories: message.data.categories,
         maxMembers: message.data.max_members,
         totalChannels: message.data.total_channels,
