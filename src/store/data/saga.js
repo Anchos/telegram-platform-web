@@ -28,8 +28,8 @@ const getMembersForResponse = getRangeForResponse(getMembers);
 const getCostForResponse = getRangeForResponse(getCost);
 
 function* fetchDataSaga(_, { backend }) {
-  const { channels, categories, maxMembers, totalChannels } = yield call(backend.getChannels, {
-    name: yield select(getQuery),
+  const { channels, categories, maxMembers, maxCost, totalChannels } = yield call(backend.getChannels, {
+    title: yield select(getQuery),
     category: yield select(getCategory),
     members: yield select(getMembersForResponse),
     cost: yield select(getCostForResponse),
@@ -37,7 +37,7 @@ function* fetchDataSaga(_, { backend }) {
     offset: (yield select(getPage)) * (yield select(getPageSize)),
   });
 
-  yield put(setMeta({ maxMembers, totalChannels, maxCost: 300e3 }));
+  yield put(setMeta({ maxMembers, totalChannels, maxCost }));
   yield put(setCategories(categories));
   yield put(setItems(channels));
 }
