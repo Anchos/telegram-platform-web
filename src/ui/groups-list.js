@@ -1,15 +1,15 @@
 import * as React from "react";
-
 import { Navbar, Nav, NavItem, NavLink, Container, Button } from "reactstrap";
+import Link from "redux-first-router-link";
 
 export const GroupsList = () => (
   <Navbar>
     <Container>
       <Nav pills>
         <NavItem>
-          <NavLink href="#" active>
+          <Link className="nav-link active" to="/channels">
             Channels
-          </NavLink>
+          </Link>
         </NavItem>
         <NavItem>
           <NavLink disabled href="#">

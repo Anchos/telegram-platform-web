@@ -11,7 +11,3 @@ export const setQuery = createAction();
 export const setMembers = createAction();
 export const setCost = createAction();
 export const toggleCategory = createAction();
-
-export const setPage = createAction();
-export const nextPage = createAction();
-export const prevPage = createAction();

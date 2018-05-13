@@ -2,29 +2,71 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Button, Table } from "reactstrap";
+import Link from "redux-first-router-link";
 
-import { fetchData, nextPage, prevPage } from "~/store/data/actions";
-import { getItems, getPage, getIsThereNextPage, getIsTherePrevPage } from "~/store/data/selectors";
+import {
+  getItems,
+  getIsThereNextPage,
+  getIsTherePrevPage,
+  getFilters,
+  getMeta,
+} from "~/store/data/selectors";
+import { goChannels, goChannel } from "~/store/route/actions";
 
 const mapStateToProps = createStructuredSelector({
   channels: getItems,
-  page: getPage,
+  filters: getFilters,
+  meta: getMeta,
   isTherePrevPage: getIsTherePrevPage,
   isThereNextPage: getIsThereNextPage,
 });
 
-const ChannelsListView = ({ channels, page, isThereNextPage, isTherePrevPage, dispatch }) => {
+const ChannelsListView = ({
+  channels,
+  filters,
+  meta,
+  isThereNextPage,
+  isTherePrevPage,
+  dispatch,
+}) => {
   const pagination = (
     <div className="d-flex my-3">
-      <Button color="primary" disabled={!isTherePrevPage} onClick={() => dispatch(prevPage())}>
-        Prev
-      </Button>
+      {isTherePrevPage ? (
+        <Link
+          className="btn btn-primary"
+          to={goChannels({
+            category: filters.category === "" ? "all" : filters.category,
+            from: Math.max(0, filters.from - 20),
+            to: Math.min(meta.total, Math.max(0, filters.from - 20) + 20),
+          })}
+        >
+          Next
+        </Link>
+      ) : (
+        <Button color="primary" disabled>
+          Prev
+        </Button>
+      )}
       <div className="text-center" style={{ width: "100%" }}>
-        {page + 1}
+        {filters.from} - {filters.to}
       </div>
-      <Button color="primary" disabled={!isThereNextPage} onClick={() => dispatch(nextPage())}>
-        Next
-      </Button>
+
+      {isThereNextPage ? (
+        <Link
+          className="btn btn-primary"
+          to={goChannels({
+            category: filters.category === "" ? "all" : filters.category,
+            from: Math.min(meta.total, filters.to),
+            to: Math.min(meta.total, filters.to + 20),
+          })}
+        >
+          Next
+        </Link>
+      ) : (
+        <Button color="primary" disabled>
+          Next
+        </Button>
+      )}
     </div>
   );
 
@@ -48,7 +90,9 @@ const ChannelsListView = ({ channels, page, isThereNextPage, isTherePrevPage, di
               <td>
                 <img src={channel.photo} width={32} height={32} className="rounded-circle" />
               </td>
-              <td>{channel.title}</td>
+              <td>
+                <Link to={goChannel({ name: channel.username })}>{channel.title}</Link>
+              </td>
               <td>
                 <a href={`https://t.me/${channel.username}`} target="_blank">
                   @{channel.username}

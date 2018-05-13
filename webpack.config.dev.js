@@ -6,9 +6,19 @@ const HTMLPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
 
+  output: {
+    publicPath: "/",
+  },
+
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
+    },
+  },
+
+  devServer: {
+    historyApiFallback: {
+      index: "/",
     },
   },
 

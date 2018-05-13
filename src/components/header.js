@@ -1,33 +1,34 @@
 import * as React from "react";
 import { Navbar, Nav, NavItem, Container, NavbarBrand, Button } from "reactstrap";
+import Link from "redux-first-router-link";
 
 import { LoginButton } from "~/components/login-button";
 
 export const Header = () => (
   <Navbar>
     <Container>
-      <Nav navbar>
-        <NavItem>
-          <Button color="primary">Predlojenie veka bldjad</Button>
-        </NavItem>
-      </Nav>
-      <NavbarBrand
-        style={{
-          position: "absolute",
-          width: "100%",
-          left: 0,
-          textAlign: "center",
-          margin: "auto",
-          zIndex: -1,
-        }}
-      >
-        BIPLANE
-      </NavbarBrand>
-      <Nav className="ml-auto" navbar>
-        <NavItem>
-          <LoginButton />
-        </NavItem>
-      </Nav>
+      <div style={{ display: "flex", width: "100%" }}>
+        <Nav navbar style={{ marginRight: "auto" }}>
+          <NavItem>
+            <Button color="primary">Predlojenie veka bldjad</Button>
+          </NavItem>
+        </Nav>
+        <NavbarBrand
+          tag="span"
+          style={{
+            flex: 1,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Link to="/">BIPLANE</Link>
+        </NavbarBrand>
+        <Nav navbar style={{ marginLeft: "auto" }}>
+          <NavItem>
+            <LoginButton />
+          </NavItem>
+        </Nav>
+      </div>
     </Container>
   </Navbar>
 );

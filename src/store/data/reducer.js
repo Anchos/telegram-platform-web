@@ -14,25 +14,37 @@ import {
   prevPage,
   nextPage,
   setCost,
-} from './actions'
+} from "./actions";
 
-// prettier-ignore
-const category = createReducer({}, "")
-  .on(toggleCategory, (state, name) => state === name ? "" : name);
+import { goChannels } from "../route/actions";
 
-const page = createField(0, setPage)
-  .on(prevPage, page => page - 1)
-  .on(nextPage, page => page + 1);
+const initialFilters = {
+  query: "",
+  members: { min: 0, max: null },
+  cost: { min: 0, max: null },
+  category: "",
+  from: 0,
+  to: 0,
+};
+
+const filters = createReducer({}, initialFilters)
+  .on(setQuery, (state, query) => ({ ...state, query }))
+  .on(setMembers, (state, members) => ({ ...state, members }))
+  .on(setCost, (state, cost) => ({ ...state, cost }))
+  .on(toggleCategory, (state, category) => ({
+    ...state,
+    category: state.category === category ? "" : category,
+  }))
+  .on(goChannels, (state, { from, to, category }) => ({
+    ...state,
+    from,
+    to,
+    category: category === "all" ? "" : category,
+  }));
 
 export const data = combineReducers({
   categories: createField([], setCategories),
   items: createField([], setItems),
-  page,
   meta: createField({ total: 0, maxMembers: Infinity, maxCost: Infinity }, setMeta),
-  filters: combineReducers({
-    query: createField("", setQuery),
-    members: createField({ min: 0, max: null }, setMembers),
-    cost: createField({min: 0, max: null}, setCost),
-    category,
-  }),
+  filters,
 });

@@ -1,21 +1,36 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { createSelector, createStructuredSelector } from "reselect";
+import { createStructuredSelector } from "reselect";
 
 import { getSession } from "~/store/auth/selectors";
+
+import { PAGE_CHANNEL, PAGE_CHANNELS } from "~/store/route/reducer";
+import { getPage } from "~/store/route/selectors";
 
 import { List } from "~/pages/list";
 import { Header } from "~/components/header";
 
-const mapStateToProps = createStructuredSelector({
-  session: getSession,
-});
+const renderPage = page => {
+  switch (page) {
+    case PAGE_CHANNEL:
+      return "Hello";
 
-const AppView = ({ session }) => (
+    case PAGE_CHANNELS:
+      return <List />;
+
+    default:
+      return "default";
+  }
+};
+
+export const App = connect(
+  createStructuredSelector({
+    session: getSession,
+    page: getPage,
+  }),
+)(({ session, page }) => (
   <>
     <Header />
-    {session && <List />}
+    {session && renderPage(page)}
   </>
-);
-
-export const App = connect(mapStateToProps)(AppView);
+));

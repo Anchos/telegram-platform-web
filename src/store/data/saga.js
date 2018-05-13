@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 import { setSession } from "~/store/auth/actions";
 
-import { getQuery, getMembers, getCost, getCategory, getPage, getPageSize } from './selectors'
+import { getMembers, getCost, getPageSize, getFilters, getCategory, getQuery } from "./selectors";
 import {
   fetchData,
   setItems,
@@ -13,28 +13,26 @@ import {
   setQuery,
   toggleCategory,
   setMeta,
-  setPage,
-  nextPage,
-  prevPage,
-} from './actions'
+} from "./actions";
 
-// prettier-ignore
-const getRangeForResponse = getter => createSelector(
-  getter,
-  ({min, max}) => max === Infinity ? [] : [min, max]
-);
+import { goChannels } from "~/store/route/actions";
+
+const getRangeForResponse = getter =>
+  createSelector(getter, ({ min, max }) => (max === Infinity ? [] : [min, max]));
 
 const getMembersForResponse = getRangeForResponse(getMembers);
 const getCostForResponse = getRangeForResponse(getCost);
 
 function* fetchDataSaga(_, { backend }) {
+  const filters = yield select(getFilters);
+
   const { channels, categories, maxMembers, maxCost, total } = yield call(backend.getChannels, {
     title: yield select(getQuery),
     category: yield select(getCategory),
     members: yield select(getMembersForResponse),
     cost: yield select(getCostForResponse),
-    count: yield select(getPageSize),
-    offset: (yield select(getPage)) * (yield select(getPageSize)),
+    offset: filters.from,
+    count: filters.to - filters.from,
   });
 
   yield put(setMeta({ maxMembers, total, maxCost: 300e3 }));
@@ -43,7 +41,15 @@ function* fetchDataSaga(_, { backend }) {
 }
 
 function* refetchDataSaga(services) {
-  yield put(setPage(0));
+  const category = yield select(getCategory);
+
+  yield put(
+    goChannels({
+      category: category === "" ? "all" : category,
+      from: 0,
+      to: 20,
+    }),
+  );
 }
 
 function debounce(ms, pattern, handler, ...args) {
@@ -63,8 +69,6 @@ export function* data(services) {
     debounce(200, setMembers, refetchDataSaga, undefined, services),
     debounce(200, setCost, refetchDataSaga, undefined, services),
     takeEvery(toggleCategory, refetchDataSaga, undefined, services),
-    takeEvery(setPage, fetchDataSaga, undefined, services),
-    takeEvery(nextPage, fetchDataSaga, undefined, services),
-    takeEvery(prevPage, fetchDataSaga, undefined, services),
+    takeEvery(goChannels, fetchDataSaga, undefined, services),
   ]);
 }

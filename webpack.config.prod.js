@@ -8,6 +8,10 @@ const CompressionPlugin = require("compression-webpack-plugin");
 module.exports = {
   mode: "production",
 
+  output: {
+    publicPath: "/",
+  },
+
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),

@@ -1,13 +1,15 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { reducer } from "~/store/reducer";
 import { saga } from "~/store/saga";
+
+import { enhancer as routesEnhancer, middleware as routesMiddleware } from "~/store/routes";
 
 import { DI } from "~/DI";
 import { Backend } from "~/services/backend";
@@ -31,7 +33,12 @@ const container = new DI()
   });
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+
+const store = createStore(
+  reducer,
+  compose(routesEnhancer, applyMiddleware(routesMiddleware, sagaMiddleware)),
+);
+
 sagaMiddleware.run(saga, container.instances);
 
 render(

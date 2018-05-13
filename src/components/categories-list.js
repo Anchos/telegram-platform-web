@@ -7,12 +7,12 @@ import { getCategory, getCategories } from "~/store/data/selectors";
 
 import { CategoryCard } from "~/ui/cateogory-card";
 
-const mapStateToProps = createStructuredSelector({
-  categories: getCategories,
-  activeCategory: getCategory,
-});
-
-const CategoriesListView = ({ categories, activeCategory, dispatch }) =>
+export const CategoriesList = connect(
+  createStructuredSelector({
+    categories: getCategories,
+    activeCategory: getCategory,
+  }),
+)(({ categories, activeCategory, dispatch }) =>
   categories.map(category => (
     <CategoryCard
       key={category.category}
@@ -21,6 +21,5 @@ const CategoriesListView = ({ categories, activeCategory, dispatch }) =>
       active={category.category === activeCategory}
       onClick={() => dispatch(toggleCategory(category.category))}
     />
-  ));
-
-export const CategoriesList = connect(mapStateToProps)(CategoriesListView);
+  )),
+);
