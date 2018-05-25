@@ -1,11 +1,19 @@
 {
   "deploy": {
-    "production": {
+    "prod": {
       "user": "root",
       "host": "159.65.126.202",
       "ref": "origin/master",
       "repo": "git@github.com:m-2k/telegram-platform-web.git",
-      "path": "/var/www/frontend",
+      "path": "/var/www/frontend/prod",
+      "post-deploy": "npm install && npm run build"
+    },
+    "stage": {
+      "user": "root",
+      "host": "159.65.126.202",
+      "ref": "origin/stage",
+      "repo": "git@github.com:m-2k/telegram-platform-web.git",
+      "path": "/var/www/frontend/stage",
       "post-deploy": "npm install && npm run build"
     }
   }
