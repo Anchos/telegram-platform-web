@@ -11,7 +11,7 @@
     "stage": {
       "user": "root",
       "host": "159.65.126.202",
-      "ref": "origin/master",
+      "ref": "origin/stage",
       "repo": "git@github.com:m-2k/telegram-platform-web.git",
       "path": "/var/www/frontend/stage",
       "post-deploy": "npm install && npm run build"
