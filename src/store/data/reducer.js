@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { createReducer } from "redux-act";
 
-import { createField } from "~/store/create-field";
+import { createField } from "src/store/create-field";
 
 import {
   setItems,

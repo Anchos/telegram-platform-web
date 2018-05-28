@@ -7,11 +7,11 @@ import { Input, Label, Row, Col } from "reactstrap";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
-import { setQuery, setMembers, setCost } from "~/store/data/actions";
+import { setQuery, setMembers, setCost } from "src/store/data/actions";
 import {
   getQuery, getMembers, getMaxMembers,
   getCost, getMaxCost
-} from "~/store/data/selectors";
+} from "src/store/data/selectors";
 
 export const ChannelsFilters = connect(
   createStructuredSelector({

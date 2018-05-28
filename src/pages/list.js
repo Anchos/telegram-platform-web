@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Container } from "reactstrap";
 
-import { AdBar } from "~/components/ad-bar";
-import { CategoriesList } from "~/components/categories-list";
-import { ChannelsFilters } from "~/components/channels-filters";
-import { ChannelsList } from "~/components/channels-list";
-import { GroupsList } from "~/ui/groups-list";
+import { AdBar } from "src/components/ad-bar";
+import { CategoriesList } from "src/components/categories-list";
+import { ChannelsFilters } from "src/components/channels-filters";
+import { ChannelsList } from "src/components/channels-list";
+import { GroupsList } from "src/ui/groups-list";
 
 export const List = () => (
   <>

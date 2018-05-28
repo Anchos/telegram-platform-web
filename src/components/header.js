@@ -2,7 +2,7 @@ import * as React from "react";
 import { Navbar, Nav, NavItem, Container, NavbarBrand, Button } from "reactstrap";
 import Link from "redux-first-router-link";
 
-import { LoginButton } from "~/components/login-button";
+import { LoginButton } from "src/components/login-button";
 
 export const Header = () => (
   <Navbar>

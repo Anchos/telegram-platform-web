@@ -2,10 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { toggleCategory } from "~/store/data/actions";
-import { getCategory, getCategories } from "~/store/data/selectors";
+import { toggleCategory } from "src/store/data/actions";
+import { getCategory, getCategories } from "src/store/data/selectors";
 
-import { CategoryCard } from "~/ui/cateogory-card";
+import { CategoryCard } from "src/ui/cateogory-card";
 
 export const CategoriesList = connect(
   createStructuredSelector({

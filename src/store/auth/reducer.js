@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { createField } from "~/store/create-field";
+import { createField } from "src/store/create-field";
 
 import { setSession, setUser } from "./actions";
 

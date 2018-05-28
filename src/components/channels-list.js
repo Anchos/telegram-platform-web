@@ -10,8 +10,8 @@ import {
   getIsTherePrevPage,
   getFilters,
   getMeta,
-} from "~/store/data/selectors";
-import { goChannels, goChannel } from "~/store/route/actions";
+} from "src/store/data/selectors";
+import { goChannels, goChannel } from "src/store/route/actions";
 
 const mapStateToProps = createStructuredSelector({
   channels: getItems,

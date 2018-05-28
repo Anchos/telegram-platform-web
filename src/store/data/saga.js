@@ -1,7 +1,7 @@
 import { takeLatest, takeEvery, throttle, all, put, call, select } from "redux-saga/effects";
 import { createSelector } from "reselect";
 
-import { setSession } from "~/store/auth/actions";
+import { setSession } from "src/store/auth/actions";
 
 import { getMembers, getCost, getPageSize, getFilters, getCategory, getQuery } from "./selectors";
 import {
@@ -15,7 +15,7 @@ import {
   setMeta,
 } from "./actions";
 
-import { goChannels } from "~/store/route/actions";
+import { goChannels } from "src/store/route/actions";
 
 const getRangeForResponse = getter =>
   createSelector(getter, ({ min, max }) => (max === Infinity ? [] : [min, max]));

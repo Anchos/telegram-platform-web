@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { createSelector, createStructuredSelector } from "reselect";
 import { Media, Button } from "reactstrap";
 
-import { getUser, getSession } from "~/store/auth/selectors";
-import { login, logout } from "~/store/auth/actions";
+import { getUser, getSession } from "src/store/auth/selectors";
+import { login, logout } from "src/store/auth/actions";
 
 const mapStateToProps = createStructuredSelector({
   user: getUser,

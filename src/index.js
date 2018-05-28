@@ -6,18 +6,18 @@ import createSagaMiddleware from "redux-saga";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { reducer } from "~/store/reducer";
-import { saga } from "~/store/saga";
+import { reducer } from "src/store/reducer";
+import { saga } from "src/store/saga";
 
-import { enhancer as routesEnhancer, middleware as routesMiddleware } from "~/store/routes";
+import { enhancer as routesEnhancer, middleware as routesMiddleware } from "src/store/routes";
 
-import { DI } from "~/DI";
-import { Backend } from "~/services/backend";
-import { Socket } from "~/services/socket";
-import { Storage } from "~/services/storage";
-import { AuthPopup } from "~/services/auth-popup";
+import { DI } from "src/DI";
+import { Backend } from "src/services/backend";
+import { Socket } from "src/services/socket";
+import { Storage } from "src/services/storage";
+import { AuthPopup } from "src/services/auth-popup";
 
-import { App } from "~/components/app";
+import { App } from "src/components/app";
 
 const root = document.createElement("div");
 document.body.appendChild(root);

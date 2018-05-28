@@ -2,7 +2,7 @@ import { connectRoutes } from "redux-first-router";
 import { createAction } from "redux-act";
 import createHistory from "history/createBrowserHistory";
 
-import { goChannel, goChannels } from "~/store/route/actions";
+import { goChannel, goChannels } from "src/store/route/actions";
 
 export const routesMap = {
   [createAction()]: {
