@@ -34,9 +34,15 @@ const container = new DI()
 
 const sagaMiddleware = createSagaMiddleware();
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducer,
-  compose(routesEnhancer, applyMiddleware(routesMiddleware, sagaMiddleware)),
+  compose(
+    routesEnhancer,
+    applyMiddleware(routesMiddleware, sagaMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ),
 );
 
 sagaMiddleware.run(saga, container.instances);
