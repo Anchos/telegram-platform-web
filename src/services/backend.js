@@ -16,7 +16,16 @@ export class Backend {
 
   getChannels = ({ count, offset, title, category, members, cost } = {}) =>
     this.socket
-      .request({ action: "FETCH", type: "CHANNELS", count, offset, title, category, members, cost })
+      .request({
+        action: "FETCH_CHANNELS",
+        type: "CHANNELS",
+        count,
+        offset,
+        title,
+        category,
+        members,
+        cost,
+      })
       .then(message => ({
         channels: message.data.items,
         categories: message.data.categories,
