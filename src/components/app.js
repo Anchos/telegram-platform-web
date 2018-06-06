@@ -7,30 +7,41 @@ import { getSession } from "src/store/auth/selectors";
 import { PAGE_CHANNEL, PAGE_CHANNELS } from "src/store/route/reducer";
 import { getPage } from "src/store/route/selectors";
 
-import { List } from "src/pages/list";
+import Channel from "src/pages/channel";
+import Main from "src/pages/main";
 import { Header } from "src/components/header";
 
-const renderPage = page => {
-  switch (page) {
-    case PAGE_CHANNEL:
-      return "Hello";
+class App extends React.Component {
+  renderPage = () => {
+    const { page } = this.props;
 
-    case PAGE_CHANNELS:
-      return <List />;
+    switch (page) {
+      case PAGE_CHANNEL:
+        return <Channel />;
 
-    default:
-      return "default";
+      case PAGE_CHANNELS:
+        return <Main />;
+
+      default:
+        return "default";
+    }
+  };
+
+  render() {
+    const { session, page } = this.props;
+
+    return (
+      <>
+        <Header />
+        {session && this.renderPage()}
+      </>
+    );
   }
-};
+}
 
-export const App = connect(
+export default connect(
   createStructuredSelector({
     session: getSession,
     page: getPage,
   }),
-)(({ session, page }) => (
-  <>
-    <Header />
-    {session && renderPage(page)}
-  </>
-));
+)(App);

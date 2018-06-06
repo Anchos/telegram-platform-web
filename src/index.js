@@ -17,7 +17,7 @@ import { Socket } from "src/services/socket";
 import { Storage } from "src/services/storage";
 import { AuthPopup } from "src/services/auth-popup";
 
-import { App } from "src/components/app";
+import App from "src/components/app";
 
 const root = document.createElement("div");
 document.body.appendChild(root);

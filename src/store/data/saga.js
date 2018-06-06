@@ -1,5 +1,7 @@
 import { takeLatest, takeEvery, throttle, all, put, call, select } from "redux-saga/effects";
 import { createSelector } from "reselect";
+import { normalize } from "normalizr";
+import channelSchema from "src/schema/channel";
 
 import { setSession } from "src/store/auth/actions";
 
@@ -38,6 +40,8 @@ function* fetchDataSaga(_, { backend }) {
   yield put(setMeta({ maxMembers, total, maxCost: 300e3 }));
   yield put(setCategories(categories));
   yield put(setItems(channels));
+
+  yield put({ type: Symbol(), payload: normalize(channels, [channelSchema]) });
 }
 
 function* refetchDataSaga(services) {
