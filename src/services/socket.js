@@ -19,7 +19,7 @@ export class Socket {
   subscribers = new Set();
 
   constructor() {
-    this.socket = new WebSocket("ws://159.65.126.202:5000/client");
+    this.socket = new WebSocket("wss://ws.recursion.ga/client");
     this.socket.onopen = this.handleOpenSocket;
     this.socket.onmessage = this.handleHandleSocket;
   }
