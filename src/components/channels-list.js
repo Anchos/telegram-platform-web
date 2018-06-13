@@ -95,7 +95,7 @@ const ChannelsListView = ({
               </td>
               <td>
                 <a href={`https://t.me/${channel.username}`} target="_blank">
-                  @{channel.username}
+                  {channel.username}
                 </a>
               </td>
               <td>{channel.members}</td>
