@@ -31,10 +31,16 @@ class App extends React.Component {
     const { session, page } = this.props;
 
     return (
-      <>
+      <div style={{ backgroundColor: '#EEF5FE' }}>
         <Header />
-        {session && this.renderPage()}
-      </>
+        <div
+          style={{
+            padding: '0 60px'
+          }}
+        >
+          {session && this.renderPage()}
+        </div>
+      </div>
     );
   }
 }
