@@ -9,7 +9,7 @@ import { getPage } from "src/store/route/selectors";
 
 import Channel from "src/pages/channel";
 import Main from "src/pages/main";
-import { Header } from "src/components/header";
+import { Header } from "../ui/newdesign/Header";
 
 class App extends React.Component {
   renderPage = () => {
