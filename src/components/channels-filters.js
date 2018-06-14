@@ -22,14 +22,7 @@ export const ChannelsFilters = connect(
     maxCost: getMaxCost
   }),
 )(({ query, members, maxMembers, cost, maxCost, dispatch }) => (
-  <Row className="my-3 py-3">
-    <Col md={4}>
-      <Input
-        placeholder="Search..."
-        value={query}
-        onChange={event => dispatch(setQuery(event.target.value))}
-      />
-    </Col>
+  <Row style={{ marginTop: 70 }}>
     <Col md={4} className="d-flex align-items-center pr-4">
       <div className="mr-3">Members</div>
       <div className="flex-fill">
@@ -51,6 +44,15 @@ export const ChannelsFilters = connect(
           onChange={(cost) => dispatch(setCost(cost))}
         />
       </div>
+    </Col>
+    <Col md={4} style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <input
+        type={'radio'}
+        id={'show-partner-channels'}
+        checked={true}
+        style={{ marginRight: 10 }}
+      />
+      <label htmlFor={'show-partner-channels'} style={{ marginBottom: 0 }}>Partner channels</label>
     </Col>
   </Row>
 ));
