@@ -2,17 +2,17 @@
   "deploy": {
     "prod": {
       "user": "root",
-      "host": "159.65.126.202",
-      "ref": "origin/master",
-      "repo": "git@github.com:m-2k/telegram-platform-web.git",
+      "host": "82.202.212.205",
+      "ref": "origin/new-design",
+      "repo": "git@github.com:makepiupiu/telegram-platform-web.git",
       "path": "/var/www/frontend/prod",
       "post-deploy": "npm install && npm run build"
     },
     "stage": {
       "user": "root",
-      "host": "159.65.126.202",
+      "host": "82.202.212.205",
       "ref": "origin/stage",
-      "repo": "git@github.com:m-2k/telegram-platform-web.git",
+      "repo": "git@github.com:makepiupiu/telegram-platform-web.git",
       "path": "/var/www/frontend/stage",
       "post-deploy": "npm install && npm run build"
     }
