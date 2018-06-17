@@ -1,22 +1,14 @@
 import * as React from "react";
-import { connect } from "react-redux";
 import { observer, inject } from 'mobx-react';
-// import { createStructuredSelector } from "reselect";
-//
-// import { getSession } from "src/store/auth/selectors";
-//
-// import { PAGE_CHANNEL, PAGE_CHANNELS } from "src/store/route/reducer";
-// import { getPage } from "src/store/route/selectors";
-//
-// import Channel from "src/pages/channel";
-// import Main from "src/pages/main";
 import { Header } from "../ui/newdesign/Header";
-import { ChannelList } from "./ChannelList";
 import {
   PAGE_CHANNEL,
   PAGE_CHANNELS,
 } from "../store/route/reducer";
 import { MainPage } from "../pages/MainPage";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Channel } from "../pages/channel/channel";
+import { DevLogs } from "../pages/DevLogs";
 
 @inject('app')
 @observer
@@ -40,17 +32,22 @@ class App extends React.Component {
     const { session, page } = this.props;
 
     return (
-      <div style={{ backgroundColor: '#EEF5FE' }}>
-        <Header />
-        <div
-          style={{
-            padding: '0 60px'
-          }}
-        >
-          <div>I was built with parcel 1.9 and work with Mobx 4. Feels better.</div>
-          {this.renderPage()}
+      <Router>
+        <div style={{ backgroundColor: '#EEF5FE', height: '100%' }}>
+          <Header />
+          <div
+            style={{
+              padding: '0 60px'
+            }}
+          >
+            <Switch>
+              <Route exact={true} path={'/'} component={MainPage} />
+              <Route path={'/channels/@:username'} component={Channel} />
+              <Route path={'/dev/log'} component={DevLogs} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

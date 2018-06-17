@@ -14,6 +14,7 @@ export class AppStore {
     this.socket = new Socket(HOST);
     this.storage = new Storage();
     this.api = new Backend({ socket: this.socket, storage: this.storage })
+    this.init();
   }
 
   @observable loggedIn = false;
@@ -26,8 +27,11 @@ export class AppStore {
   @observable count = 20;
 
   init = async () => {
-    const open = this.socket.isOpen();
-    console.log("Init from mobx", open)
+    const prevSessionId = this.storage.getSessionId();
+    console.log('has old session id', prevSessionId)
+    const { sessionId } = await this.api.getSession(prevSessionId || '');
+    console.log('new session id', sessionId);
+    this.storage.setSessionId(sessionId);
   }
 
 }

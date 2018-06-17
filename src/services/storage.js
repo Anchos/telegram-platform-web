@@ -2,7 +2,9 @@ export class Storage {
   getFromStore = key => {
     try {
       return JSON.parse(localStorage.getItem(key));
-    } catch (_) {}
+    } catch (_) {
+      return null;
+    }
   };
 
   setToStore = (key, data) => {

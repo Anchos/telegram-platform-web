@@ -14,6 +14,15 @@ export class Backend {
         connectionId: message.connection_id,
       }));
 
+  getSingleChannel = ({ username } = {}) =>
+    this.socket
+      .request({
+        username,
+        id: 0,
+        action: "FETCH_CHANNEL",
+        type: "",
+      });
+
   getChannels = ({ count, offset, title, category, members, cost } = {}) =>
     this.socket
       .request({

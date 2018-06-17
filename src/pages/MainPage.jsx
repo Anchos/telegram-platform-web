@@ -18,7 +18,7 @@ export class MainPage extends React.Component {
     return (
       <div>
         <div style={{ textAlign: 'center' }}>Very Premium channel</div>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Container style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <ChannelCard
             name="@name"
             author="someAuthor"
@@ -34,7 +34,7 @@ export class MainPage extends React.Component {
             author="someAuthor"
             description="Description lorem ipsum"
           />
-        </div>
+        </Container>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 80 }}>
           <CategoryButton text={'Channels'} style={{ marginRight: 30 }} active />
           <CategoryButton text={'Supergroups'} style={{ marginRight: 30 }} />

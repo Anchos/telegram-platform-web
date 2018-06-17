@@ -18,6 +18,7 @@ export class Header extends React.Component {
         }}
       >
         <Logo/>
+        <div style={{ alignSelf: 'center' }}>I was built with parcel 1.9 and work with Mobx 4. Feels better.</div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Button
             text={'Add channel'}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CardDeck, Container, Row } from "reactstrap";
 
-import { AdChannelCard } from "src/ui/ad-channel-card";
+import { AdChannelCard } from "../../src/ui/ad-channel-card";
 
 const channel = (
   <AdChannelCard

@@ -24,6 +24,27 @@ export class ChannelStore {
 
   @observable channels = [];
 
+  @observable id = -1;
+  @observable description = '';
+  @observable photo = '';
+  @observable members = 0;
+  @observable membersGrowth = 0;
+  @observable cost = 0;
+  @observable category = '';
+  @observable language = '';
+  @observable verified = false;
+  @observable vip = false;
+  @observable views = 0;
+  @observable viewsGrowth = 0;
+  @observable telegramId = null;
+  @observable title = '';
+  @observable username = '';
+
+  @action.bound
+  confirmOwner = async () => {
+    alert('Тусуйся бля')
+  }
+
   @action.bound
   getAll = async ({ count, offset, title, category, members, cost }, initMaxValues = true) => {
     const data = await this.app.api.getChannels({ count, offset, title, category, members, cost });
@@ -36,6 +57,43 @@ export class ChannelStore {
     }
     console.log('set max members', this.app.maxMembers)
     this.channels = data.channels;
+  }
+
+  getChannelInfo = async ({ username }) => {
+    const channel = await this.app.api.getSingleChannel({ username: '@' + username });
+    console.log('single channel info', channel);
+    const {
+      id,
+      description,
+      photo,
+      members,
+      members_growth: membersGrowth,
+      cost,
+      category,
+      language,
+      verified,
+      vip,
+      views,
+      views_growth: viewsGrowth,
+      telegram_id,
+      title
+    } = channel.data;
+    this.id = id;
+    this.description = description;
+    this.photo = photo;
+    this.members = members;
+    this.membersGrowth = membersGrowth;
+    this.cost = cost;
+    this.category = category;
+    this.language = language;
+    this.verified = verified;
+    this.vip = vip;
+    this.views = views;
+    this.viewsGrowth = viewsGrowth;
+    this.telegram_id = telegram_id;
+    this.title = title;
+    this.username = channel.username;
+
   }
 
 }
