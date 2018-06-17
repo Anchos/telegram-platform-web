@@ -19,10 +19,11 @@ export class AppStore {
   @observable loggedIn = false;
   @observable SOCKET_HOST = '';
   @observable maxCost = 1;
-  @observable cost = 0;
+  @observable toCost = 1;
   @observable maxMembers = 1;
-  @observable members = 0;
+  @observable toMembers = 1;
   @observable showPartners = false;
+  @observable count = 20;
 
   init = async () => {
     const open = this.socket.isOpen();

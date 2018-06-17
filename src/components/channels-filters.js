@@ -21,8 +21,8 @@ export class ChannelFilters extends React.Component {
             <InputRange
               minValue={0}
               maxValue={app.maxMembers}
-              value={app.members}
-              onChange={members => app.members = members}
+              value={app.toMembers}
+              onChange={members => app.toMembers = members}
             />
           </div>
         </Col>
@@ -32,20 +32,34 @@ export class ChannelFilters extends React.Component {
             <InputRange
               minValue={0}
               maxValue={app.maxCost}
-              value={app.cost}
-              onChange={(cost) => app.cost = cost}
+              value={app.toCost}
+              onChange={(cost) => app.toCost = cost}
             />
           </div>
         </Col>
-        <Col md={4} style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <input
-            type={'checkbox'}
-            id={'show-partner-channels'}
-            onChange={() => app.showPartners = !app.showPartners}
-            checked={app.showPartners}
-            style={{ marginRight: 10 }}
+        <Col md={3} style={{ flexDirection: 'column', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <input
+              type={'checkbox'}
+              id={'show-partner-channels'}
+              onChange={() => app.showPartners = !app.showPartners}
+              checked={app.showPartners}
+              style={{ marginRight: 10 }}
+            />
+            <label htmlFor={'show-partner-channels'} style={{ marginBottom: 0 }}>Partner channels</label>
+          </div>
+        </Col>
+        <Col md={1}>
+          Count
+          <Input
+            value={app.count}
+            type={'text'}
+            onChange={e => {
+              console.log('val', e.target.value, app.count)
+              app.count = e.target.value
+            }}
+            invalid={String(Number(app.count)) === 'NaN'}
           />
-          <label htmlFor={'show-partner-channels'} style={{ marginBottom: 0 }}>Partner channels</label>
         </Col>
       </Row>
     )
