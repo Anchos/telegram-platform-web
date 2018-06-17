@@ -1,12 +1,11 @@
 {
   "presets": [
-    ["@babel/env", { "modules": false, "useBuiltIns": "usage" } ],
-    "@babel/react"
+    "react",
+    "env"
   ],
   "plugins": [
-    "react-hot-loader/babel",
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/proposal-class-properties",
-    ["@babel/transform-runtime", { "helpers": false, "polyfill": false, "regenerator": true }]
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
   ]
 }

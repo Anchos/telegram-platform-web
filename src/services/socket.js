@@ -18,13 +18,15 @@ export class Socket {
   continuations = new Map();
   subscribers = new Set();
 
-  constructor() {
-    this.socket = new WebSocket("wss://ws.recursion.ga/client");
+  constructor(SOCKET_HOST) {
+    this.socket = new WebSocket(SOCKET_HOST);
     this.socket.onopen = this.handleOpenSocket;
     this.socket.onmessage = this.handleHandleSocket;
+    console.log("Opened probably");
   }
 
   handleOpenSocket = event => {
+    console.log("Definitely opened socket connection", event)
     for (const message of this.messagesQueue) {
       this.send(message);
     }

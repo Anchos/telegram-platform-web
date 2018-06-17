@@ -3,7 +3,7 @@
     "prod": {
       "user": "root",
       "host": "82.202.212.205",
-      "ref": "origin/new-design",
+      "ref": "origin/master",
       "repo": "git@github.com:makepiupiu/telegram-platform-web.git",
       "path": "/var/www/frontend/prod",
       "post-deploy": "npm install && npm run build"

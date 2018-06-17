@@ -12,7 +12,7 @@ import { SearchForm } from "../ui/newdesign/SearchForm";
 export default function Main() {
   return (
     <>
-      <div style={{ textAlign: 'center' }}>Premium channel</div>
+      <div style={{ textAlign: 'center' }}>Very Premium channel</div>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <ChannelCard
           name="@name"
