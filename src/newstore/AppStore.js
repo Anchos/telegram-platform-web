@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, reaction } from 'mobx';
 import { Socket } from "../services/socket";
 import { Storage } from "../services/storage";
 import { Backend } from "../services/backend";
@@ -18,6 +18,11 @@ export class AppStore {
 
   @observable loggedIn = false;
   @observable SOCKET_HOST = '';
+  @observable maxCost = 1;
+  @observable cost = 0;
+  @observable maxMembers = 1;
+  @observable members = 0;
+  @observable showPartners = false;
 
   init = async () => {
     const open = this.socket.isOpen();

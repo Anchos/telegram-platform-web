@@ -11,9 +11,15 @@ import { observer, inject } from 'mobx-react';
 // import Channel from "src/pages/channel";
 // import Main from "src/pages/main";
 import { Header } from "../ui/newdesign/Header";
+import { ChannelList } from "./ChannelList";
+import {
+  PAGE_CHANNEL,
+  PAGE_CHANNELS,
+} from "../store/route/reducer";
+import { MainPage } from "../pages/MainPage";
 
-@observer
 @inject('app')
+@observer
 class App extends React.Component {
   renderPage = () => {
     const { page } = this.props;
@@ -23,10 +29,10 @@ class App extends React.Component {
         return <div>Bye world</div>;
 
       case PAGE_CHANNELS:
-        return <div>Hello world</div>;
+        return <MainPage/>;
 
       default:
-        return "default";
+        return <MainPage />;
     }
   };
 
@@ -41,7 +47,8 @@ class App extends React.Component {
             padding: '0 60px'
           }}
         >
-          <div>I'm built with parcel ok {this.props.app.api.getChannels({ count: 20, offset: 0, title: '', category: '', members: [], cost: [] })}</div>
+          <div>I was built with parcel 1.9 and work with Mobx 4. Feels better.</div>
+          {this.renderPage()}
         </div>
       </div>
     );
