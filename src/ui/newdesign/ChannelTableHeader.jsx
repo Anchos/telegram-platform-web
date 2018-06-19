@@ -28,20 +28,23 @@ export class ChannelTableHeader extends React.Component {
         <Col
           xs={12}
           md={1}
+          style={{ textAlign: 'center' }}
         >
-          <div>Members</div>
+          <div style={{ width: '100%' }}>Members</div>
         </Col>
         <Col
           xs={12}
           md={1}
+          style={{ textAlign: 'center' }}
         >
-          <div>Price</div>
+          <div style={{ width: '100%' }}>Price</div>
         </Col>
         <Col
           xs={12}
           md={1}
+          style={{ textAlign: 'center' }}
         >
-          <div>Like</div>
+          <div style={{ width: '100%' }}>Like</div>
         </Col>
       </div>
     )

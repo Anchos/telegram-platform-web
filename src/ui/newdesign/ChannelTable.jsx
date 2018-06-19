@@ -8,7 +8,9 @@ export class ChannelTable extends React.Component {
       <div
         style={{
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          marginBottom: 50,
+          marginTop: 50,
         }}
       >
         <ChannelTableHeader/>

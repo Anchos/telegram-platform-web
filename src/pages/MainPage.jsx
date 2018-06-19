@@ -100,7 +100,7 @@ export class MainPage extends React.Component {
                 like: 321,
                 name: 'Channel by Joker',
                 username: '@joker',
-                type: 'super',
+                type: 'Super',
                 categories: ['Dota', 'League of Legends', 'Anime', 'Nujabes', 'Cole Slow', 'Salade'],
                 photo: 'http://via.placeholder.com/60x60'
               }
