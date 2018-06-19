@@ -13,7 +13,7 @@ export class SearchForm extends React.Component {
           ...this.props.style,
         }}
       >
-        <div style={{ width: 500, position: 'relative' }}>
+        <div style={{ width: this.props.width, position: 'relative' }}>
           <Input
             placeholder="Search..."
             value={''}

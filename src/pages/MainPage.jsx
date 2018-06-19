@@ -9,16 +9,53 @@ import { ChannelCard } from "../ui/newdesign/ChannelCard";
 import { CategoryButton } from "../ui/newdesign/CategoryButton";
 
 import { SearchForm } from "../ui/newdesign/SearchForm";
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
+import { Button } from "../ui/newdesign/Button";
+import { ChannelTable } from "../ui/newdesign/ChannelTable";
 
+@inject('app')
 @observer
 export class MainPage extends React.Component {
+
+  state = {
+    activeSection: 0,
+    activeCategory: 0,
+  }
 
   render() {
     return (
       <div>
-        <div style={{ textAlign: 'center' }}>Very Premium channel</div>
-        <Container style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <div style={{ marginTop: 40 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {
+              ['Channels', 'Supergroups', 'Bots', 'Stickers'].map((t, i) => {
+                const isActive = this.state.activeSection;
+                return <div>
+                  <CategoryButton
+                    text={t}
+                    active={isActive === i}
+                    onClick={() => this.setState({ activeSection: i })}
+                  />
+                  {
+                    isActive === 0 && i === 0 ?
+                      <Button
+                        style={{
+                          color: '#2fb96a',
+                          fontSize: 20,
+                          fontWeight: 300,
+                          textDecoration: 'underline',
+                          padding: 0
+                        }}
+                        text={'Add channel'}
+                      />
+                      : <div style={{ padding: '20px 0' }} />
+                  }
+                </div>
+              })
+            }
+          </div>
+        </div>
+        <Container style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 40 }}>
           <ChannelCard
             name="@name"
             author="someAuthor"
@@ -35,21 +72,40 @@ export class MainPage extends React.Component {
             description="Description lorem ipsum"
           />
         </Container>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 80 }}>
-          <CategoryButton text={'Channels'} style={{ marginRight: 30 }} active />
-          <CategoryButton text={'Supergroups'} style={{ marginRight: 30 }} />
-          <CategoryButton text={'Bots'} style={{ marginRight: 30 }} />
-          <CategoryButton text={'Stickers'} />
-        </div>
-        <Container className="my-3">
-          <SearchForm
-            style={{
-              marginTop: 80,
-            }}
-            onChange={e => console.log("Value from search", e.target.value)}
-            onSubmit={() => console.log("Submitted search")}
-          />
+        <Container style={{ marginTop: 50 }}>
+          <div>
+            <h2 style={{ fontSize: 22, paddingLeft: 20 }}>Category</h2>
+            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+              {
+                this.props.app.categories.map((c, i) => (
+                  <CategoryButton
+                    style={{
+                      fontSize: 22,
+                      marginTop: 20,
+                    }}
+                    text={c}
+                    active={this.state.activeCategory === i}
+                    onClick={() => this.setState({ activeCategory: i })}
+                  />
+                ))
+              }
+            </div>
+          </div>
           <ChannelFilters />
+          <ChannelTable
+            rows={[
+              {
+                members: 123,
+                price: 223,
+                like: 321,
+                name: 'Channel by Joker',
+                username: '@joker',
+                type: 'super',
+                categories: ['Dota', 'League of Legends', 'Anime', 'Nujabes', 'Cole Slow', 'Salade'],
+                photo: 'http://via.placeholder.com/60x60'
+              }
+            ]}
+          />
           <ChannelList />
         </Container>
       </div>

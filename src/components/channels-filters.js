@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
+import { SearchForm } from "../ui/newdesign/SearchForm";
 
 
 @inject('app')
@@ -61,6 +62,14 @@ export class ChannelFilters extends React.Component {
             invalid={String(Number(app.count)) === 'NaN'}
           />
         </Col>
+        <SearchForm
+          style={{
+            marginTop: 80,
+          }}
+          width={400}
+          onChange={e => console.log("Value from search", e.target.value)}
+          onSubmit={() => console.log("Submitted search")}
+        />
       </Row>
     )
   }
