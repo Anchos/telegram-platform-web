@@ -21,6 +21,7 @@ export class MainPage extends React.Component {
   state = {
     activeSection: 0,
     activeCategory: 0,
+    activeCategoryCount: 0,
   }
 
   render() {
@@ -86,9 +87,9 @@ export class MainPage extends React.Component {
                       fontSize: 22,
                       marginTop: 20,
                     }}
-                    text={c}
+                    text={c.category}
                     active={this.state.activeCategory === i}
-                    onClick={() => this.setState({ activeCategory: i })}
+                    onClick={() => this.setState({ activeCategory: i, activeCategoryCount: c.count })}
                   />
                 ))
               }
@@ -96,20 +97,8 @@ export class MainPage extends React.Component {
           </div>
           <ChannelFilters />
           <ChannelTable
-            rows={[
-              {
-                members: 123,
-                price: 223,
-                like: 321,
-                name: 'Channel by Joker',
-                username: '@joker',
-                type: 'Super',
-                categories: ['Dota', 'League of Legends', 'Anime', 'Nujabes', 'Cole Slow', 'Salade'],
-                photo: 'http://via.placeholder.com/60x60'
-              }
-            ]}
+            rows={this.props.app.channels}
           />
-          <ChannelList />
         </Container>
       </div>
     )

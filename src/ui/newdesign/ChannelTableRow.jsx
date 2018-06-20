@@ -1,18 +1,28 @@
 import * as React from 'react';
 import { Col } from "reactstrap";
 import { CategoryButton } from "./CategoryButton";
+import { observer } from 'mobx-react';
 
+@observer
 export class ChannelTableRow extends React.Component {
   render() {
+
     const {
-      type,
+      category,
+      cost,
+      description,
+      id,
+      language,
       members,
-      price,
-      like,
-      name,
+      members_growth: membersGrowth,
+      photo,
+      telegram_id: telegramId,
+      title,
+      views_growth: viewsGrowth,
+      vip,
       username,
-      categories,
-      photo
+      verified,
+      views
     } = this.props.row;
     return (
       <div
@@ -28,10 +38,13 @@ export class ChannelTableRow extends React.Component {
         >
           <div
             style={{
-              marginRight: 10
+              marginRight: 10,
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            {type}
+            <span>{vip ? 'Vip' : 'Not Vip'}</span>
+            <span>{verified ? 'Verified' : 'Not Verified'}</span>
           </div>
           <div
             style={{
@@ -44,18 +57,16 @@ export class ChannelTableRow extends React.Component {
             <div style={{ fontSize: 18 }}>{name}</div>
             <div style={{ fontSize: 14 }}>{username}</div>
             <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-              {categories && categories.map(c => (
-                <CategoryButton
-                  text={c}
-                  style={{
-                    fontSize: 16,
-                    borderRadius: 3,
-                    marginRight: 3,
-                    marginTop: 3
-                  }}
-                  active
-                />
-              ))}
+              <CategoryButton
+                text={category}
+                style={{
+                  fontSize: 16,
+                  borderRadius: 3,
+                  marginRight: 3,
+                  marginTop: 3
+                }}
+                active
+              />
             </div>
           </div>
         </Col>
@@ -79,7 +90,7 @@ export class ChannelTableRow extends React.Component {
             textAlign: 'center'
           }}
         >
-          <div style={{ width: '100%' }}>{price}</div>
+          <div style={{ width: '100%' }}>{cost}</div>
         </Col>
         <Col
           xs={12}
@@ -90,7 +101,7 @@ export class ChannelTableRow extends React.Component {
             textAlign: 'center'
           }}
         >
-          <div style={{ width: '100%' }}>{like}</div>
+          <div style={{ width: '100%' }}>Rating...</div>
         </Col>
       </div>
     )

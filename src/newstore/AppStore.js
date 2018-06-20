@@ -25,10 +25,7 @@ export class AppStore {
   @observable toMembers = 1;
   @observable showPartners = false;
   @observable count = 20;
-  @observable categories = [
-    'Work', 'Telegram', 'Web', 'Programming', 'Anime', '3D', '2D', '4D', 'Miku Miku Dance', 'Coding', 'Testing', 'Gurren', 'Lagann',
-    'Noragami', 'Naruto', 'Sasuke', 'Bleach', 'Row', 'Fight', 'The', 'Power'
-  ];
+  @observable categories = [];
 
   init = async () => {
     const prevSessionId = this.storage.getSessionId();

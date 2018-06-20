@@ -16,8 +16,8 @@ export class ChannelStore {
         offset: 0,
         title: '',
         category: '',
-        members: [0, this.app.toMembers],
-        cost: [0, this.app.toCost]
+        members: [0, this.app.toMembers || 0],
+        cost: [0, this.app.toCost || 0]
       }, false)
     }, { delay: 500 })
   }
@@ -47,7 +47,7 @@ export class ChannelStore {
 
   @action.bound
   getAll = async ({ count, offset, title, category, members, cost }, initMaxValues = true) => {
-    const data = await this.app.api.getChannels({ count, offset, title, category, members, cost });
+    const data = await this.app.api.getChannelsAndCategories({ count, offset, title, category, members, cost });
     console.log('data at channs', data)
     this.app.maxMembers = data.maxMembers;
     this.app.maxCost = 240000;
@@ -57,6 +57,7 @@ export class ChannelStore {
     }
     console.log('set max members', this.app.maxMembers)
     this.channels = data.channels;
+    this.app.categories = data.categories;
   }
 
   getChannelInfo = async ({ username }) => {
