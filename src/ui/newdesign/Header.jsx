@@ -21,6 +21,7 @@ export class Header extends React.Component {
           paddingLeft: 60,
           paddingRight: 60,
           backgroundColor: 'white',
+          boxShadow: '0 3px 4px 0 rgba(0, 0, 0, 0.25)'
         }}
       >
         <Container

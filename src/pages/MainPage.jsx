@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Container,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import { ChannelFilters } from '../components/channels-filters';
 import { ChannelList } from "../components/ChannelList";
@@ -38,16 +39,18 @@ export class MainPage extends React.Component {
                   />
                   {
                     isActive === 0 && i === 0 ?
-                      <Button
+                      <Link
+                        to='addchannel'
                         style={{
                           color: '#2fb96a',
                           fontSize: 20,
                           fontWeight: 300,
                           textDecoration: 'underline',
-                          padding: 0
+                          padding: '9px 13px'
                         }}
-                        text={'Add channel'}
-                      />
+                      >
+                      Add channel
+                      </Link>
                       : <div style={{ padding: '20px 0' }} />
                   }
                 </div>
