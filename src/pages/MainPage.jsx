@@ -40,7 +40,7 @@ export class MainPage extends React.Component {
                   {
                     isActive === 0 && i === 0 ?
                       <Link
-                        to='/addchannel'
+                        to={'/addchannel'}
                         style={{
                           color: '#2fb96a',
                           fontSize: 20,
