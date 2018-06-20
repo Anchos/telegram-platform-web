@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = () => (
+export const Footer = () => (
   <footer style={{
     backgroundColor: "#2fb96a",
     padding: '15px 0px',
@@ -15,5 +15,3 @@ const Footer = () => (
     </ul>
   </footer>
 )
-
-export default Footer;

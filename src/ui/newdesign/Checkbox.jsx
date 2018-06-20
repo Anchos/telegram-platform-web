@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Checkbox = ({ id, label }) => (
+export const Checkbox = ({ id, label }) => (
   <div
     style={{ display: 'flex', alignItems: 'center' }}
   >
@@ -23,5 +23,3 @@ const Checkbox = ({ id, label }) => (
     <label htmlFor={id}>{label}</label>
   </div>
 )
-
-export default Checkbox

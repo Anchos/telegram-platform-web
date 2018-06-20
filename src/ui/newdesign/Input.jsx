@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = props => (
+export const Input = props => (
   <div style={{ marginBottom: '40px' }}>
     <input
       style={{ 
@@ -17,5 +17,3 @@ const Input = props => (
     />
   </div>
 )
-
-export default Input

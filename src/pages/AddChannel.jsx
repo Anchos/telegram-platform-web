@@ -3,8 +3,8 @@ import {
   Container,
 } from "reactstrap";
 
-import Input from "../ui/newdesign/Input";
-import Checkbox from "../ui/newdesign/Checkbox";
+import { Input } from "../ui/newdesign/Input";
+import { Checkbox } from "../ui/newdesign/Checkbox";
 import { Button } from "../ui/newdesign/Button";
 
 const inputs = ['Channel Username', 'Category', 'Email'];

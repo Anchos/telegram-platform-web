@@ -1,7 +1,7 @@
 import * as React from "react";
 import { observer, inject } from 'mobx-react';
 import { Header } from "../ui/newdesign/Header";
-import Footer from "../ui/newdesign/Footer";
+import { Footer } from "../ui/newdesign/Footer";
 import {
   PAGE_CHANNEL,
   PAGE_CHANNELS,
