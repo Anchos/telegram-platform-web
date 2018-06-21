@@ -1,4 +1,4 @@
-import { action, observable, reaction } from 'mobx';
+import { action, observable, reaction, computed } from 'mobx';
 
 export class ChannelStore {
 
@@ -23,6 +23,7 @@ export class ChannelStore {
   }
 
   @observable channels = [];
+  @observable activePage = 1;
 
   @observable id = -1;
   @observable description = '';
@@ -39,10 +40,16 @@ export class ChannelStore {
   @observable telegramId = null;
   @observable title = '';
   @observable username = '';
+  @observable channelsTotal = 0;
 
   @action.bound
   confirmOwner = async () => {
     alert('Тусуйся бля')
+  }
+
+  @computed
+  get pagesLength() {
+    return Math.ceil(this.channelsTotal / this.app.count);
   }
 
   @action.bound
@@ -58,6 +65,7 @@ export class ChannelStore {
     console.log('set max members', this.app.maxMembers)
     this.channels = data.channels;
     this.app.categories = data.categories;
+    this.channelsTotal = data.total;
   }
 
   getChannelInfo = async ({ username }) => {

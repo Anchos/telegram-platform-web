@@ -19,10 +19,10 @@ export class AppStore {
 
   @observable loggedIn = false;
   @observable SOCKET_HOST = '';
-  @observable maxCost = 1;
-  @observable toCost = 1;
-  @observable maxMembers = 1;
-  @observable toMembers = 1;
+  @observable maxCost = 0;
+  @observable toCost = 0;
+  @observable maxMembers = 0;
+  @observable toMembers = 0;
   @observable showPartners = false;
   @observable count = 20;
   @observable categories = [];

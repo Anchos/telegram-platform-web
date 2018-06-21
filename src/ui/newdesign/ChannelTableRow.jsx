@@ -24,6 +24,7 @@ export class ChannelTableRow extends React.Component {
       verified,
       views
     } = this.props.row;
+    console.log('category', category)
     return (
       <div
         style={{
@@ -51,10 +52,20 @@ export class ChannelTableRow extends React.Component {
               marginRight: 10
             }}
           >
-            <img src={photo} width={60} height={60} style={{ borderRadius: 50, borderColor: 'white', borderWidth: 2 }} />
+            <img
+              src={photo}
+              width={60}
+              height={60}
+              style={{
+                borderRadius: 50,
+                borderColor: 'white',
+                borderWidth: 2,
+                backgroundColor: 'white'
+              }}
+            />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontSize: 18 }}>{name}</div>
+            <div style={{ fontSize: 18, wordWrap: 'break-word' }}>{title}</div>
             <div style={{ fontSize: 14 }}>{username}</div>
             <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
               <CategoryButton

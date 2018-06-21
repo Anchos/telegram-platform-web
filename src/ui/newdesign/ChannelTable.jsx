@@ -5,8 +5,11 @@ import {
   inject,
   observer,
 } from "mobx-react";
+import { ShowMoreButton } from "./ShowMoreButton";
+import { PaginationRow } from "./PaginationRow";
+import * as _ from 'lodash';
 
-@inject('channelsStore')
+@inject('channelsStore', 'app')
 @observer
 export class ChannelTable extends React.Component {
 
@@ -15,7 +18,7 @@ export class ChannelTable extends React.Component {
   }
 
   render() {
-    const { channels } = this.props.channelsStore;
+    const { channels, pagesLength } = this.props.channelsStore;
     return (
       <div
         style={{
@@ -30,6 +33,26 @@ export class ChannelTable extends React.Component {
           channels.map(c => (
             <ChannelTableRow row={c} />
           ))
+        }
+        <ShowMoreButton
+          style={{ marginTop: 20 }}
+        />
+        {
+          pagesLength > 1 ?
+            <PaginationRow
+              activePage={this.props.channelsStore.activePage}
+              onPageClick={p => {
+                this.props.channelsStore.activePage = Number(p);
+                this.props.channelsStore.getAll({
+                  offset: this.props.app.count * (Number(p) - 1),
+                  count: this.props.app.count,
+                  members: [0, this.props.app.toMembers],
+                  cost: [0, this.props.app.toCost],
+                })
+              }}
+              style={{ marginTop: 20 }}
+              pages={_.range(1, pagesLength + 1)}
+            /> : null
         }
       </div>
     )

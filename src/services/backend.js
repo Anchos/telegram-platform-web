@@ -33,8 +33,8 @@ export class Backend {
         offset,
         members,
         cost,
-        ...category.length ? { category } : {},
-        ...title.length ? { title } : {},
+        ...category ? { category } : {},
+        ...title ? { title } : {},
       })
       .then(message => ({
         channels: message.data.items,
