@@ -10,8 +10,8 @@ import { createStores } from "./newstore";
 const stores = createStores();
 
 render(
-  <Provider {...stores}>
+  <Provider {...stores} >
     <App />
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

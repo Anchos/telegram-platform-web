@@ -7,16 +7,16 @@ export class ChannelCard extends React.Component {
       <div
         style={{
           backgroundColor: 'white',
-          borderRadius: 10,
+          borderRadius: 3,
           boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
           display: 'flex',
           flexDirection: 'row',
           padding: '10px 25px',
-          width: 310
+          maxWidth: 370
         }}
       >
         <div style={{ marginRight: 10 }}>
-          image
+          <img src={'http://via.placeholder.com/75x75'} width={75} height={75} style={{ borderRadius: 50 }} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div

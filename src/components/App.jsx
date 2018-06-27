@@ -1,56 +1,54 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import data from '../data';
+import styles from '../ui/styles';
 import { observer, inject } from 'mobx-react';
-// import { createStructuredSelector } from "reselect";
-//
-// import { getSession } from "src/store/auth/selectors";
-//
-// import { PAGE_CHANNEL, PAGE_CHANNELS } from "src/store/route/reducer";
-// import { getPage } from "src/store/route/selectors";
-//
-// import Channel from "src/pages/channel";
-// import Main from "src/pages/main";
-import { Header } from "../ui/newdesign/Header";
-import { ChannelList } from "./ChannelList";
+import { Header } from "../ui/newdesign/header/Header";
+import { Categories } from "../ui/newdesign/categories/Categories";
+import { Footer } from "../ui/newdesign/Footer";
 import {
   PAGE_CHANNEL,
   PAGE_CHANNELS,
 } from "../store/route/reducer";
 import { MainPage } from "../pages/MainPage";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Channel } from "../pages/channel/channel";
+import { DevLogs } from "../pages/DevLogs";
+import { AddChannel } from "../pages/AddChannel";
+
+styles()
 
 @inject('app')
 @observer
 class App extends React.Component {
-  renderPage = () => {
-    const { page } = this.props;
+  // renderPage = () => {
+  //   const { page } = this.props;
 
-    switch (page) {
-      case PAGE_CHANNEL:
-        return <div>Bye world</div>;
+  //   switch (page) {
+  //     case PAGE_CHANNEL:
+  //       return <div>Bye world</div>;
 
-      case PAGE_CHANNELS:
-        return <MainPage/>;
+  //     case PAGE_CHANNELS:
+  //       return <MainPage/>;
 
-      default:
-        return <MainPage />;
-    }
-  };
+  //     default:
+  //       return <MainPage />;
+  //   }
+  // };
 
   render() {
     const { session, page } = this.props;
 
     return (
-      <div style={{ backgroundColor: '#EEF5FE' }}>
-        <Header />
-        <div
-          style={{
-            padding: '0 60px'
-          }}
-        >
-          <div>I was built with parcel 1.9 and work with Mobx 4. Feels better.</div>
-          {this.renderPage()}
+      <Router>
+        <div>
+          <Header />
+          <Categories categories={data.categories} />
+          <Switch>
+            <Route exact={true} path={'/'} component={MainPage} />
+            <Route path={'/channels/@:username'} component={Channel} />
+          </Switch>
         </div>
-      </div>
+      </Router>
     );
   }
 }
