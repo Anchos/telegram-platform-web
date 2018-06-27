@@ -9,26 +9,32 @@ import {
 
 import { Categories } from './Categories'
 
-export const Row = ({ type }) => (
-  <TableRow type={type} className='row align-items-center'>
+export const Row = ({ 
+  title,
+  username,
+  photo,
+  likes,
+  members
+}) => (
+  <TableRow className='row align-items-center'>
     <div className='col-2'>
       <div className='row no-gutters align-items-center no-gutters'>
-        <Type type={type}>s</Type>
-        <Avatar></Avatar>
+        <Type>s</Type>
+        <Avatar imageUrl={photo}></Avatar>
       </div>
     </div>
     <div className='col-7'>
-      <Title type={type}>Channel by joker</Title>
-      <SmallText type={type}>@joker</SmallText>
+      <Title>{title}</Title>
+      <SmallText>{username}</SmallText>
       <Categories categories={new Array(6).fill('Криптовалюта')} />
     </div>
     <div className='col-3'>
       <div className='row no-gutters justify-content-between'>
         <div className='col'>
-          <div className='row no-gutters justify-content-center'>15 897</div>
+          <div className='row no-gutters justify-content-center'>{members}</div>
         </div>
         <div className='col'>
-          <div className='row no-gutters justify-content-center'>59 781</div>
+          <div className='row no-gutters justify-content-center'>{likes}</div>
         </div>
         <div className='col'>
           <div className='row no-gutters justify-content-center'>200 $</div>

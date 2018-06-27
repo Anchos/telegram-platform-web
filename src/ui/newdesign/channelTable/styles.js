@@ -9,7 +9,7 @@ export const TableRow = styled.li`
   background-image: ${props => props.type === 'partners' ? 'linear-gradient(86deg, #4e99cd, #1b679c)': 'none'};
   border: ${props => props.type === 'partners' ? 'none' : '1px solid #087ac9'};
   margin-bottom: 10px;
-  color: #fff;
+  color: #3f8abf;
 
   &:last-child {
     margin-bottom: 0
@@ -35,6 +35,8 @@ export const Avatar = styled.div`
   height: 70px;
   background-color: #fff;
   border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-image: ${props => props.imageUrl ? `url(${props.imageUrl})` : 'none'};
 `
 
@@ -75,6 +77,7 @@ export const Filter = styled.button`
   border: none;
   background-color: transparent;
   position: relative;
+  padding-right: 33px;
 
   &::after {
     content: '';
@@ -83,6 +86,6 @@ export const Filter = styled.button`
     border: 7px solid transparent;	
     border-top: 7px solid #232825;
     bottom: 5px;
-    right: -13px;
+    right: 14px;
   }
 `

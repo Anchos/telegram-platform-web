@@ -41,6 +41,7 @@ export const Stats = styled.div`
   width: calc(100% - 90px);
   font-size: 14px;
   margin-bottom: 18px;
+  text-align: center;
 `
 
 export const StatsRow = styled.div`

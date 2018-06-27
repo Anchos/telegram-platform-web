@@ -8,6 +8,9 @@ import { Button } from '../button/Button'
 
 export class Channels extends React.Component {
   render() {
+
+    let { channels = [] } = this.props
+
     return (
       <Wrapper className='container-fluid'>
         <RowMarginBottom margin='48px' className='row no-gutters align-items'>
@@ -28,7 +31,7 @@ export class Channels extends React.Component {
             </div>
           </div>
         </RowMarginBottom>
-        <ChannelTable />
+        <ChannelTable channels={channels} />
       </Wrapper>
     )
   }

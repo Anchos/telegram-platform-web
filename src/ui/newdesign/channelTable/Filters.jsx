@@ -11,20 +11,27 @@ export const Filters = () => (
         <Filter>Name</Filter>
       </div>
     </div>
-    <div className='col-1'>
+    <div className='col-3'>
+      <div className='row no-gutters justify-content-between'>
+        <div><Filter>Followers</Filter></div>
+        <div><Filter>Likes</Filter></div>
+        <div><Filter>Ads</Filter></div>
+      </div>
+    </div>
+    {/* <div className='col-1'>
       <div className='row justify-content-center no-gutters'>
         <Filter>Followers</Filter>
+      </div>
+    </div>
+    <div className='col-1'>
+      <div className='row justify-content-center no-gutters'>
+        <Filter>Likes</Filter>
       </div>
     </div>
     <div className='col-1'>
       <div className='row justify-content-center no-gutters'>
         <Filter>Ads</Filter>
       </div>
-    </div>
-    <div className='col-1'>
-      <div className='row justify-content-center no-gutters'>
-        <Filter>Followers</Filter>
-      </div>
-    </div>
+    </div> */}
   </WrapperFilters>
 )

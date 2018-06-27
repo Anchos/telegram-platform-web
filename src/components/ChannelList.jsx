@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export class ChannelList extends React.Component {
 
   async componentDidMount() {
-    await this.props.channelsStore.getAll({ count: 20, offset: 0, title: '', category: '', members: [], cost: [] });
+    await this.props.channelsStore.getAll({ count: 20, offset: 0, title: '', category: '', members: [10, 200], cost: [10, 200] });
   }
 
   render() {
