@@ -1,6 +1,9 @@
 import * as React from "react";
+import data from '../data';
+import styles from '../ui/styles';
 import { observer, inject } from 'mobx-react';
-import { Header } from "../ui/newdesign/Header";
+import { Header } from "../ui/newdesign/header/Header";
+import { Categories } from "../ui/newdesign/categories/Categories";
 import { Footer } from "../ui/newdesign/Footer";
 import {
   PAGE_CHANNEL,
@@ -12,46 +15,38 @@ import { Channel } from "../pages/channel/channel";
 import { DevLogs } from "../pages/DevLogs";
 import { AddChannel } from "../pages/AddChannel";
 
+styles()
+
 @inject('app')
 @observer
 class App extends React.Component {
-  renderPage = () => {
-    const { page } = this.props;
+  // renderPage = () => {
+  //   const { page } = this.props;
 
-    switch (page) {
-      case PAGE_CHANNEL:
-        return <div>Bye world</div>;
+  //   switch (page) {
+  //     case PAGE_CHANNEL:
+  //       return <div>Bye world</div>;
 
-      case PAGE_CHANNELS:
-        return <MainPage/>;
+  //     case PAGE_CHANNELS:
+  //       return <MainPage/>;
 
-      default:
-        return <MainPage />;
-    }
-  };
+  //     default:
+  //       return <MainPage />;
+  //   }
+  // };
 
   render() {
     const { session, page } = this.props;
 
     return (
       <Router>
-        <div style={{ 
-          backgroundColor: '#EEF5FE', position: 'relative'
-        }}>
+        <div>
           <Header />
-          <div
-            style={{
-              padding: '0 60px'
-            }}
-          >
-            <Switch>
-              <Route exact={true} path={'/'} component={MainPage} />
-              <Route path={'/channels/@:username'} component={Channel} />
-              <Route path={'/dev/log'} component={DevLogs} />
-              <Route path={'/addchannel'} component={AddChannel} />
-            </Switch>
-          </div>
-          <Footer />
+          <Categories categories={data.categories} />
+          <Switch>
+            <Route exact={true} path={'/'} component={MainPage} />
+            <Route path={'/channels/@:username'} component={Channel} />
+          </Switch>
         </div>
       </Router>
     );
