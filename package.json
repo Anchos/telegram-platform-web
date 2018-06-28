@@ -6,10 +6,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "oldstart": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "oldbuild": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "deploy:prod": "pm2 deploy prod",
     "deploy:stage": "pm2 deploy stage",
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "NODE_ENV=production parcel build index.html --no-minify"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
