@@ -7,7 +7,10 @@ import './styles.css'
 export class NumericFilter extends React.Component {
 
   state = {
-    value: 10
+    value: {
+      min: 0,
+      max: 10
+    }
   }
 
   handleChange = value => this.setState({ value })
@@ -21,8 +24,8 @@ export class NumericFilter extends React.Component {
           minValue={0}
           value={this.state.value}
           onChange={this.handleChange}
+          formatLabel={value => value}
         />
-        <Value>{this.state.value}</Value>
       </Wrapper>
     )
   }
