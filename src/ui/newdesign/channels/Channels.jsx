@@ -9,7 +9,7 @@ import { Button } from '../button/Button'
 export class Channels extends React.Component {
   render() {
 
-    let { channels = [], getChannelForMembers } = this.props
+    let { channels = [], getChannelForMembers, maxMembers } = this.props
 
     return (
       <Wrapper className='container-fluid'>
@@ -23,6 +23,7 @@ export class Channels extends React.Component {
               getChannelForMembers={getChannelForMembers} 
               label='Number of subscribers' 
               channels={channels}
+              maxValue={maxMembers}
             />
           </div>
           <div className='col-12 col-sm-12 col-md-6 col-lg-4'>

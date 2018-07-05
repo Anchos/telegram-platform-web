@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AdBar } from '../../components/ad-bar';
+// import { AdBar } from '../../components/ad-bar';
 import { Container, Row, Col, Button } from "reactstrap";
 import { observer, inject } from 'mobx-react';
 import { ChannelCard } from "../../ui/newdesign/ChannelCard";

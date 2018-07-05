@@ -9,9 +9,3 @@ export const Label = styled.div`
   margin-bottom: 12px;
   color: #3d3d3d;
 `
-
-export const Value = styled.div`
-  font-size: 14px;
-  color: #3d3d3d;
-  padding-top: 5px;
-`

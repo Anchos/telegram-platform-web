@@ -8,6 +8,10 @@ export class ChannelTable extends React.Component {
 
     let { channels } = this.props
 
+    if (!channels || !channels.length) {
+      return <div>Нет данных</div>;
+    }
+
     return (
       <div className='container-fluid'>
         <Filters />

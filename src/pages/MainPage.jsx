@@ -5,6 +5,7 @@ import { inject, observer } from 'mobx-react'
 import { Banners } from '../ui/newdesign/banners/Banners'
 import { Channels } from '../ui/newdesign/channels/Channels'
 
+
 @inject('channelsStore')
 @observer
 export class MainPage extends React.Component {
@@ -26,20 +27,22 @@ export class MainPage extends React.Component {
     await this.props.channelsStore.getAll(this.body)
   }
 
+  getChannelForMembers = values => {
+    this.props.channelsStore.getChannelForMembers(values)
+  }
+
   render() {
 
-    const { channels, getChannelForMembers } = this.props.channelsStore
+    const { channels, app: { maxMembers } } = this.props.channelsStore
 
-    if (!channels || !channels.length) {
-      return null;
-    }
-
+  
     return (
       <div>
         <Banners cards={data.cards} />
         <Channels 
-          getChannelForMembers={getChannelForMembers}
+          getChannelForMembers={this.getChannelForMembers}
           channels={channels}
+          maxMembers={maxMembers}
         />
       </div>
     )
