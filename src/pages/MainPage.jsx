@@ -1,6 +1,7 @@
 import React from 'react'
 import data from '../data'
 import { inject, observer } from 'mobx-react'
+import _ from 'lodash'
 
 import { Banners } from '../ui/newdesign/banners/Banners'
 import { Channels } from '../ui/newdesign/channels/Channels'
@@ -25,6 +26,7 @@ export class MainPage extends React.Component {
 
   async componentDidMount() {
     await this.props.channelsStore.getAll(this.body)
+    this.debounce = _.debounce(this.props.channelsStore.getChannelForMembers, 1000)
   }
 
   getChannelForMembers = values => {
@@ -40,7 +42,7 @@ export class MainPage extends React.Component {
       <div>
         <Banners cards={data.cards} />
         <Channels 
-          getChannelForMembers={this.getChannelForMembers}
+          getChannelForMembers={this.debounce}
           channels={channels}
           maxMembers={maxMembers}
         />
