@@ -68,6 +68,13 @@ export class ChannelStore {
     this.channelsTotal = data.total;
   }
 
+  getChannelForMembers = async subscribes => {
+    const members = [subscribes.min, subscribes.max]
+    const data = await this.app.api.getChannelsAndCategories({ members })
+
+    console.log(data.channels)
+  }
+
   getChannelInfo = async ({ username }) => {
     const channel = await this.app.api.getSingleChannel({ username: '@' + username });
     console.log('single channel info', channel);

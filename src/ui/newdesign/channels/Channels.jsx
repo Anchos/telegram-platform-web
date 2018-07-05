@@ -9,7 +9,7 @@ import { Button } from '../button/Button'
 export class Channels extends React.Component {
   render() {
 
-    let { channels = [] } = this.props
+    let { channels = [], getChannelForMembers } = this.props
 
     return (
       <Wrapper className='container-fluid'>
@@ -19,7 +19,11 @@ export class Channels extends React.Component {
         </RowMarginBottom>
         <RowMarginBottom margin='35px' className='row align-items-center justify-content-between'>
           <div className='col-12 col-sm-12 col-md-6 col-lg-4'>
-            <NumericFilter label='Number of subscribers' />
+            <NumericFilter 
+              getChannelForMembers={getChannelForMembers} 
+              label='Number of subscribers' 
+              channels={channels}
+            />
           </div>
           <div className='col-12 col-sm-12 col-md-6 col-lg-4'>
             <NumericFilter label='Advertising cost' />

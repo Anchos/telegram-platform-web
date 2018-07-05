@@ -28,7 +28,7 @@ export class MainPage extends React.Component {
 
   render() {
 
-    const { channels } = this.props.channelsStore
+    const { channels, getChannelForMembers } = this.props.channelsStore
 
     if (!channels || !channels.length) {
       return null;
@@ -37,7 +37,10 @@ export class MainPage extends React.Component {
     return (
       <div>
         <Banners cards={data.cards} />
-        <Channels channels={channels} />
+        <Channels 
+          getChannelForMembers={getChannelForMembers}
+          channels={channels}
+        />
       </div>
     )
   }
