@@ -26,13 +26,15 @@ export class AppStore {
   @observable showPartners = false;
   @observable count = 20;
   @observable categories = [];
+  @observable connectionId = null;
 
   init = async () => {
     const prevSessionId = this.storage.getSessionId();
     console.log('has old session id', prevSessionId)
-    const { sessionId } = await this.api.getSession(prevSessionId || '');
+    const { sessionId, connectionId } = await this.api.getSession(prevSessionId || '');
     console.log('new session id', sessionId);
     this.storage.setSessionId(sessionId);
+    this.connectionId = connectionId
   }
 
 }

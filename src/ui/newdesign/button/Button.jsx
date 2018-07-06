@@ -1,12 +1,16 @@
 import React from 'react'
-import { StyledButton } from './styles'
+import { StyledButton, StyledLink } from './styles'
 
-export const Button = ({ text, handleClick, ...props }) => (
-  <StyledButton
-    {...props}
-    type='button' 
-    onClick={handleClick}
-  >
-    {text}
-  </StyledButton>
-)
+export const Button = ({ text, handleClick, href, ...props }) => 
+  href ?
+    <StyledLink {...props} href={href} >
+      {text}
+    </StyledLink>
+    :
+    <StyledButton
+      {...props}
+      type='button'
+      onClick={handleClick}
+    >
+      {text}
+    </StyledButton>

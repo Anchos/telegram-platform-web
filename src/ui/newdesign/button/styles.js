@@ -12,3 +12,4 @@ export const StyledButton = styled.button`
   color: ${props => props.primary ? '#fff' : '#15ad56'};
   border: ${props => props.primary ? 'none' : '1px solid #15ad56'};
 `
+export const StyledLink = StyledButton.withComponent('a')
