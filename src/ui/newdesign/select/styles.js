@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding-top: 30px;
-  padding-bottom: 60px;
+  width: 50px;
+`
+
+export const StyledSelect = styled.select`
+  width: 100%;
 `

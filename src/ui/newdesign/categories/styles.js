@@ -8,6 +8,11 @@ const NativeLink = ({ className, children, ...props }) => (
   </Link>
 )
 
+export const Wrapper = styled.div`
+  background-color: #fff;
+  box-shadow: 0 3px 8px 0 rgba(9, 71, 36, 0.1);
+`
+
 export const StyledLink = styled(NativeLink)`
   color: inherit;
 
@@ -22,11 +27,10 @@ export const StyledLink = styled(NativeLink)`
 `
 
 export const StyledCategories = styled.div`
-  padding: 18px 60px 14px;
+  padding-top: 18px;
+  padding-bottom: 14px;
   color: #ccc;
   font-size: 16px;
-  background-color: #fff;
-  box-shadow: 0 3px 8px 0 rgba(9, 71, 36, 0.1);
 `
 
 export const Item = styled.li`

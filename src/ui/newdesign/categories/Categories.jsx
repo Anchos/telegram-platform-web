@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledCategories, Item, StyledLink } from './styles'
+import { StyledCategories, Item, StyledLink, Wrapper } from './styles'
 
 export class Categories extends React.Component {
   render() {
@@ -7,18 +7,22 @@ export class Categories extends React.Component {
     let { categories } = this.props
 
     return (
-      <StyledCategories className='container-fluid'>
-        <ul className='row no-gutters'>
-          {
-            categories && categories.map((element, i) => 
-              <Item key={i}>
-                <StyledLink to={`/${element}`}>
-                {element}
-                </StyledLink>
-              </Item>)
-          }
-        </ul>
-      </StyledCategories>
+      <Wrapper className='container-fluid'>
+        <StyledCategories className='container'>
+          <div className='row justify-content-center'>  
+            <ul className='row no-gutters'>
+              {
+                categories && categories.map((element, i) => 
+                  <Item key={i}>
+                    <StyledLink to={`/${element}`}>
+                    {element}
+                    </StyledLink>
+                  </Item>)
+              }
+            </ul>
+          </div>
+        </StyledCategories>
+      </Wrapper>
     )
   }
 }

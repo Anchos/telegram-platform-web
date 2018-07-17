@@ -21,6 +21,10 @@ export const StyledCard = styled.div`
   font-size: 17px;
   color: #232825;
   padding: 25px;
+
+  @media (max-width: 992px) {
+    margin-bottom: 20px
+  }
 `
 
 export const Title = styled.h3`

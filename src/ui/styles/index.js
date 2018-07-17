@@ -1,18 +1,37 @@
 import { injectGlobal } from 'styled-components'
+import woff2 from '../../fonts/open-sans-regular.woff2'
+import woff from '../../fonts/open-sans-regular.woff'
 
 export default () => injectGlobal`
+
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: 
+      local('Open Sans Regular'),
+      local('OpenSans-Regular'),
+      url(${woff2}) format('woff2'),
+      url(${woff}) format('woff')
+  }
+
+  @media (min-width: 1400px) {
+    .container {
+        max-width: 1383px;
+    }
+  }
 
   * {
     box-sizing: border-box;
   }
 
-  body {
-    overflow-x: hidden;
+  label {
+    margin-bottom: 0
   }
 
-  .row {
-    /* margin-left: 0;
-    margin-right: 0; */
+  body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.2;
   }
 
   .no-padding {

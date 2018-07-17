@@ -1,55 +1,107 @@
-import React from 'react';
+import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Logo } from '../logo/Logo';
+import { Link } from 'react-router-dom'
+
 import { 
+  HeaderWrapper,
   HeaderRow, 
   Menu, 
+  WrapperHidden,
   Item, 
-  StyledLink,
-  StyledButton
+  StyledLink
 } from './styles';
 import data from '../../../data'
 
+import { Logo } from '../logo/Logo'
 import { SearchInput } from '../searchInput/SearchInput'
 import { Button } from '../button/Button'
+import { Select } from '../select/Select'
 
 @inject('app')
 @observer
 export class Header extends React.Component {
+
+  state = {
+    focus: false,
+    searchValue: ''
+  }
+
+  search = event => {
+    event.preventDefault()
+
+    this.setState({ searchValue: event.target.value })
+  }
+
+  handleBlur = () => {
+    this.setState({
+      focus: false,
+      searchValue: ''
+    })
+  }
+
+  handleFocus = () => {
+    this.setState({
+      focus: true
+    })
+  }
+
   render() {
     const { menu = [] } = data;
     const { connectionId } = this.props.app
 
     return (
-      <HeaderRow className='container-fluid'>
+      <HeaderWrapper className='container-fluid'>
+        <HeaderRow className='container'>
         <div className='row no-gutters align-items-center justify-content-between'>
-          <div className='row no-gutters align-items-center'>
+
+          <WrapperHidden className='col-2'>
             <Logo />
-            <SearchInput />
+          </WrapperHidden>
+
+          <div className='col-md-12 col-lg-7 col-xl-6'>
+            <div className={
+              `
+              no-gutters row align-items-center 
+              justify-content-${this.state.focus ? 'end' : 'between'}
+            `}>
+              {
+                !this.state.focus &&
+                  <Menu className='row no-gutters align-items-center'>
+                    {
+                      menu && menu.map((element, i) => 
+                        <Item key={i}>
+                          <StyledLink to={`/${element}`}>{element}</StyledLink>
+                        </Item>
+                      )
+                    }
+                    <Item><Button text='Suggest' primary /></Item>
+                  </Menu>
+              }
+              <SearchInput 
+                handleFocus={this.handleFocus}
+                handleBlur={this.handleBlur}
+                handleChange={this.search}
+                focus={this.state.focus}
+                value={this.state.searchValue}
+              />
+            </div>
           </div>
 
-          <div className='row no-gutters align-items-center'>
-            <Menu className='row no-gutters align-items-center'>
-              {
-                menu && menu.map((element, i) => 
-                  <Item key={i}>
-                    <StyledLink to={`/${element}`}>{element}</StyledLink>
-                  </Item>
-                )
-              }
-            </Menu>
-            <StyledButton type='button'>English</StyledButton>
-            <div style={{ marginRight: 16 }}>
+          <div className='col-md-4 col-lg-3 col-xl-3'>
+            <div className='row no-gutters align-items-center justify-content-between'>
+              <WrapperHidden><Link to='/faq'>FAQ</Link></WrapperHidden>
+              <WrapperHidden><Select options={[{ value: 'en', name: 'EN' }]} /></WrapperHidden>
               <Button text='Surprise' primary />
+              <Button 
+                href={`https://t.me/medev_bot?start=${connectionId}`} 
+                text='Sign In'
+              />
             </div>
-            <Button 
-              text='Sign In'
-              target='_blank'
-              href={`https://t.me/medev_bot?start=${connectionId}`} 
-            />
           </div>
+
         </div>
       </HeaderRow>
+      </HeaderWrapper>
     )
   }
 }

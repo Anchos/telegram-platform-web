@@ -1,44 +1,23 @@
 import styled from 'styled-components';
 import img from './img/search.svg';
 
-export const WrapperInput = styled.div`
-  width: 373px;
+const Wrapper = styled.div`
+  width: ${props => props.focus ? '100%' : '40px'};
   height: 40px;
-  position: relative;
-  
-  &::after {
-    content: '';
-    display: block;
-    right: 17px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 14px;
-    height: 14px;
-    background-image: url(${img});
-    position: absolute;
-  }
+  border-bottom: ${props => props.focus ? '1px solid #232825' : 'none'};
 `
 
-export const StyledInput = styled.input`
-  width: 100%;
-  height: 100%;
+const Input = styled.input`
   display: block;
-  border-radius: 20px;
-  background-color: #ffffff;
-  border: solid 1px #cccccc;
-  font-family: Lato;
-  font-size: 20px;
-  color: #232825;
-  padding-left: 18px;
-  padding-right: 30px;
+  border: none;
+  background-color: transparent;
+  background-image: url(${img});
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  height: 100%;
+  width: 100%;
   outline: none;
-
-  &:focus { 
-    border: solid 1px #15ad56;
-  }
-
-  &::placeholder {
-    color: #cccccc;
-    font-family: Lato;
-  }
 `
+
+export { Wrapper, Input }

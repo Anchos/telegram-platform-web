@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyledInput, WrapperInput } from './styles';
+import { Input, Wrapper } from './styles';
 
-export const SearchInput = () => (
-  <WrapperInput>
-    <StyledInput 
-      type='text'
-      placeholder='Channel name, tag or description...'
+export const SearchInput = props => (
+  <Wrapper focus={props.focus}>
+    <Input 
+      type='search'
+      onFocus={props.handleFocus}
+      onBlur={props.handleBlur}
+      onChange={props.handleChange}
+      value={props.value}
     />
-  </WrapperInput>
+  </Wrapper>
 )

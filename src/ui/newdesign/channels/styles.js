@@ -2,8 +2,23 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   margin-bottom: 37px;
-  padding-left: 60px;
-  padding-right: 60px;
+`
+
+export const WrapperCheckboxes = styled.div`
+
+  &:last-child {
+      margin-bottom: 0;
+    }
+
+  @media (max-width: 960px) {
+    margin-top: 80px;
+  }
+`
+
+export const WrapperFilter = styled.div`
+  @media (max-width: 720px) {
+    margin-bottom: 100px;
+  }
 `
 
 export const RowMarginBottom = styled.div`

@@ -8,11 +8,24 @@ const NativeLink = ({ className, children, ...props }) => (
   </Link>
 )
 
+export const WrapperHidden = styled.div`
+  @media (max-width: 1400px) {
+    display: none
+  }
+`
+
+export const RowCenter = styled.div`
+  justify-content: flex-end
+`
+
+export const HeaderWrapper = styled.div`
+  box-shadow: 0 3px 8px 0 rgba(9, 71, 36, 0.1);
+  background-color: #ffffff;
+`
+
 export const HeaderRow = styled.header`
   width: 100%;
-  padding: 15px 60px;
-  background-color: #ffffff;
-  box-shadow: 0 3px 8px 0 rgba(9, 71, 36, 0.1);
+  padding: 15px 0;
 `
 
 export const Menu = styled.ul`
@@ -20,7 +33,6 @@ export const Menu = styled.ul`
   font-size: 20px;
   color: #232825;
   margin-bottom: 0;
-  margin-right: 40px;
 `
 export const StyledLink = styled(NativeLink)`
   color: #232825;
@@ -36,20 +48,11 @@ export const Item = styled.li`
   font-size: 20px;
   color: #232825;
   margin-bottom: 0;
-  margin-right: 33px;
+  margin-right: 13.5px;
 
   &:last-child {
     margin-right: 0;
   }
-`
-
-export const StyledButton = styled.button`
-  list-style: none;
-  font-size: 20px;
-  color: #232825;
-  border: none;
-  background-color: transparent;
-  margin-right: 14px;
 `
 
 

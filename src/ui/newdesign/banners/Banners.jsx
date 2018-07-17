@@ -4,7 +4,7 @@ import { Wrapper } from './styles'
 import { Card } from '../card/Card'
 
 export const Banners = ({ cards }) => (
-  <Wrapper className='container-fluid'>
+  <Wrapper className='container'>
     <ul className='row align-items-center justify-content-center'>
       {
         cards && cards.map((card, i) =>
