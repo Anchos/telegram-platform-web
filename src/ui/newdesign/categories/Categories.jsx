@@ -9,7 +9,7 @@ export class Categories extends React.Component {
     return (
       <Wrapper className='container-fluid'>
         <StyledCategories className='container'>
-          <div className='row justify-content-center'>  
+          <div className='row no-gutters justify-content-center'>  
             <ul className='row no-gutters'>
               {
                 categories && categories.map((element, i) => 

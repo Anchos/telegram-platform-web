@@ -1,6 +1,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { 
   HeaderWrapper,
@@ -19,7 +19,7 @@ import { Select } from '../select/Select'
 
 @inject('app')
 @observer
-export class Header extends React.Component {
+class HeaderClass extends React.Component {
 
   state = {
     focus: false,
@@ -70,7 +70,7 @@ export class Header extends React.Component {
                     {
                       menu && menu.map((element, i) => 
                         <Item key={i}>
-                          <StyledLink to={`/${element}`}>{element}</StyledLink>
+                          <StyledLink activeStyle={{color: '#15AD56'}} to={`/${element.toLowerCase()}`}>{element}</StyledLink>
                         </Item>
                       )
                     }
@@ -105,3 +105,5 @@ export class Header extends React.Component {
     )
   }
 }
+
+export const Header = withRouter(HeaderClass)

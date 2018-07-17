@@ -1,21 +1,15 @@
 import styled from 'styled-components';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const NativeLink = ({ className, children, ...props }) => (
-  <Link {...props} className={className}>
-    {children}
-  </Link>
-)
 
 export const WrapperHidden = styled.div`
   @media (max-width: 1400px) {
-    display: none
+    display: none;
   }
 `
 
 export const RowCenter = styled.div`
-  justify-content: flex-end
+  justify-content: flex-end;
 `
 
 export const HeaderWrapper = styled.div`
@@ -25,7 +19,8 @@ export const HeaderWrapper = styled.div`
 
 export const HeaderRow = styled.header`
   width: 100%;
-  padding: 15px 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
 `
 
 export const Menu = styled.ul`
@@ -34,7 +29,7 @@ export const Menu = styled.ul`
   color: #232825;
   margin-bottom: 0;
 `
-export const StyledLink = styled(NativeLink)`
+export const StyledLink = styled(NavLink)`
   color: #232825;
 
   &:hover {

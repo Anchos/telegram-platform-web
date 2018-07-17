@@ -18,20 +18,5 @@ export const Filters = () => (
         <div><Filter>Ads</Filter></div>
       </div>
     </div>
-    {/* <div className='col-1'>
-      <div className='row justify-content-center no-gutters'>
-        <Filter>Followers</Filter>
-      </div>
-    </div>
-    <div className='col-1'>
-      <div className='row justify-content-center no-gutters'>
-        <Filter>Likes</Filter>
-      </div>
-    </div>
-    <div className='col-1'>
-      <div className='row justify-content-center no-gutters'>
-        <Filter>Ads</Filter>
-      </div>
-    </div> */}
   </WrapperFilters>
 )
