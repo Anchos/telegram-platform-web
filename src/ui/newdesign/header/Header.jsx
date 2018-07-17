@@ -1,6 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Link, withRouter } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
 import { 
   HeaderWrapper,
@@ -8,8 +9,14 @@ import {
   Menu, 
   WrapperHidden,
   Item, 
-  StyledLink
-} from './styles';
+  StyledLink,
+  MenuWrapper,
+  ButtonToggle,
+  ButtonToggleSpan,
+  WrapperLogin,
+  Overlay
+} from './styles'
+import './styles.css'
 import data from '../../../data'
 
 import { Logo } from '../logo/Logo'
@@ -23,7 +30,8 @@ class HeaderClass extends React.Component {
 
   state = {
     focus: false,
-    searchValue: ''
+    searchValue: '',
+    toggleMenu: false
   }
 
   search = event => {
@@ -45,6 +53,14 @@ class HeaderClass extends React.Component {
     })
   }
 
+  toggleMenu = event => {
+    event.preventDefault()
+
+    this.setState(prevState => ({
+      toggleMenu: !prevState.toggleMenu
+    }))
+  }
+
   render() {
     const { menu = [] } = data;
     const { connectionId } = this.props.app
@@ -58,24 +74,43 @@ class HeaderClass extends React.Component {
             <Logo />
           </WrapperHidden>
 
-          <div className='col-md-12 col-lg-7 col-xl-6'>
-            <div className={
+          <MediaQuery 
+            query='(max-width: 991px)'>
+            <ButtonToggle toggleMenu={this.state.toggleMenu} onClick={this.toggleMenu}>
+              <ButtonToggleSpan toggleMenu={this.state.toggleMenu}></ButtonToggleSpan>
+              <ButtonToggleSpan toggleMenu={this.state.toggleMenu}></ButtonToggleSpan>
+              <ButtonToggleSpan toggleMenu={this.state.toggleMenu}></ButtonToggleSpan>
+            </ButtonToggle>
+          </MediaQuery>
+
+          <MenuWrapper 
+            toggleMenu={this.state.toggleMenu}
+            className='col-md-12 col-lg-7 col-xl-6'>
+            <div id='outer-container' className={
               `
               no-gutters row align-items-center 
               justify-content-${this.state.focus ? 'end' : 'between'}
             `}>
               {
                 !this.state.focus &&
-                  <Menu className='row no-gutters align-items-center'>
-                    {
-                      menu && menu.map((element, i) => 
-                        <Item key={i}>
-                          <StyledLink activeStyle={{color: '#15AD56'}} to={`/${element.toLowerCase()}`}>{element}</StyledLink>
-                        </Item>
-                      )
-                    }
-                    <Item><Button text='Suggest' primary /></Item>
-                  </Menu>
+                    <Menu 
+                      id='page-wrap'
+                      className='row no-gutters align-items-center'
+                      itemListClassName='row'
+                    >
+                      {
+                        menu && menu.map((element, i) => 
+                          <Item key={i}>
+                            <StyledLink activeStyle={{color: '#15AD56'}} to={`/${element.toLowerCase()}`}>{element}</StyledLink>
+                          </Item>
+                        )
+                      }
+                      <Item><Button text='Suggest' primary /></Item>
+                      <MediaQuery 
+                        query='(max-width: 991px)'>
+                        <Button text='Surprise' primary />
+                      </MediaQuery>
+                    </Menu>
               }
               <SearchInput 
                 handleFocus={this.handleFocus}
@@ -85,17 +120,22 @@ class HeaderClass extends React.Component {
                 value={this.state.searchValue}
               />
             </div>
-          </div>
+          </MenuWrapper>
 
-          <div className='col-md-4 col-lg-3 col-xl-3'>
+          <div className='col-md-12 col-lg-3 col-xl-3'>
             <div className='row no-gutters align-items-center justify-content-between'>
               <WrapperHidden><Link to='/faq'>FAQ</Link></WrapperHidden>
               <WrapperHidden><Select options={[{ value: 'en', name: 'EN' }]} /></WrapperHidden>
-              <Button text='Surprise' primary />
-              <Button 
-                href={`https://t.me/medev_bot?start=${connectionId}`} 
-                text='Sign In'
-              />
+              <MediaQuery 
+                query='(min-width: 991px)'>
+                <Button text='Surprise' primary />
+              </MediaQuery>
+              <WrapperLogin>
+                <Button 
+                  href={`https://t.me/medev_bot?start=${connectionId}`} 
+                  text='Sign In'
+                />
+              </WrapperLogin>
             </div>
           </div>
 
