@@ -29,6 +29,12 @@ export default () => injectGlobal`
     margin-bottom: 0
   }
 
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
   body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.2;

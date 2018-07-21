@@ -31,3 +31,7 @@ export const List = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
 `
+
+export const ListCenter = List.extend`
+  justify-content: space-between;
+`
