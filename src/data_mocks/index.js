@@ -6,6 +6,6 @@ const data = {
   menu,
   categories,
   cards
-}
+};
 
-export default data
+export default data;

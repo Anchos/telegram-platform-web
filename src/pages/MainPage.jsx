@@ -1,5 +1,5 @@
 import React from 'react'
-import data from '../data'
+import data from '../data_mocks'
 import { inject, observer } from 'mobx-react'
 import _ from 'lodash'
 
@@ -14,13 +14,13 @@ export class MainPage extends React.Component {
   constructor() {
     super()
 
-    this.body = { 
-      count: 20, 
-      offset: 0, 
-      title: '', 
-      category: '', 
-      members: [0, 20], 
-      cost: [0, 20] 
+    this.body = {
+      count: 20,
+      offset: 0,
+      title: '',
+      category: '',
+      members: [0, 20],
+      cost: [0, 20]
     }
   }
 
@@ -37,11 +37,11 @@ export class MainPage extends React.Component {
 
     const { channels, app: { maxMembers } } = this.props.channelsStore
 
-  
+
     return (
       <div>
         <Banners cards={data.cards} />
-        <Channels 
+        <Channels
           getChannelForMembers={this.debounce}
           channels={channels}
           maxMembers={maxMembers}

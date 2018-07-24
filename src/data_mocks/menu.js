@@ -3,4 +3,4 @@ export const menu = [
   'Supergroups',
   'Bots',
   'Stickers'
-]
+];

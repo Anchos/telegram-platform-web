@@ -3,12 +3,12 @@ import { inject, observer } from 'mobx-react'
 import { Link, withRouter } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 
-import { 
+import {
   HeaderWrapper,
-  HeaderRow, 
-  Menu, 
+  HeaderRow,
+  Menu,
   WrapperHidden,
-  Item, 
+  Item,
   StyledLink,
   MenuWrapper,
   ButtonToggle,
@@ -17,7 +17,7 @@ import {
   Overlay
 } from './styles'
 import './styles.css'
-import data from '../../../data'
+import data from '../../../data_mocks'
 
 import { Logo } from '../logo/Logo'
 import { SearchInput } from '../searchInput/SearchInput'
@@ -74,7 +74,7 @@ class HeaderClass extends React.Component {
             <Logo />
           </WrapperHidden>
 
-          <MediaQuery 
+          <MediaQuery
             query='(max-width: 991px)'>
             <ButtonToggle toggleMenu={this.state.toggleMenu} onClick={this.toggleMenu}>
               <ButtonToggleSpan toggleMenu={this.state.toggleMenu}></ButtonToggleSpan>
@@ -83,36 +83,36 @@ class HeaderClass extends React.Component {
             </ButtonToggle>
           </MediaQuery>
 
-          <MenuWrapper 
+          <MenuWrapper
             toggleMenu={this.state.toggleMenu}
             className='col-md-12 col-lg-7 col-xl-6'>
             <div id='outer-container' className={
               `
-              no-gutters row align-items-center 
+              no-gutters row align-items-center
               justify-content-${this.state.focus ? 'end' : 'between'}
             `}>
               {
                 !this.state.focus &&
-                    <Menu 
+                    <Menu
                       id='page-wrap'
                       className='row no-gutters align-items-center'
                       itemListClassName='row'
                     >
                       {
-                        menu && menu.map((element, i) => 
+                        menu && menu.map((element, i) =>
                           <Item key={i}>
                             <StyledLink activeStyle={{color: '#15AD56'}} to={`/${element.toLowerCase()}`}>{element}</StyledLink>
                           </Item>
                         )
                       }
                       <Item><Button text='Suggest' primary /></Item>
-                      <MediaQuery 
+                      <MediaQuery
                         query='(max-width: 991px)'>
                         <Button text='Surprise' primary />
                       </MediaQuery>
                     </Menu>
               }
-              <SearchInput 
+              <SearchInput
                 handleFocus={this.handleFocus}
                 handleBlur={this.handleBlur}
                 handleChange={this.search}
@@ -126,13 +126,13 @@ class HeaderClass extends React.Component {
             <div className='row no-gutters align-items-center justify-content-between'>
               <WrapperHidden><Link to='/faq'>FAQ</Link></WrapperHidden>
               <WrapperHidden><Select options={[{ value: 'en', name: 'EN' }]} /></WrapperHidden>
-              <MediaQuery 
+              <MediaQuery
                 query='(min-width: 991px)'>
                 <Button text='Surprise' primary />
               </MediaQuery>
               <WrapperLogin>
-                <Button 
-                  href={`https://t.me/medev_bot?start=${connectionId}`} 
+                <Button
+                  href={`https://t.me/medev_bot?start=${connectionId}`}
                   text='Sign In'
                 />
               </WrapperLogin>

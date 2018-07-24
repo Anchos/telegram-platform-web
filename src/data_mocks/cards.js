@@ -23,4 +23,4 @@ export const cards = [
     title: 'Channel by Qwerty & Typography',
     description: 'Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis nisl'
   }
-]
+];

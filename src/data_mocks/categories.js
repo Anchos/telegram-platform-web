@@ -23,4 +23,4 @@ export const categories = [
   'Food & Cooking',
   'Auto & Moto',
   'Other'
-]
+];
