@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
@@ -58,6 +59,7 @@ class HeaderClass extends React.Component {
   };
 
   render() {
+    const {connection_id} = this.props;
     const { menu = [] } = data;
 
     return (
@@ -131,7 +133,7 @@ class HeaderClass extends React.Component {
                   <Button text="Surprise" primary />
                 </MediaQuery>
                 <WrapperLogin>
-                  <Button href={`https://t.me/medev_bot?start=${"dfkj"}`} text="Sign In" />
+                  <Button href={`https://t.me/medev_bot?start=${connection_id}`} text="Sign In" />
                 </WrapperLogin>
               </div>
             </div>
@@ -142,4 +144,6 @@ class HeaderClass extends React.Component {
   }
 }
 
-export const Header = withRouter(HeaderClass);
+export const Header = withRouter(
+  connect(state => ({ connection_id: state.connection.connection_id }))(HeaderClass)
+);
