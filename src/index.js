@@ -1,18 +1,13 @@
-import * as React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'mobx-react';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './components/App';
-import { createStores } from './newstore';
-
-
-const stores = createStores();
-
+import * as React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./components/App";
+import store from "./store/store";
 
 render(
-  <Provider {...stores} >
+  <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root"),
 );
