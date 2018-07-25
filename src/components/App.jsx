@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux';
 import data from "../data_mocks";
 import { Header } from "../ui/newdesign/header/Header";
 import { Categories } from "../ui/newdesign/categories/Categories";
@@ -15,6 +16,10 @@ const Wrapper = styled.div`
 `;
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.initialize();
+  }
+
   render() {
     return (
       <Router>
@@ -33,4 +38,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(() => ({}), dispatch => ({
+  initialize: () => dispatch({type: "INIT_REQUESTED"})
+}))(App);

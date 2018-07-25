@@ -22,11 +22,9 @@ export class Socket {
     this.socket = new WebSocket(SOCKET_HOST);
     this.socket.onopen = this.handleOpenSocket;
     this.socket.onmessage = this.handleHandleSocket;
-    console.log("Opened probably");
   }
 
   handleOpenSocket = event => {
-    console.log("Definitely opened socket connection", event);
     for (const message of this.messagesQueue) {
       this.send(message);
     }
@@ -34,8 +32,6 @@ export class Socket {
 
   handleHandleSocket = event => {
     const message = JSON.parse(event.data);
-
-    console.log("in:", message);
 
     if (this.continuations.has(message.id)) {
       this.continuations.get(message.id).resolve(message);
@@ -49,7 +45,6 @@ export class Socket {
 
   send = message => {
     if (this.isOpen) {
-      console.log("out:", message);
 
       this.socket.send(JSON.stringify(message));
     } else {

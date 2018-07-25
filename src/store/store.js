@@ -21,9 +21,9 @@ const store = createStore(
 );
 
 saga.run(function*() {
-  yield all({
-    auth: sagas.auth(),
-    data: sagas.data(),
-  });
+  yield all([
+    sagas.auth(),
+    sagas.data(),
+  ]);
 });
 export default store;
