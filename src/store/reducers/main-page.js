@@ -4,9 +4,9 @@ const initialValues = {
     offset: 0,
     title: "",
     category: "",
-    members: [0, 10000000],
-    cost: [0, 100000],
-    likes: [0, 1000000],
+    members: [0, 10000],
+    cost: [0, 10000],
+    likes: [0, 10000],
   },
   channels: {
     items: [],

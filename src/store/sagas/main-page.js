@@ -10,4 +10,5 @@ function* getChannels() {
 
 export default function*() {
   yield takeLatest('CHANNELS_FETCH_REQUESTED', getChannels);
+  yield takeLatest('CHANNELS_SET_FILTERS', getChannels);
 };
