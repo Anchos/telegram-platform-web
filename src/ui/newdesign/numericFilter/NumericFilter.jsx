@@ -16,7 +16,7 @@ export class NumericFilter extends React.Component {
   };
 
   onRangeChange = value => {
-    this.setState(value, () => console.log(this.state));
+    this.setState(value);
   };
 
   render() {
