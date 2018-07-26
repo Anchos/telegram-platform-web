@@ -1,41 +1,59 @@
-import { Socket } from "./socket";
+import { socket } from './../index';
 
-const socket = new Socket("wss://ws.recursion.ga/client");
-
-export const getSession = sessionId =>
-  socket
-    .request({
-      action: "INIT",
-      session_id: sessionId,
-    })
-    .then(message => ({
-      sessionId: message.session_id,
-      connectionId: message.connection_id,
-    }));
-
-export const getSingleChannel = ({ username } = {}) =>
+export const getSession = session_id =>
   socket.request({
-    username,
-    action: "FETCH_CHANNEL",
-    type: "",
+    action: "INIT",
+    session_id,
   });
 
-export const getChannelsAndCategories = ({ count, offset, title, category, members, cost } = {}) =>
+export const getSingleChannel = username =>
   socket
     .request({
-      action: "FETCH_CHANNELS",
-      count,
-      offset,
-      members,
-      cost,
-      ...(category ? { category } : {}),
-      ...(title ? { title } : {}),
+      username,
+      action: "FETCH_CHANNEL",
     })
     .then(message => ({
-      channels: message.data.items,
-      categories: message.data.categories,
-      maxMembers: message.data.max_members,
-      total: message.data.total,
+      ...message.data,
+    }));
+
+export const getChannelsAndCategories = params => {
+  const { category, title, ...rest } = params;
+  if (category) rest.category = category;
+  if (title) rest.title = title;
+  return socket.request({
+    action: "FETCH_CHANNELS",
+    ...rest,
+  });
+};
+
+export const verifyChannel = username =>
+  socket
+    .request({
+      action: "VERIFY_CHANNEL",
+      username,
+    })
+    .then(message => ({
+      ...message.data,
+    }));
+
+export const updateChannel = username =>
+  socket
+    .request({
+      action: "UPDATE_CHANNEL",
+      username,
+    })
+    .then(message => ({
+      ...message.data,
+    }));
+
+export const likeChannel = username =>
+  socket
+    .request({
+      action: "LIKE_CHANNEL",
+      username,
+    })
+    .then(message => ({
+      ...message.data,
     }));
 
 export const awaitUser = () =>
@@ -43,3 +61,6 @@ export const awaitUser = () =>
     name: message.first_name,
     avatar: message.photo,
   }));
+
+// to be used only in "componentWillUnmount" of App component; reason: not bound to redux store, not being handled anywhere
+export const closeConnection = () => socket.close();

@@ -1,39 +1,32 @@
 import React from "react";
+import { connect } from "react-redux";
 import data from "../data_mocks";
-import _ from "lodash";
+import { requestChannels } from "../store/action-creators";
 
 import { Banners } from "../ui/newdesign/banners/Banners";
 import { Channels } from "../ui/newdesign/channels/Channels";
 
-export class MainPage extends React.Component {
-  constructor() {
-    super();
-
-    this.body = {
-      count: 20,
-      offset: 0,
-      title: "",
-      category: "",
-      members: [0, 20],
-      cost: [0, 20],
-    };
+class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.requestChannels();
   }
 
-  getChannelForMembers = values => {
-    // this.props.channelsStore.getChannelForMembers(values)
-  };
-
   render() {
-    // const { channels, app: { maxMembers } } = this.props.channelsStore
+    const {channels} = this.props;
     return (
       <div>
         <Banners cards={data.cards} />
         <Channels
         //getChannelForMembers={this.debounce}
-        //channels={channels}
+        channels={channels}
         //maxMembers={maxMembers}
         />
       </div>
     );
   }
 }
+
+export default connect(
+  state => ({ channels: state.main.channels.items }),
+  { requestChannels },
+)(MainPage);

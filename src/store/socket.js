@@ -82,6 +82,8 @@ export class Socket {
       this.subscribe(handler);
     });
 
+  close = () => this.socket.close();
+
   get isOpen() {
     return this.socket.readyState === this.socket.OPEN;
   }

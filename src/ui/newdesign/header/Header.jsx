@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import MediaQuery from "react-responsive";
-
+import { requestChannels } from "../../../store/action-creators";
 import {
   HeaderWrapper,
   HeaderRow,
@@ -59,7 +59,7 @@ class HeaderClass extends React.Component {
   };
 
   render() {
-    const {connection_id} = this.props;
+    const { connection_id } = this.props;
     const { menu = [] } = data;
 
     return (
@@ -104,7 +104,7 @@ class HeaderClass extends React.Component {
                         </Item>
                       ))}
                     <Item>
-                      <Button text="Suggest" primary />
+                      <Button text="Suggest" primary handleClick={this.props.requestChannels} />
                     </Item>
                     <MediaQuery query="(max-width: 991px)">
                       <Button text="Surprise" primary />
@@ -145,5 +145,8 @@ class HeaderClass extends React.Component {
 }
 
 export const Header = withRouter(
-  connect(state => ({ connection_id: state.connection.connection_id }))(HeaderClass)
+  connect(
+    state => ({ connection_id: state.connection.connection_id }),
+    { requestChannels },
+  )(HeaderClass),
 );

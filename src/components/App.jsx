@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from 'react-redux';
 import data from "../data_mocks";
+import {closeConnection} from "../store/backend";
 import { Header } from "../ui/newdesign/header/Header";
 import { Categories } from "../ui/newdesign/categories/Categories";
-import { MainPage } from "../pages/MainPage";
+import MainPage from "../pages/MainPage";
 import { StickersPage } from "../pages/Stickers";
 import { BotsPage } from "../pages/Bots";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,8 +17,9 @@ const Wrapper = styled.div`
 `;
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.initialize();
+
+  componentWillUnmount() {
+    closeConnection();
   }
 
   render() {
@@ -38,6 +40,9 @@ class App extends React.Component {
   }
 }
 
-export default connect(() => ({}), dispatch => ({
-  initialize: () => dispatch({type: "INIT_REQUESTED"})
-}))(App);
+export default connect(
+  state => ({ fetching: state.connection.fetching }),
+  dispatch => ({
+    initialize: () => dispatch({ type: "INIT_REQUESTED" }),
+  }),
+)(App);
