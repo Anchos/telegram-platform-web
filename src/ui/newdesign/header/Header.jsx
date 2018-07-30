@@ -16,7 +16,6 @@ import {
   WrapperLogin,
   Overlay,
 } from "./styles";
-import "./styles.css";
 import data from "../../../data_mocks";
 
 import { Logo } from "../logo/Logo";

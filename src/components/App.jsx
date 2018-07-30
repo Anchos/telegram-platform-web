@@ -18,6 +18,10 @@ const Wrapper = styled.div`
 
 class App extends React.Component {
 
+  componentDidMount() {
+    this.props.initialize();
+  }
+
   componentWillUnmount() {
     closeConnection();
   }

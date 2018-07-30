@@ -1,4 +1,6 @@
-import { socket } from './../index';
+import { Socket } from "./socket";
+
+export const socket = new Socket("wss://ws.recursion.ga/client");
 
 export const getSession = session_id =>
   socket.request({
