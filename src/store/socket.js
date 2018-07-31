@@ -105,7 +105,6 @@ export class Socket {
     });
 
   close = () => {
-    console.log('123');
     this.messagesQueue.length = 0;
     this.socket.close();
   };
