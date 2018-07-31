@@ -45,6 +45,7 @@ class App extends React.Component {
   };
 
   componentWillUnmount() {
+    clearInterval(this.interval);
     closeConnection();
   }
 
