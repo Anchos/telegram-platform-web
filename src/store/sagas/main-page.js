@@ -4,7 +4,9 @@ import {setChannels} from "../action-creators";
 
 function* getChannels() {
   const filters = yield select(state => state.main.filters);
+  console.log(filters);
   const response = yield call(getChannelsAndCategories, filters);
+  console.log(response);
   yield put(setChannels(response));
 }
 

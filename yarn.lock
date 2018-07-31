@@ -8798,6 +8798,10 @@ style-loader@^0.21.0:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
+style.css@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/style.css/-/style.css-1.0.0.tgz#0ee5aa605dfa962ab2b2ed06a809f672594ce344"
+
 styled-components@^3.2.6:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.3.3.tgz#09e702055ab11f7a8eab8229b1c0d0b855095686"

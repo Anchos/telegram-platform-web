@@ -19,14 +19,36 @@ export class Socket {
   subscribers = new Set();
 
   constructor(SOCKET_HOST) {
-    this.socket = new WebSocket(SOCKET_HOST);
+    this.SOCKET_HOST = SOCKET_HOST;
+  }
+
+  openSocket = () => {
+    this.socket = new WebSocket(this.SOCKET_HOST);
     this.socket.onopen = this.handleOpenSocket;
     this.socket.onmessage = this.handleHandleSocket;
-  }
+    this.socket.onclose = this.handleCloseSocket;
+    this.socket.onerror = this.handleError;
+  };
+
+  handleError = event => {
+    for (const subscriber of this.subscribers) {
+      subscriber(event);
+    }
+  };
 
   handleOpenSocket = event => {
     for (const message of this.messagesQueue) {
       this.send(message);
+    }
+
+    for (const subscriber of this.subscribers) {
+      subscriber(event);
+    }
+  };
+
+  handleCloseSocket = event => {
+    for (const subscriber of this.subscribers) {
+      subscriber(event);
     }
   };
 
@@ -82,7 +104,11 @@ export class Socket {
       this.subscribe(handler);
     });
 
-  close = () => this.socket.close();
+  close = () => {
+    console.log('123');
+    this.messagesQueue.length = 0;
+    this.socket.close();
+  };
 
   get isOpen() {
     return this.socket.readyState === this.socket.OPEN;
