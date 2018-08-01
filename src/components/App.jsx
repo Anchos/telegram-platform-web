@@ -169,6 +169,7 @@ class App extends React.Component {
               }
             />
           </div>
+          <button onClick={this.props.requestChannels}>Fetch channels</button>
         </div>
         <div style={{ marginLeft: 25, overflowX: "scroll", maxWidth: 1500 }}>
           <table style={{ fontSize: 8 }}>
@@ -220,6 +221,7 @@ class App extends React.Component {
 export default connect(
   state => state,
   dispatch => ({
+    requestChannels: () => dispatch(requestChannels()),
     setFilters: filters => dispatch(setChannelsFilters(filters)),
     initialize: () => dispatch({ type: "INIT_REQUESTED" }),
   }),
