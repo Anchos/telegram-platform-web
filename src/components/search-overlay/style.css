@@ -1,0 +1,21 @@
+.search-overlay {
+  position: fixed;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  top: 100px;
+  width: 100%;
+  height: calc(100vh - 100px);
+  animation: rollDown 300ms linear;
+  background-color: rgba(255, 255, 255, 0.98);
+  z-index: 20;
+  transition: 300ms linear height;
+}
+
+.search-overlay.search-overlay_closing {
+  height: 0;
+}
+
+@keyframes rollDown {
+  from { height: 0; }
+  to { height: 100vh; }
+}

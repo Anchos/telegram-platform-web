@@ -9,4 +9,8 @@ export const requestChannels = () => ({type: "CHANNELS_FETCH_REQUESTED"});
 
 export const setChannels = message => ({type: "CHANNELS_FETCH_SUCCESS", payload: message.data});
 
+export const setSearchChannels = message => ({type: "SEARCH_CHANNELS_FETCH_SUCCESS", payload: message.data});
+
 export const setChannelsFilters = filters => ({type: 'CHANNELS_SET_FILTERS', payload: filters});
+
+export const setSearchChannelsFilters = filters => ({type: 'SEARCH_CHANNELS_SET_FILTERS', payload: filters});

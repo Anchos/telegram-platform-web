@@ -1,7 +1,7 @@
 import React from "react";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import data from "../data_mocks";
-import {closeConnection} from "../store/backend";
+import { closeConnection } from "../store/backend";
 import { Header } from "../ui/newdesign/header/Header";
 import { Categories } from "../ui/newdesign/categories/Categories";
 import MainPage from "../pages/MainPage";
@@ -17,7 +17,6 @@ const Wrapper = styled.div`
 `;
 
 class App extends React.Component {
-
   componentDidMount() {
     this.props.initialize();
   }

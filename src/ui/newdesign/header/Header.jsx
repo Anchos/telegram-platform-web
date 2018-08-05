@@ -22,6 +22,7 @@ import { Logo } from "../logo/Logo";
 import { SearchInput } from "../searchInput/SearchInput";
 import { Button } from "../button/Button";
 import { Select } from "../select/Select";
+import ChannelSearch from './../../../components/channel-search'
 
 class HeaderClass extends React.Component {
   state = {
@@ -39,7 +40,6 @@ class HeaderClass extends React.Component {
   handleBlur = () => {
     this.setState({
       focus: false,
-      searchValue: "",
     });
   };
 
@@ -117,6 +117,7 @@ class HeaderClass extends React.Component {
                   focus={this.state.focus}
                   value={this.state.searchValue}
                 />
+                <ChannelSearch open={!!this.state.searchValue} searchQuery={this.state.searchValue}/>
               </div>
             </MenuWrapper>
 

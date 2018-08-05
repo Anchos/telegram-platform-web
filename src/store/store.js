@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import reduxLogger from 'redux-logger';
 import { all } from "redux-saga/effects";
@@ -16,6 +16,7 @@ const store = createStore(
   combineReducers({
     connection: reducers.connection,
     main: reducers.mainPage,
+    channelSearch: reducers.channelSearch
   }),
   applyMiddleware(...middlewares),
 );
@@ -24,6 +25,7 @@ saga.run(function*() {
   yield all([
     sagas.auth(),
     sagas.data(),
+    sagas.searchChannels()
   ]);
 });
 export default store;
