@@ -16,7 +16,8 @@ const store = createStore(
   combineReducers({
     connection: reducers.connection,
     main: reducers.mainPage,
-    channelSearch: reducers.channelSearch
+    channelSearch: reducers.channelSearch,
+    botSearch: reducers.botSearch
   }),
   applyMiddleware(...middlewares),
 );
@@ -25,7 +26,8 @@ saga.run(function*() {
   yield all([
     sagas.auth(),
     sagas.data(),
-    sagas.searchChannels()
+    sagas.searchChannels(),
+    sagas.searchBots()
   ]);
 });
 export default store;

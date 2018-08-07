@@ -9,6 +9,7 @@ import { StickersPage } from "../pages/Stickers";
 import { BotsPage } from "../pages/Bots";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Footer } from "../ui/newdesign/footer/Footer";
+import { socket } from "../store/backend";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -19,6 +20,12 @@ const Wrapper = styled.div`
 class App extends React.Component {
   componentDidMount() {
     this.props.initialize();
+    setInterval(() => {
+      console.log('checking connection...');
+      if(!socket.isOpen) {
+        socket.connect().then(() => console.log('reconnected') || this.props.initialize);
+      }
+    }, 10000)
   }
 
   componentWillUnmount() {

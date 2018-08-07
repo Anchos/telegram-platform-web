@@ -22,7 +22,8 @@ import { Logo } from "../logo/Logo";
 import { SearchInput } from "../searchInput/SearchInput";
 import { Button } from "../button/Button";
 import { Select } from "../select/Select";
-import ChannelSearch from './../../../components/channel-search'
+import ChannelSearch from "./../../../components/channel-search";
+import BotSearch from "./../../../components/bot-search";
 
 class HeaderClass extends React.Component {
   state = {
@@ -58,8 +59,10 @@ class HeaderClass extends React.Component {
   };
 
   render() {
-    const { connection_id } = this.props;
+    const { connection_id, location } = this.props;
     const { menu = [] } = data;
+
+    const currentPage = location.pathname.split("/")[1];
 
     return (
       <HeaderWrapper className="container-fluid">
@@ -117,7 +120,14 @@ class HeaderClass extends React.Component {
                   focus={this.state.focus}
                   value={this.state.searchValue}
                 />
-                <ChannelSearch open={!!this.state.searchValue} searchQuery={this.state.searchValue}/>
+                {currentPage === "bots" ? (
+                  <BotSearch open={!!this.state.searchValue} searchQuery={this.state.searchValue} />
+                ) : (
+                  <ChannelSearch
+                    open={!!this.state.searchValue}
+                    searchQuery={this.state.searchValue}
+                  />
+                )}
               </div>
             </MenuWrapper>
 

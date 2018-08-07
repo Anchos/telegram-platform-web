@@ -1,8 +1,10 @@
 import {call, takeLatest, put, select} from 'redux-saga/effects'
+import {delay} from 'redux-saga';
 import {getChannelsAndCategories} from "../backend";
 import {setSearchChannels} from "../action-creators";
 
 function* getChannels() {
+  yield delay(1000);
   const filters = yield select(state => state.main.filters);
   const response = yield call(getChannelsAndCategories, filters);
   yield put(setSearchChannels(response));
