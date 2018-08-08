@@ -5,7 +5,7 @@ import {setSearchChannels} from "../action-creators";
 
 function* getChannels() {
   yield delay(1000);
-  const filters = yield select(state => state.main.filters);
+  const filters = yield select(state => state.channelSearch.filters);
   const response = yield call(getChannelsAndCategories, filters);
   yield put(setSearchChannels(response));
 }

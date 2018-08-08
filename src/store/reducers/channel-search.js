@@ -40,7 +40,11 @@ const channelSearch = (state = initialValues, action) => {
     case "SEARCH_CHANNELS_SET_FILTERS":
       return {
         ...state,
-        filters: action.payload
+        filters: action.payload,
+        channels: {
+          ...state.channels,
+          fetching: true,
+        },
       };
     default:
       return state;

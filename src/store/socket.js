@@ -28,7 +28,7 @@ export class Socket {
 
   connect = () => {
     return new Promise((resolve, reject) => {
-      this.socket = new WebSocket(SOCKET_HOST);
+      this.socket = new WebSocket(this.socketHost);
       this.socket.onmessage = this.handleHandleSocket;
       this.socket.onopen = resolve;
       this.socket.onerror = reject;

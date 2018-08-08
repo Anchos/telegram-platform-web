@@ -32,7 +32,11 @@ const botSearch = (state = initialValues, action) => {
     case "SEARCH_BOTS_SET_FILTERS":
       return {
         ...state,
-        filters: action.payload
+        filters: action.payload,
+        bots: {
+          ...state.bots,
+          fetching: true,
+        },
       };
     default:
       return state;
