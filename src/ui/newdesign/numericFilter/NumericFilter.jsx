@@ -7,8 +7,8 @@ import "./styles.css";
 
 export class NumericFilter extends React.Component {
   state = {
-    min: 0,
-    max: 0,
+    min: this.props.from,
+    max: this.props.to,
   };
 
   completeChange = () => {

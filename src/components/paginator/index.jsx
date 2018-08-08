@@ -15,9 +15,7 @@ class Paginator extends React.PureComponent {
   onEnter = ({ keyCode }) =>
     keyCode === 13 &&
     this.props.onChange(
-      +this.state.input > this.props.pageCount - 1
-        ? +this.state.input - 1
-        : this.props.pageCount - 1,
+      +this.state.input > this.props.pageCount ? this.props.pageCount - 1 : +this.state.input - 1,
     );
 
   goBack = () => this.props.onChange(this.props.currentPage - 1);
