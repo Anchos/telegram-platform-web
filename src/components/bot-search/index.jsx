@@ -5,6 +5,7 @@ import classNames from "class-names";
 import SearchOverlay from "../search-overlay";
 import { setSearchBotsFilters } from "../../store/action-creators";
 import BotCard from "../bot-card";
+import Loader from "../loader";
 import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
 import style from "./style.css";
 
@@ -31,6 +32,7 @@ class ChannelSearch extends React.Component {
     const {
       open,
       bots,
+      botsFetching,
       filters: {
         installs: [fromInstalls, toInstalls],
       },
@@ -47,9 +49,15 @@ class ChannelSearch extends React.Component {
               onChange={this.onInstallsChange}
             />
           </div>
-          <div className={st("bot-search__tiles")}>
-            {bots.map(bot => <BotCard key={bot.id} {...bot} />)}
-          </div>
+          {botsFetching ? (
+            <Loader centered size="lg" />
+          ) : bots.length > 0 ? (
+            <div className={st("bot-search__tiles")}>
+              {bots.map(bot => <BotCard key={bot.id} {...bot} />)}
+            </div>
+          ) : (
+            <div className={st("channel-search__empty")}>No channels match your search</div>
+          )}
         </div>
       </SearchOverlay>
     );
@@ -66,6 +74,7 @@ ChannelSearch.propTypes = {
 
 export default connect(
   state => ({
+    botsFetching: state.botSearch.bots.fetching,
     filters: state.botSearch.filters,
     bots: state.botSearch.bots.items,
   }),

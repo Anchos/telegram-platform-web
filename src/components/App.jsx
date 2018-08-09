@@ -19,11 +19,10 @@ const Wrapper = styled.div`
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.initialize();
     setInterval(() => {
       console.log('checking connection...');
       if(!socket.isOpen) {
-        socket.connect().then(() => console.log('reconnected') || this.props.initialize);
+        socket.connect()
       }
     }, 10000)
   }

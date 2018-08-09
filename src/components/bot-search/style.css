@@ -1,9 +1,11 @@
 .bot-search {
-  max-width: 1110px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
 }
 
 .bot-search__filters {

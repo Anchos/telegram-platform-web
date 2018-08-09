@@ -121,10 +121,13 @@ class HeaderClass extends React.Component {
                   value={this.state.searchValue}
                 />
                 {currentPage === "bots" ? (
-                  <BotSearch open={!!this.state.searchValue} searchQuery={this.state.searchValue} />
+                  <BotSearch
+                    open={!!this.state.searchValue || this.state.focus}
+                    searchQuery={this.state.searchValue}
+                  />
                 ) : (
                   <ChannelSearch
-                    open={!!this.state.searchValue}
+                    open={!!this.state.searchValue || this.state.focus}
                     searchQuery={this.state.searchValue}
                   />
                 )}

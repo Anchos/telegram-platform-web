@@ -15,6 +15,7 @@ function getNextMessageId() {
 
 export class Socket {
   messagesQueue = [];
+  openQueue = [];
   continuations = new Map();
   subscribers = new Set();
   socketHost = '';
@@ -30,15 +31,17 @@ export class Socket {
     return new Promise((resolve, reject) => {
       this.socket = new WebSocket(this.socketHost);
       this.socket.onmessage = this.handleHandleSocket;
-      this.socket.onopen = resolve;
+      this.socket.onopen = this.handleOpenSocket;
       this.socket.onerror = reject;
     })
   };
 
-  handleOpenSocket = event => {
-    for (const message of this.messagesQueue) {
-      this.send(message);
-    }
+  onOpen = (callback) => {
+    this.openQueue.push(callback)
+  };
+
+  handleOpenSocket = () => {
+    this.openQueue.forEach(callback => callback());
   };
 
   handleHandleSocket = event => {
