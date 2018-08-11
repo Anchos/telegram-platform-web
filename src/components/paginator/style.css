@@ -1,0 +1,29 @@
+@import 'biplane-uikit/index.css';
+
+.paginator {
+  padding: 10px 0;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.paginator__arrow {
+  cursor: pointer;
+  user-select: none;
+  margin: 0 25px;
+}
+
+.paginator__arrow_left {
+  transform: scaleX(-1);
+}
+
+.paginator__input {
+  border: 1px solid var(--gray-border);
+  border-radius: 3px;
+  width: 59px;
+  height: 40px;
+  padding: 6px;
+  margin-right: 15px;
+}

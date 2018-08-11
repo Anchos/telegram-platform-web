@@ -8,5 +8,13 @@ export const setConnection = message => ({
 export const requestChannels = () => ({type: "CHANNELS_FETCH_REQUESTED"});
 
 export const setChannels = message => ({type: "CHANNELS_FETCH_SUCCESS", payload: message.data});
-
 export const setChannelsFilters = filters => ({type: 'CHANNELS_SET_FILTERS', payload: filters});
+
+export const setSearchChannels = message => ({type: "SEARCH_CHANNELS_FETCH_SUCCESS", payload: message.data});
+export const setSearchChannelsFilters = filters => ({type: 'SEARCH_CHANNELS_SET_FILTERS', payload: filters});
+
+export const setSearchBots = message => ({type: "SEARCH_BOTS_FETCH_SUCCESS", payload: message.data});
+export const setSearchBotsFilters = filters => ({type: 'SEARCH_BOTS_SET_FILTERS', payload: filters});
+
+export const setSearchStickers = message => ({type: "SEARCH_STICKERS_FETCH_SUCCESS", payload: message.data});
+export const setSearchStickersFilters = filters => ({type: 'SEARCH_STICKERS_SET_FILTERS', payload: filters});
