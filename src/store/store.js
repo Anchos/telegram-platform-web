@@ -19,7 +19,8 @@ const store = createStore(
     connection: reducers.connection,
     main: reducers.mainPage,
     channelSearch: reducers.channelSearch,
-    botSearch: reducers.botSearch
+    botSearch: reducers.botSearch,
+    stickerSearch: reducers.stickerSearch
   }),
   applyMiddleware(...middlewares),
 );
@@ -32,7 +33,8 @@ saga.run(function*() {
     sagas.auth(),
     sagas.data(),
     sagas.searchChannels(),
-    sagas.searchBots()
+    sagas.searchBots(),
+    sagas.searchStickers()
   ]);
 });
 export default store;

@@ -24,6 +24,7 @@ import { Button } from "../button/Button";
 import { Select } from "../select/Select";
 import ChannelSearch from "./../../../components/channel-search";
 import BotSearch from "./../../../components/bot-search";
+import StickerSearch from "./../../../components/sticker-search";
 
 class HeaderClass extends React.Component {
   state = {
@@ -122,6 +123,11 @@ class HeaderClass extends React.Component {
                 />
                 {currentPage === "bots" ? (
                   <BotSearch
+                    open={!!this.state.searchValue || this.state.focus}
+                    searchQuery={this.state.searchValue}
+                  />
+                ) : currentPage === "stickers" ? (
+                  <StickerSearch
                     open={!!this.state.searchValue || this.state.focus}
                     searchQuery={this.state.searchValue}
                   />

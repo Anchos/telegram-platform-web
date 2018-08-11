@@ -15,3 +15,6 @@ export const setSearchChannelsFilters = filters => ({type: 'SEARCH_CHANNELS_SET_
 
 export const setSearchBots = message => ({type: "SEARCH_BOTS_FETCH_SUCCESS", payload: message.data});
 export const setSearchBotsFilters = filters => ({type: 'SEARCH_BOTS_SET_FILTERS', payload: filters});
+
+export const setSearchStickers = message => ({type: "SEARCH_STICKERS_FETCH_SUCCESS", payload: message.data});
+export const setSearchStickersFilters = filters => ({type: 'SEARCH_STICKERS_SET_FILTERS', payload: filters});
