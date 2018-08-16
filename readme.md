@@ -2,13 +2,14 @@ developer interface for telegram-platform web
 
 ###### includes:
 * connecting to socket
+* socket url can be changed from default
 * initializing session (connection_id)
 * closing socket
 * setting filters for channel fetching
 * fetching telegram channel list with previously set filters
 
 ###### to be implemented in the next version:
-* changeable backend url
+* ???
 
 ###### installation & running
 1. install npm (usually bundled with nodejs): `apt-get install nodejs` or something along these lines

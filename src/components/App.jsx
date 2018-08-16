@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       connection_status: "disconnected",
+      socket_host: "wss://ws.recursion.ga/client",
     };
     socket.subscribe(this.connectionWatcher);
   }
@@ -65,6 +66,16 @@ class App extends React.Component {
       <div style={{ display: "flex" }}>
         <div>
           <div>{this.state.connection_status}</div>
+          <div>socket host url</div>
+          <div>
+            <input
+              value={this.state.socket_host}
+              onChange={e => {
+                this.setState({ socket_host: e.target.value || "wss://ws.recursion.ga/client" });
+                socket.SOCKET_HOST = e.target.value || "wss://ws.recursion.ga/client";
+              }}
+            />
+          </div>
           <button onClick={socket.openSocket}>Open socket</button>
           <button onClick={this.props.initialize}>Initialize connection</button>
           <button onClick={socket.close}>Close socket</button>
