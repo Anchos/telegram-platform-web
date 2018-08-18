@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import classNames from "class-names";
 import SearchOverlay from "../search-overlay";
 import { setSearchStickersFilters } from "../../store/action-creators";
 import StickerCard from "../sticker-card";
 import Loader from "../loader";
 import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
 import style from "./style.css";
-
-const st = classNames.bind(style);
 
 class StickerSearch extends React.Component {
   onInstallsChange = ({ max, min }) => {
@@ -39,8 +36,8 @@ class StickerSearch extends React.Component {
     } = this.props;
     return (
       <SearchOverlay open={open}>
-        <div className={st("sticker-search")}>
-          <div className={st("sticker-search__filters")}>
+        <div className="sticker-search">
+          <div className="sticker-search__filters">
             <NumericFilter
               label="Number of installs"
               from={fromInstalls}
@@ -52,11 +49,11 @@ class StickerSearch extends React.Component {
           {stickersFetching ? (
             <Loader centered size="lg" />
           ) : stickers.length > 0 ? (
-            <div className={st("sticker-search__tiles")}>
+            <div className="sticker-search__tiles">
               {stickers.map(sticker => <StickerCard key={sticker.id} {...sticker} />)}
             </div>
           ) : (
-            <div className={st("channel-search__empty")}>No stickers match your search</div>
+            <div className="channel-search__empty">No stickers match your search</div>
           )}
         </div>
       </SearchOverlay>

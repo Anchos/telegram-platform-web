@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "class-names";
 import style from "./style.css";
 
-const st = classNames.bind(style);
 const arrowSrc = require("./arrow-right.svg");
 
 class Paginator extends React.PureComponent {
@@ -24,10 +23,10 @@ class Paginator extends React.PureComponent {
   render() {
     const { pageCount, currentPage } = this.props;
     return (
-      <div className={st("paginator")}>
+      <div className="paginator">
         <img
           src={arrowSrc}
-          className={st("paginator__arrow", "paginator__arrow_left")}
+          className={classNames("paginator__arrow", "paginator__arrow_left")}
           alt=""
           onClick={currentPage > 0 ? this.goBack : undefined}
         />
@@ -35,7 +34,7 @@ class Paginator extends React.PureComponent {
           <input
             type=""
             onKeyDown={this.onEnter}
-            className={st("paginator__input")}
+            className="paginator__input"
             value={this.state.input}
             onChange={this.onInputChange}
           />
@@ -43,7 +42,7 @@ class Paginator extends React.PureComponent {
         </div>
         <img
           src={arrowSrc}
-          className={st("paginator__arrow", "paginator__arrow_right")}
+          className={classNames("paginator__arrow", "paginator__arrow_right")}
           alt=""
           onClick={currentPage < pageCount - 1 ? this.goForward : undefined}
         />

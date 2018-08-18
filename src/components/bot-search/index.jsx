@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import classNames from "class-names";
 import SearchOverlay from "../search-overlay";
 import { setSearchBotsFilters } from "../../store/action-creators";
 import BotCard from "../bot-card";
 import Loader from "../loader";
 import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
 import style from "./style.css";
-
-const st = classNames.bind(style);
 
 class BotSearch extends React.Component {
   onInstallsChange = ({ max, min }) => {
@@ -39,8 +36,8 @@ class BotSearch extends React.Component {
     } = this.props;
     return (
       <SearchOverlay open={open}>
-        <div className={st("bot-search")}>
-          <div className={st("bot-search__filters")}>
+        <div className="bot-search">
+          <div className="bot-search__filters">
             <NumericFilter
               label="Number of installs"
               from={fromInstalls}
@@ -52,11 +49,11 @@ class BotSearch extends React.Component {
           {botsFetching ? (
             <Loader centered size="lg" />
           ) : bots.length > 0 ? (
-            <div className={st("bot-search__tiles")}>
+            <div className="bot-search__tiles">
               {bots.map(bot => <BotCard key={bot.id} {...bot} />)}
             </div>
           ) : (
-            <div className={st("channel-search__empty")}>No bots match your search</div>
+            <div className="channel-search__empty">No bots match your search</div>
           )}
         </div>
       </SearchOverlay>

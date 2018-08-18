@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import classNames from "class-names";
 import style from "./style.css";
-
-const st = classNames.bind(style);
 
 class SearchOverlay extends React.Component {
   static propTypes = {
@@ -41,7 +38,7 @@ class SearchOverlay extends React.Component {
     return (
       this.state.shouldRender &&
       ReactDOM.createPortal(
-        <div className={st("search-overlay")} ref={o => (this.container = o)}>
+        <div className="search-overlay" ref={o => (this.container = o)}>
           {this.props.children}
         </div>,
         document.body,

@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import classNames from "class-names";
 import style from "./style.css";
 
-const st = classNames.bind(style);
-
 const Loader = ({ size, centered }) => (
-  <div className={st("loader", `loader_${size}`, centered && "loader_centered")}>
-    <div className={st("loader__spinner")} />
+  <div className={classNames("loader", `loader_${size}`, centered && "loader_centered")}>
+    <div className="loader__spinner" />
   </div>
 );
 
