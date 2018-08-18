@@ -20,7 +20,8 @@ const store = createStore(
     main: reducers.mainPage,
     channelSearch: reducers.channelSearch,
     botSearch: reducers.botSearch,
-    stickerSearch: reducers.stickerSearch
+    stickerSearch: reducers.stickerSearch,
+    channelPage: reducers.channelPage
   }),
   applyMiddleware(...middlewares),
 );

@@ -5,6 +5,7 @@ import { closeConnection } from "../store/backend";
 import { Header } from "../ui/newdesign/header/Header";
 import { Categories } from "../ui/newdesign/categories/Categories";
 import MainPage from "../pages/MainPage";
+import ChannelPage from "./channel-page";
 import { StickersPage } from "../pages/Stickers";
 import { BotsPage } from "../pages/Bots";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -41,7 +42,7 @@ class App extends React.Component {
             <Route exact={true} path="/" component={MainPage} />
             <Route path="/stickers" component={StickersPage} />
             <Route path="/bots" component={BotsPage} />
-            <Route path="/channels/:channel_id" component={() => <div />} />
+            <Route path="/channels/:username" component={ChannelPage} />
           </Switch>
           <Footer />
         </Wrapper>
