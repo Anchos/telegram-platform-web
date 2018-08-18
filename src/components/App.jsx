@@ -20,11 +20,11 @@ const Wrapper = styled.div`
 class App extends React.Component {
   componentDidMount() {
     setInterval(() => {
-      console.log('checking connection...');
-      if(!socket.isOpen) {
-        socket.connect()
+      console.log("checking connection...");
+      if (!socket.isOpen) {
+        socket.connect();
       }
-    }, 10000)
+    }, 10000);
   }
 
   componentWillUnmount() {
@@ -38,9 +38,10 @@ class App extends React.Component {
           <Header />
           <Categories categories={data.categories} />
           <Switch>
-            <Route exact={true} path={"/"} component={MainPage} />
-            <Route path={"/stickers"} component={StickersPage} />
-            <Route path={"/bots"} component={BotsPage} />
+            <Route exact={true} path="/" component={MainPage} />
+            <Route path="/stickers" component={StickersPage} />
+            <Route path="/bots" component={BotsPage} />
+            <Route path="/channels/:channel_id" component={() => <div />} />
           </Switch>
           <Footer />
         </Wrapper>
