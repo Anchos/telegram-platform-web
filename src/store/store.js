@@ -35,7 +35,8 @@ saga.run(function*() {
     sagas.data(),
     sagas.searchChannels(),
     sagas.searchBots(),
-    sagas.searchStickers()
+    sagas.searchStickers(),
+    sagas.channelPage()
   ]);
 });
 export default store;

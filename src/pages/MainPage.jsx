@@ -5,6 +5,7 @@ import { requestChannels, setChannelsFilters } from "../store/action-creators";
 
 import { Banners } from "../ui/newdesign/banners/Banners";
 import { Channels } from "../ui/newdesign/channels/Channels";
+import { Categories } from "../ui/newdesign/categories/Categories";
 
 class MainPage extends React.Component {
   componentDidMount() {
@@ -14,7 +15,8 @@ class MainPage extends React.Component {
   render() {
     const { channels, setChannelsFilters, filters } = this.props;
     return (
-      <div>
+      <React.Fragment>
+        <Categories categories={data.categories} />
         <Banners cards={data.cards} />
         <Channels
           channels={channels}
@@ -23,7 +25,7 @@ class MainPage extends React.Component {
           maxMembers={20000}
           maxCost={20000}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

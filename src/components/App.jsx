@@ -37,7 +37,6 @@ class App extends React.Component {
       <Router>
         <Wrapper>
           <Header />
-          <Categories categories={data.categories} />
           <Switch>
             <Route exact={true} path="/" component={MainPage} />
             <Route path="/stickers" component={StickersPage} />
