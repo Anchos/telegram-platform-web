@@ -8,4 +8,4 @@ export const Logo = () => (
       Biplane
     </Link>
   </StyledLogo>
-)
+);

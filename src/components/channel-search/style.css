@@ -1,0 +1,63 @@
+.channel-search {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+.channel-search__filter-title {
+  font-size: 20px;
+}
+
+.channel-search__empty {
+  font-size: 25px;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.channel-search__filters {
+  position: sticky;
+  flex-shrink: 0;
+  top: 0;
+  display: flex;
+  padding: 30px 0;
+  background-color: #fff;
+  justify-content: space-between;
+}
+
+.channel-search__checkboxes {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channel-search__checkboxes > label + label {
+  margin-left: 20px;
+}
+
+.channel-search__table-header {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+}
+
+.channel-search__name {
+  grid-column: 3 / 13;
+}
+
+.channel-search__followers {
+  grid-column: 13 / 14;
+}
+
+.channel-search__likes {
+  grid-column: 14 / 15;
+}
+
+.channel-search__cost {
+  grid-column: 15 / 16;
+}

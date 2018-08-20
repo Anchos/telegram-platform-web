@@ -1,52 +1,39 @@
-import React from 'react'
-import data from '../data'
-import { inject, observer } from 'mobx-react'
-import _ from 'lodash'
+import React from "react";
+import { connect } from "react-redux";
+import data from "../data_mocks";
+import { requestChannels, setChannelsFilters } from "../store/action-creators";
 
-import { Banners } from '../ui/newdesign/banners/Banners'
-import { Channels } from '../ui/newdesign/channels/Channels'
+import { Banners } from "../ui/newdesign/banners/Banners";
+import { Channels } from "../ui/newdesign/channels/Channels";
+import { Categories } from "../ui/newdesign/categories/Categories";
 
-
-@inject('channelsStore')
-@observer
-export class MainPage extends React.Component {
-
-  constructor() {
-    super()
-
-    this.body = { 
-      count: 20, 
-      offset: 0, 
-      title: '', 
-      category: '', 
-      members: [0, 20], 
-      cost: [0, 20] 
-    }
-  }
-
-  async componentDidMount() {
-    await this.props.channelsStore.getAll(this.body)
-    this.debounce = _.debounce(this.props.channelsStore.getChannelForMembers, 1000)
-  }
-
-  getChannelForMembers = values => {
-    this.props.channelsStore.getChannelForMembers(values)
+class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.requestChannels();
   }
 
   render() {
-
-    const { channels, app: { maxMembers } } = this.props.channelsStore
-
-  
+    const { channels, setChannelsFilters, filters } = this.props;
     return (
-      <div>
+      <React.Fragment>
+        <Categories categories={data.categories} />
         <Banners cards={data.cards} />
-        <Channels 
-          getChannelForMembers={this.debounce}
+        <Channels
           channels={channels}
-          maxMembers={maxMembers}
+          onFiltersChange={setChannelsFilters}
+          filters={filters}
+          maxMembers={20000}
+          maxCost={20000}
         />
-      </div>
-    )
+      </React.Fragment>
+    );
   }
 }
+
+export default connect(
+  state => ({
+    channels: state.main.channels.items,
+    filters: state.main.filters,
+  }),
+  { requestChannels, setChannelsFilters },
+)(MainPage);

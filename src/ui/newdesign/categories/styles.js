@@ -6,12 +6,12 @@ const NativeLink = ({ className, children, ...props }) => (
   <Link {...props} className={className}>
     {children}
   </Link>
-)
+);
 
 export const Wrapper = styled.div`
   background-color: #fff;
   box-shadow: 0 3px 8px 0 rgba(9, 71, 36, 0.1);
-`
+`;
 
 export const StyledLink = styled(NativeLink)`
   color: inherit;
@@ -24,14 +24,14 @@ export const StyledLink = styled(NativeLink)`
   &:active {
     color:  #232825;
   }
-`
+`;
 
 export const StyledCategories = styled.div`
   padding-top: 18px;
   padding-bottom: 14px;
   color: #ccc;
   font-size: 16px;
-`
+`;
 
 export const Item = styled.li`
   margin-right: 40px;
@@ -41,4 +41,4 @@ export const Item = styled.li`
     margin-right: 0;
     margin-bottom: 0
   }
-`
+`;

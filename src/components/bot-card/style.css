@@ -1,0 +1,41 @@
+@import 'biplane-uikit/lib/colors.css';
+
+.bot-card {
+  width: 425px;
+  height: 245px;
+  padding: 18px 25px;
+  border: solid 2px var(--gray-shadow);
+  border-radius: 2px;
+  font-size: 17px;
+}
+
+.bot-card__header {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.bot-card__image-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin-right: 15px;
+  border-radius: 1000px;
+}
+
+.bot-card__names {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bot-card__title {
+  margin-bottom: 6px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bot-card__username {
+  font-size: 14px;
+}
+
+

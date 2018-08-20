@@ -9,8 +9,12 @@ export const Wrapper = styled.footer`
   width: 100%;
   left: 0;
   bottom: 0; */
-`
+`;
 
 export const Strong = styled.span`
   color: #15AD56;
-`
+`;
+
+export const FooterLink = styled.div`
+  margin-left: 20px;
+`;
