@@ -1,5 +1,7 @@
 export const initializeConnection = () => ({ type: "INIT_REQUESTED" });
 
+export const authorize = data => ({type: 'AUTH', payload: data});
+
 export const setConnection = message => ({
   type: "INIT_SUCCESS",
   payload: { connection_id: message.connection_id },
