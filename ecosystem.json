@@ -2,7 +2,7 @@
   "deploy": {
     "prod": {
       "user": "root",
-      "host": "192.124.176.248",
+      "host": "ih1070646.vds.myihor.ru",
       "ref": "origin/master",
       "repo": "git@github.com:anchos/telegram-platform-web.git",
       "path": "/var/www",
