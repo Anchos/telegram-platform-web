@@ -2,19 +2,11 @@
   "deploy": {
     "prod": {
       "user": "root",
-      "host": "???",
+      "host": "192.124.176.248",
       "ref": "origin/master",
       "repo": "git@github.com:anchos/telegram-platform-web.git",
-      "path": "/var/www/frontend/prod",
-      "post-deploy": "npm install && npm run build"
-    },
-    "stage": {
-      "user": "root",
-      "host": "???",
-      "ref": "origin/stage",
-      "repo": "git@github.com:anchos/telegram-platform-web.git",
-      "path": "/var/www/frontend/stage",
-      "post-deploy": "npm install && npm run build"
+      "path": "/var/www",
+      "post-deploy": "yarn install && yarn build"
     }
   }
 }
