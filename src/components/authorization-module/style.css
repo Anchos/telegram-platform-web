@@ -1,0 +1,34 @@
+.authorization-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authorization-modal__header {
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.authorization-modal__instructions {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.authorization-modal__instruction-point + .authorization-modal__instruction-point {
+  margin-top: 24px;
+}
+
+.authorization-modal__open-button-container {
+  margin: 0 8px;
+}
+
+.authorization-modal__success-image-container {
+  margin: auto 0;
+}
+
+.authorization-modal__success-image-container>img {
+  width: 120px;
+  pointer-events: none;
+  user-select: none;
+}

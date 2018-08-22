@@ -87,7 +87,7 @@ class ChannelSearch extends React.Component {
             </div>
           </div>
           {channelsFetching ? (
-            <Loader centered size="lg" />
+            <Loader centered size="large" />
           ) : channels.length > 0 ? (
             <React.Fragment>
               <div className="channel-search__table-header">

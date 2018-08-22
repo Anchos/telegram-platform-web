@@ -47,7 +47,7 @@ class StickerSearch extends React.Component {
             />
           </div>
           {stickersFetching ? (
-            <Loader centered size="lg" />
+            <Loader centered size="large" />
           ) : stickers.length > 0 ? (
             <div className="sticker-search__tiles">
               {stickers.map(sticker => <StickerCard key={sticker.id} {...sticker} />)}

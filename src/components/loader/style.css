@@ -8,19 +8,24 @@
   animation: spin 2s ease-in-out infinite;
 }
 
-.loader_sm > .loader__spinner {
+.loader_small > .loader__spinner {
   width: 20px;
   height: 20px;
 }
 
-.loader_md > .loader__spinner {
+.loader_medium > .loader__spinner {
   width: 30px;
   height: 30px;
 }
 
-.loader_lg > .loader__spinner {
+.loader_large > .loader__spinner {
   width: 50px;
   height: 50px;
+}
+
+.loader_xxlarge > .loader__spinner {
+  width: 120px;
+  height: 120px;
 }
 
 .loader_centered {
