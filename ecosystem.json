@@ -3,8 +3,8 @@
     "prod": {
       "user": "root",
       "host": "ih1070646.vds.myihor.ru",
-      "ref": "origin/master",
-      "repo": "git@github.com:anchos/telegram-platform-web.git",
+      "ref": "origin/develop",
+      "repo": "git@github.com:Anchos/telegram-platform-web",
       "path": "/var/www",
       "post-deploy": "yarn install && yarn build"
     }
