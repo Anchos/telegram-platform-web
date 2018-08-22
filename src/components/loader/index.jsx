@@ -10,12 +10,12 @@ const Loader = ({ size, centered }) => (
 );
 
 Loader.propTypes = {
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  size: PropTypes.oneOf(["small", "medium", "large", "xxlarge"]),
   centered: PropTypes.bool,
 };
 
 Loader.defaultProps = {
-  size: "md",
+  size: "medium",
 };
 
 export default Loader;

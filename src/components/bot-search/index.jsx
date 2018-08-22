@@ -47,7 +47,7 @@ class BotSearch extends React.Component {
             />
           </div>
           {botsFetching ? (
-            <Loader centered size="lg" />
+            <Loader centered size="large" />
           ) : bots.length > 0 ? (
             <div className="bot-search__tiles">
               {bots.map(bot => <BotCard key={bot.id} {...bot} />)}

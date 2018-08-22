@@ -22,6 +22,7 @@ import { Logo } from "../logo/Logo";
 import { SearchInput } from "../searchInput/SearchInput";
 import { Button } from "../button/Button";
 import { Select } from "../select/Select";
+import AuthorizationModule from '../../../components/authorization-module';
 import ChannelSearch from "./../../../components/channel-search";
 import BotSearch from "./../../../components/bot-search";
 import StickerSearch from "./../../../components/sticker-search";
@@ -152,7 +153,7 @@ class HeaderClass extends React.Component {
                   <Button text="Surprise" primary />
                 </MediaQuery>
                 <WrapperLogin>
-                  <Button href={`https://t.me/medev_bot?start=${connection_id}`} text="Sign In" />
+                  <AuthorizationModule/>
                 </WrapperLogin>
               </div>
             </div>

@@ -1,16 +1,16 @@
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
 import createSagaMiddleware from "redux-saga";
-import reduxLogger from 'redux-logger';
+import reduxLogger from "redux-logger";
 import { all } from "redux-saga/effects";
-import {initializeConnection} from "./action-creators";
-import {socket} from "./backend";
+import { initializeConnection, authorize } from "./action-creators";
+import { socket } from "./backend";
 import * as sagas from "./sagas";
 import * as reducers from "./reducers";
 
 const saga = createSagaMiddleware();
 const middlewares = [saga];
 
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   middlewares.push(reduxLogger);
 }
 
@@ -21,13 +21,20 @@ const store = createStore(
     channelSearch: reducers.channelSearch,
     botSearch: reducers.botSearch,
     stickerSearch: reducers.stickerSearch,
-    channelPage: reducers.channelPage
+    channelPage: reducers.channelPage,
+    authorization: reducers.authorization,
   }),
   applyMiddleware(...middlewares),
 );
 
 const boundConnectionInitializer = bindActionCreators(initializeConnection, store.dispatch);
 socket.onOpen(boundConnectionInitializer);
+
+const boundAuth = bindActionCreators(authorize, store.dispatch);
+socket.subscribe(message => {
+  const { action, ...rest } = message;
+  if (action === "AUTH") boundAuth(rest);
+});
 
 saga.run(function*() {
   yield all([
@@ -36,7 +43,7 @@ saga.run(function*() {
     sagas.searchChannels(),
     sagas.searchBots(),
     sagas.searchStickers(),
-    sagas.channelPage()
+    sagas.channelPage(),
   ]);
 });
 export default store;
