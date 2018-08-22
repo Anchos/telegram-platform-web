@@ -812,9 +812,9 @@ bindings@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
-biplane-uikit@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.1.8.tgz#7f6a8617859ca6fa79cae9a82eb9a716ad1b692e"
+biplane-uikit@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.1.9.tgz#c12f28d6461c3d68b84cdfb140dc97918780bb1e"
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.2"
