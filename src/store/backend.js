@@ -18,7 +18,7 @@ export const getSingleChannel = username =>
       ...message.data,
     }));
 
-export const getChannelsAndCategories = params => {
+export const getChannels = params => {
   const { category, title, ...rest } = params;
   if (category) rest.category = category;
   if (title) rest.title = title;
@@ -26,6 +26,16 @@ export const getChannelsAndCategories = params => {
     action: "FETCH_CHANNELS",
     ...rest,
   });
+};
+
+export const getCategories = () => {
+  return socket
+    .request({
+      action: "GET_CATEGORIES",
+    })
+    .then(message => ({
+      ...message.items,
+    }));
 };
 
 export const verifyChannel = username =>
@@ -57,12 +67,6 @@ export const likeChannel = username =>
     .then(message => ({
       ...message.data,
     }));
-
-export const awaitUser = () =>
-  socket.once(message => message.action === "AUTH").then(message => ({
-    name: message.first_name,
-    avatar: message.photo,
-  }));
 
 // to be used only in "componentWillUnmount" of App component; reason: not bound to redux store, not being handled anywhere
 export const closeConnection = () => socket.close();

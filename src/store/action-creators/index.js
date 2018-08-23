@@ -9,6 +9,9 @@ export const setConnection = message => ({
 
 export const requestChannels = () => ({type: "CHANNELS_FETCH_REQUESTED"});
 
+export const requestCategories = () => ({type: 'CATEGORIES_FETCH_REQUESTED'});
+export const setCategories = items => ({type: 'CATEGORIES_FETCH_SUCCESS', payload: items})
+
 export const setChannels = message => ({type: "CHANNELS_FETCH_SUCCESS", payload: message.data});
 export const setChannelsFilters = filters => ({type: 'CHANNELS_SET_FILTERS', payload: filters});
 
@@ -22,4 +25,5 @@ export const setSearchStickers = message => ({type: "SEARCH_STICKERS_FETCH_SUCCE
 export const setSearchStickersFilters = filters => ({type: 'SEARCH_STICKERS_SET_FILTERS', payload: filters});
 
 export const requestChannel = username => ({type: 'CHANNEL_FETCH_REQUESTED', username});
-export const setChannel = message => ({type: "CHANNEL_FETCH_SUCCESS", payload: message.data});
+export const setChannel = data => ({type: "CHANNEL_FETCH_SUCCESS", payload: data});
+export const setChannelRequestError = error => ({type: "CHANNEL_FETCH_FAIL", payload: error});

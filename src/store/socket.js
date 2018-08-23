@@ -18,7 +18,7 @@ export class Socket {
   openQueue = [];
   continuations = new Map();
   subscribers = new Set();
-  socketHost = '';
+  socketHost = "";
 
   constructor(SOCKET_HOST) {
     this.socketHost = SOCKET_HOST;
@@ -33,22 +33,24 @@ export class Socket {
       this.socket.onmessage = this.handleHandleSocket;
       this.socket.onopen = this.handleOpenSocket;
       this.socket.onerror = reject;
-    })
+    });
   };
 
-  onOpen = (callback) => {
-    this.openQueue.push(callback)
+  onOpen = callback => {
+    this.openQueue.push(callback);
   };
 
   handleOpenSocket = () => {
     this.openQueue.forEach(callback => callback());
+    this.messagesQueue.forEach(message => this.send(message));
   };
 
   handleHandleSocket = event => {
     const message = JSON.parse(event.data);
 
     if (this.continuations.has(message.id)) {
-      this.continuations.get(message.id).resolve(message);
+      if (message.code) this.continuations.get(message.id).reject(message);
+      else this.continuations.get(message.id).resolve(message);
       this.continuations.delete(message.id);
     }
 
@@ -59,7 +61,6 @@ export class Socket {
 
   send = message => {
     if (this.isOpen) {
-
       this.socket.send(JSON.stringify(message));
     } else {
       this.messagesQueue.push(message);

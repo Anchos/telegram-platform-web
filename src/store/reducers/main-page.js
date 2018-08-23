@@ -17,6 +17,10 @@ const initialValues = {
     max_likes: 0,
     fetching: false,
   },
+  categories: {
+    items: [],
+    fetching: false
+  }
 };
 
 const mainPageReducer = (state = initialValues, action) => {
@@ -42,6 +46,22 @@ const mainPageReducer = (state = initialValues, action) => {
         ...state,
         filters: action.payload
       };
+    case "CATEGORIES_FETCH_START":
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          fetching: true
+        }
+      }
+    case "CATEGORIES_FETCH_SUCCESS":
+      return {
+        ...state,
+        categories: {
+          items: action.payload,
+          fetching: true
+        }
+      }
     default:
       return state;
   }

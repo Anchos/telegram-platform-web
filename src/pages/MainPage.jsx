@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import data from "../data_mocks";
-import { requestChannels, setChannelsFilters } from "../store/action-creators";
+import { requestChannels, requestCategories, setChannelsFilters } from "../store/action-creators";
 
 import { Banners } from "../ui/newdesign/banners/Banners";
 import { Channels } from "../ui/newdesign/channels/Channels";
@@ -10,6 +10,7 @@ import { Categories } from "../ui/newdesign/categories/Categories";
 class MainPage extends React.Component {
   componentDidMount() {
     this.props.requestChannels();
+    this.props.requestCategories();
   }
 
   render() {
@@ -35,5 +36,5 @@ export default connect(
     channels: state.main.channels.items,
     filters: state.main.filters,
   }),
-  { requestChannels, setChannelsFilters },
+  { requestChannels, setChannelsFilters, requestCategories },
 )(MainPage);
