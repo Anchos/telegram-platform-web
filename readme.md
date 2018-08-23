@@ -8,4 +8,4 @@ to install yarn globally (not locally in project folder) run `sudo npm i -g yarn
 2. run `yarn install` or `npm install` in package folder to download required node_modules
 3. to run in developer mode locally:`yarn start` or `npm run start`, then head to http://localhost:1234
 4. to bundle all css and js files for production run `yarn build` `npm run build`, bundled files will be available at ./dist
-5. deployment (not implemented yet, but expected soon): `yarn deploy:prod` or `npm run deploy:prod`
+5. deployment: execute `./deploy.sh`, this will update repo on host machine and place built with `npm run build` bundle into /var/www
