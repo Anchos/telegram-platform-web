@@ -6,6 +6,7 @@ import { numberFormatter, Button } from "biplane-uikit";
 import style from "./style.css";
 
 import { requestChannel } from "../../store/action-creators";
+import Loader from "../loader";
 
 class ChannelPage extends React.Component {
   componentDidMount() {
@@ -25,8 +26,14 @@ class ChannelPage extends React.Component {
       verified,
       views,
       likes,
+      fetching,
+      error,
     } = this.props;
-    return (
+    return fetching ? (
+      <Loader centered />
+    ) : error ? (
+      error
+    ) : (
       <div className="channel-page__container">
         <div className="channel-page">
           <div className="channel-page__channel-section">
@@ -81,9 +88,7 @@ class ChannelPage extends React.Component {
                       <span>{category}</span>
                     </div>
                     <div className="channel-page__description">
-                      {description.length > 255
-                        ? `${description.substr(0, 252)}...`
-                        : description.length}
+                      {description.length > 255 ? `${description.substr(0, 252)}...` : description}
                     </div>
                     {/*todo: channel categories tags go here, these tags are not implemented anywhere yet*/}
                     {/*todo: reserved for social media links (?)*/}

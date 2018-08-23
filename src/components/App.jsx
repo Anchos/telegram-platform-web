@@ -11,6 +11,7 @@ import { BotsPage } from "../pages/Bots";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Footer } from "../ui/newdesign/footer/Footer";
 import { socket } from "../store/backend";
+import {initializeConnection, requestCategories, requestChannels} from "../store/action-creators";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -50,9 +51,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(
-  state => ({ fetching: state.connection.fetching }),
-  dispatch => ({
-    initialize: () => dispatch({ type: "INIT_REQUESTED" }),
-  }),
-)(App);
+export default App;
