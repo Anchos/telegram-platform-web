@@ -1,17 +1,21 @@
 const initialValues = {
-  first_name: '',
-  language_code: '',
-  photo: '',
+  first_name: "",
+  language_code: "",
+  photo: "",
   user_id: 0,
-  username: ''
+  username: "",
 };
 
 const authorization = (state = initialValues, action) => {
   switch (action.type) {
-    case 'AUTH': {
+    case "AUTH":
       return action.payload;
-    }
-    default: return state;
+
+    case "LOGOUT_SUCCESS":
+      return initialValues;
+
+    default:
+      return state;
   }
 };
 

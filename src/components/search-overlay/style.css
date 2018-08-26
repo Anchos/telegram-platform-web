@@ -2,7 +2,7 @@
   position: fixed;
   overflow-y: hidden;
   overflow-x: hidden;
-  top: 100px;
+  top: 70px;
   width: 100%;
   height: calc(100vh - 100px);
   animation: rollDown 300ms linear;

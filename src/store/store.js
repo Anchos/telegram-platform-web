@@ -38,12 +38,13 @@ socket.subscribe(message => {
 
 saga.run(function*() {
   yield all([
-    sagas.auth(),
+    sagas.init(),
     sagas.data(),
     sagas.searchChannels(),
     sagas.searchBots(),
     sagas.searchStickers(),
     sagas.channelPage(),
+    sagas.logout(),
   ]);
 });
 export default store;

@@ -1,0 +1,113 @@
+@import 'biplane-uikit/lib/colors.css';
+@import 'biplane-uikit/lib/variables.css';
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 100px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 2px -2px var(--gray-shadow);
+}
+
+.app-header__left-part {
+  display: flex;
+  flex-grow: 1;
+}
+
+.app-header__navigation {
+  display: flex;
+  margin-left: 100px;
+}
+
+.app-header__navigation-link {
+  color: black;
+  font-size: 20px;
+  margin-right: 16px;
+
+  transition: var(--transition-color);
+}
+
+.app-header__navigation-link:hover {
+  color: var(--green-light);
+  text-decoration: none;
+}
+
+.app-header__navigation-link_active {
+  font-weight: bold;
+  color: var(--green-primary);
+}
+
+.app-header__right-part {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.app-header__login {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.app-header__user-name {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.app-header__user-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+.app-header__user-image-container > img {
+  width: 100%;
+}
+
+.app-header__search {
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 44px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  transition: width 150ms linear;
+}
+
+.app-header__search:focus, .app-header__search_active {
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.app-header__search-icon {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  pointer-events: none;
+  width: 26px;
+}
+
+.app-header__delete-search {
+  position: absolute;
+  right: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: var(--transition-color);
+}
+
+.app-header__delete-search:hover {
+  color: var(--green-primary);
+}
+
+.app-header__button {
+  margin-right: 10px;
+}

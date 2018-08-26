@@ -812,9 +812,9 @@ bindings@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
-biplane-uikit@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.1.9.tgz#c12f28d6461c3d68b84cdfb140dc97918780bb1e"
+biplane-uikit@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.1.11.tgz#ecda734e5af425d4de4cde23abc0f2fd1c292d3a"
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.2"
@@ -4048,6 +4048,10 @@ react-is@^16.3.1:
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-onclickoutside@^6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
 
 react-popper@^0.8.3:
   version "0.8.3"
