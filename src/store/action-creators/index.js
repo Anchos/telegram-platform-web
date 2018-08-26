@@ -1,6 +1,8 @@
 export const initializeConnection = () => ({ type: "INIT_REQUESTED" });
 
 export const authorize = data => ({type: 'AUTH', payload: data});
+export const requestLogout = () => ({type: 'LOGOUT_REQUESTED'});
+export const setLogout = () => ({type: 'LOGOUT_SUCCESS'});
 
 export const setConnection = message => ({
   type: "INIT_SUCCESS",

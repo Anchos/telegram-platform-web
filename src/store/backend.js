@@ -8,6 +8,11 @@ export const getSession = session_id =>
     session_id,
   });
 
+export const logout = () =>
+  socket.request({
+    action: "LOGOUT",
+  });
+
 export const getSingleChannel = username =>
   socket
     .request({

@@ -1,0 +1,48 @@
+@import 'biplane-uikit/lib/colors.css';
+@import 'biplane-uikit/lib/variables.css';
+
+.bui-dropdown__wrapper {
+  position: relative;
+}
+
+.bui-dropdown__wrapped-item {
+  cursor: pointer;
+}
+
+.bui-dropdown {
+  background-color: #fff;
+  position: absolute;
+  top: calc(100% + 5px);
+  width: 100%;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--gray-border);
+  border-radius: 4px;
+  transform: scaleY(1);
+  animation: openAnimation 150ms linear;
+  transition: top 150ms linear, transform 150ms linear;
+}
+
+.bui-dropdown_closing {
+  top: 0;
+  transform: scaleY(0);
+}
+
+.bui-dropdown__option {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  transition: var(--transition-background);
+}
+
+.bui-dropdown__option + .bui-dropdown__option {
+  border-top: 1px solid var(--gray-border);
+}
+
+.bui-dropdown__option:hover {
+  background-color: var(--green-transparent-light);
+}
+
+@keyframes openAnimation {
+  from {transform: scaleY(0); top: 0;}
+  to {transform: scaleY(1); top: calc(100% + 5px);}
+}
