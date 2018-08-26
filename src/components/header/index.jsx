@@ -130,11 +130,13 @@ class Header extends React.Component {
 
 Header.propTypes = {};
 
-export default connect(
-  state => ({
-    ...state.authorization,
-  }),
-  {
-    requestLogout,
-  },
-)(withRouter(Header));
+export default withRouter(
+  connect(
+    state => ({
+      ...state.authorization,
+    }),
+    {
+      requestLogout,
+    },
+  )(Header),
+);
