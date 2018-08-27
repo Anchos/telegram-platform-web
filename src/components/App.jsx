@@ -12,7 +12,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./footer";
 import { socket } from "../store/backend";
 import { initializeConnection, requestCategories, requestChannels } from "../store/action-creators";
-import style from './style.css';
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,16 +30,16 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className='app-root'>
-        <Header />
-        <Switch>
-          <Route exact={true} path="/" component={MainPage} />
-          <Route path="/stickers" component={StickersPage} />
-          <Route path="/bots" component={BotsPage} />
-          <Route path="/channels/:username" component={ChannelPage} />
-        </Switch>
-        <Footer />
-        </div>
+        <React.Fragment>
+          <Header />
+          <Switch>
+            <Route exact={true} path="/" component={MainPage} />
+            <Route path="/stickers" component={StickersPage} />
+            <Route path="/bots" component={BotsPage} />
+            <Route path="/channels/:username" component={ChannelPage} />
+          </Switch>
+          <Footer />
+        </React.Fragment>
       </Router>
     );
   }
