@@ -7,6 +7,7 @@ import style from "./style.css";
 
 import { requestChannel } from "../../store/action-creators";
 import Loader from "../loader";
+import Error from "../error";
 
 class ChannelPage extends React.Component {
   componentDidMount() {
@@ -32,7 +33,7 @@ class ChannelPage extends React.Component {
     return fetching ? (
       <Loader centered />
     ) : error ? (
-      error
+      <Error text={`Can't find channel with username ${this.props.match.params.username}`}/>
     ) : (
       <div className="channel-page__container">
         <div className="channel-page">

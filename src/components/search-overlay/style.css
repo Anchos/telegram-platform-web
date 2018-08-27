@@ -4,7 +4,8 @@
   overflow-x: hidden;
   top: 70px;
   width: 100%;
-  height: calc(100vh - 100px);
+  min-width: 1265px;
+  height: calc(100vh - 70px);
   animation: rollDown 300ms linear;
   background-color: rgba(255, 255, 255, 0.95);
   z-index: 4;

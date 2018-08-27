@@ -1,5 +1,13 @@
 @import 'biplane-uikit/lib/variables.css';
-
+html {
+  height: 100%;
+}
 body {
   font-family: var(--font-family);
+  height: 100%;
+  min-width: 1265px;
+}
+
+#root {
+  height: 100%;
 }

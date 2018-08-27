@@ -1,0 +1,37 @@
+@import 'biplane-uikit/lib/colors.css';
+
+.app-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 100px;
+  box-shadow: 0 -4px 2px -2px var(--gray-shadow);
+}
+
+.app-footer__branding {
+  color: var(--green-primary);
+  font-weight: bold;
+}
+
+.app-footer__navigation {
+  display: flex;
+  margin-left: 100px;
+}
+
+.app-footer__navigation-link {
+  color: black;
+  font-size: 14px;
+  margin-left: 20px;
+
+  transition: var(--transition-color);
+}
+
+.app-footer__navigation-link:hover {
+  color: var(--green-light);
+  text-decoration: none;
+}
+
+.app-footer__navigation-link_active {
+  font-weight: bold;
+  color: var(--green-primary);
+}
