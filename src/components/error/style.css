@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  flex-shrink: 0;
   max-width: 500px;
   margin: 0 auto;
 }

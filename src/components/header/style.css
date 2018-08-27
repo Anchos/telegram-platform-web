@@ -3,6 +3,7 @@
 
 .app-header {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
   height: 70px;
