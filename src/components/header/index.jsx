@@ -10,6 +10,7 @@ import Dropdown from "../dropdown";
 import ChannelSearch from "../channel-search";
 import BotSearch from "../bot-search";
 import StickerSearch from "../sticker-search";
+import Loader from "../loader";
 import style from "./style.css";
 
 class Header extends React.Component {
@@ -21,7 +22,7 @@ class Header extends React.Component {
   clearInput = () => this.setState({ searchValue: "" });
 
   render() {
-    const { photo, username, requestLogout, location } = this.props;
+    const { photo, username, fetching, requestLogout, location } = this.props;
     const { searchValue } = this.state;
     const currentPage = location.pathname.split("/")[1];
     return (
@@ -73,7 +74,11 @@ class Header extends React.Component {
             >
               FAQ
             </NavLink>
-            {username ? (
+            {fetching ? (
+              <div className='app-header__logging-out-spinner'>
+              <Loader size="small" />
+              </div>
+            ) : username ? (
               <React.Fragment>
                 <Dropdown options={[{ label: "Log out", onClick: requestLogout }]}>
                   <div className="app-header__user-name">{username}</div>

@@ -53,6 +53,12 @@
   margin-right: 50px;
 }
 
+.app-header__logging-out-spinner {
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
 .app-header__user-name {
   font-size: 20px;
   margin-right: 10px;
