@@ -6,6 +6,7 @@ import classNames from "class-names";
 import { Button } from "biplane-uikit";
 import { requestLogout } from "../../store/action-creators";
 import AuthorizationModule from "../authorization-module";
+import SuggestModule from "../suggest-module";
 import Dropdown from "../dropdown";
 import ChannelSearch from "../channel-search";
 import BotSearch from "../bot-search";
@@ -64,6 +65,7 @@ class Header extends React.Component {
               Stickers
             </NavLink>
           </div>
+          <SuggestModule />
         </div>
         <div className="app-header__right-part">
           <div className="app-header__login">
@@ -75,8 +77,8 @@ class Header extends React.Component {
               FAQ
             </NavLink>
             {fetching ? (
-              <div className='app-header__logging-out-spinner'>
-              <Loader size="small" />
+              <div className="app-header__logging-out-spinner">
+                <Loader size="small" />
               </div>
             ) : username ? (
               <React.Fragment>

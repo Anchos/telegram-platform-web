@@ -5,7 +5,7 @@ import { requestChannels, requestCategories, setChannelsFilters } from "../store
 
 import { Banners } from "../ui/newdesign/banners/Banners";
 import { Channels } from "../ui/newdesign/channels/Channels";
-import { Categories } from "../ui/newdesign/categories/Categories";
+import Categories from '../components/categories';
 
 class MainPage extends React.Component {
   componentDidMount() {
