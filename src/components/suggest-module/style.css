@@ -1,6 +1,18 @@
 @import 'biplane-uikit/lib/colors.css';
 @import 'biplane-uikit/lib/variables.css';
 
+.suggest-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.suggest-modal__header {
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .suggest-modal__input {
   padding: 6px;
   width: 100%;

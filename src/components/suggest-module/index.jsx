@@ -42,8 +42,8 @@ class Authorization extends React.Component {
         <Button onClick={this.openModal}>Suggest</Button>
         {modalOpen && (
           <Modal onClose={this.closeModal} size="medium">
-            <div className="authorization-modal">
-              <div className="authorization-modal__header">Suggest channel</div>
+            <div className="suggest-modal">
+              <div className="suggest-modal__header">Suggest channel</div>
               <input
                 className="suggest-modal__input"
                 value={inputValue}
