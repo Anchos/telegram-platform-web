@@ -23,6 +23,7 @@ const store = createStore(
     stickerSearch: reducers.stickerSearch,
     channelPage: reducers.channelPage,
     authorization: reducers.authorization,
+    channelSuggest: reducers.channelSuggest
   }),
   applyMiddleware(...middlewares),
 );
@@ -45,6 +46,7 @@ saga.run(function*() {
     sagas.searchStickers(),
     sagas.channelPage(),
     sagas.logout(),
+    sagas.channelSuggest()
   ]);
 });
 export default store;

@@ -5,3 +5,4 @@ export { default as searchBots } from "./bot-search";
 export { default as searchStickers } from "./sticker-search";
 export { default as channelPage } from "./channel-page";
 export { default as logout } from "./logout";
+export { default as channelSuggest } from './channel-suggest';

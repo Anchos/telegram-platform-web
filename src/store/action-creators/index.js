@@ -29,3 +29,7 @@ export const setSearchStickersFilters = filters => ({type: 'SEARCH_STICKERS_SET_
 export const requestChannel = username => ({type: 'CHANNEL_FETCH_REQUESTED', username});
 export const setChannel = data => ({type: "CHANNEL_FETCH_SUCCESS", payload: data});
 export const setChannelRequestError = error => ({type: "CHANNEL_FETCH_FAIL", payload: error});
+
+export const requestUpdateChannel = username => ({type: 'UPDATE_CHANNEL_REQUEST', username});
+export const setUpdateChannelSuccess = () => ({type: 'UPDATE_CHANNEL_SUCCESS'});
+export const setUpdateChannelError = error => ({type: 'UPDATE_CHANNEL_FAIL', payload: error});
