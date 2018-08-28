@@ -1,6 +1,6 @@
 const initialValues = {
-  error: '',
-  fetching: false
+  error: null,
+  fetching: false,
 };
 
 const channelSuggest = (state = initialValues, action) => {
@@ -19,8 +19,12 @@ const channelSuggest = (state = initialValues, action) => {
       return {
         ...initialValues,
         fetching: false,
-        error: action.payload
-      }
+        error: action.payload,
+      };
+    case "UPDATE_CHANNEL_RESET":
+      return {
+        initialValues,
+      };
     default:
       return state;
   }

@@ -3,9 +3,18 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "class-names";
 import { Button, Modal } from "biplane-uikit";
-import { requestUpdateChannel } from "../../store/action-creators";
+import { requestUpdateChannel, resetSuggestion } from "../../store/action-creators";
 import Loader from "../loader";
 import style from "./style.css";
+
+const processErrorCode = code => {
+  switch (code) {
+    case 404:
+      return "Channel not found";
+    default:
+      return "Unknown error";
+  }
+};
 
 class Authorization extends React.Component {
   state = {
@@ -14,7 +23,10 @@ class Authorization extends React.Component {
   };
 
   openModal = () => this.setState({ modalOpen: true });
-  closeModal = () => this.setState({ modalOpen: false });
+  closeModal = () => {
+    this.props.resetSuggestion();
+    this.setState({ modalOpen: false, inputValue: "" });
+  };
   changeInput = e => this.setState({ inputValue: e.target.value });
 
   addChannel = () => {
@@ -23,11 +35,11 @@ class Authorization extends React.Component {
 
   render() {
     const { modalOpen, inputValue } = this.state;
+    const { error, fetching } = this.props;
+
     return (
       <React.Fragment>
-        <Button onClick={this.openModal}>
-          Suggest
-        </Button>
+        <Button onClick={this.openModal}>Suggest</Button>
         {modalOpen && (
           <Modal onClose={this.closeModal} size="medium">
             <div className="authorization-modal">
@@ -38,7 +50,13 @@ class Authorization extends React.Component {
                 onChange={this.changeInput}
               />
               <div className="suggest-modal__footer">
-                <div />
+                {fetching ? (
+                  <Loader />
+                ) : error ? (
+                  <div className="suggest-modal__error">{processErrorCode(error.code)}</div>
+                ) : (
+                  <div />
+                )}
                 <Button onClick={this.addChannel}>Add channel</Button>
               </div>
             </div>
@@ -50,13 +68,15 @@ class Authorization extends React.Component {
 }
 
 Authorization.propTypes = {
-  isAuthorizedYet: PropTypes.bool,
-  connection_id: PropTypes.string,
+  requestUpdateChannel: PropTypes.func,
+  resetSuggestion: PropTypes.func,
+  error: PropTypes.object,
 };
 
 export default connect(
-  state => ({}),
+  state => ({ error: state.channelSuggest.error, fetching: state.channelSuggest.fetching }),
   dispatch => ({
     requestUpdateChannel: username => dispatch(requestUpdateChannel(username)),
+    resetSuggestion: () => dispatch(resetSuggestion()),
   }),
 )(Authorization);

@@ -33,3 +33,4 @@ export const setChannelRequestError = error => ({type: "CHANNEL_FETCH_FAIL", pay
 export const requestUpdateChannel = username => ({type: 'UPDATE_CHANNEL_REQUEST', username});
 export const setUpdateChannelSuccess = () => ({type: 'UPDATE_CHANNEL_SUCCESS'});
 export const setUpdateChannelError = error => ({type: 'UPDATE_CHANNEL_FAIL', payload: error});
+export const resetSuggestion = () => ({type: 'UPDATE_CHANNEL_RESET'});

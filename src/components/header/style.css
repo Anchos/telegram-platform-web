@@ -14,11 +14,13 @@
 
 .app-header__left-part {
   display: flex;
+  align-items: center;
   flex-grow: 1;
 }
 
 .app-header__navigation {
   display: flex;
+  align-items: center;
   margin-left: 100px;
 }
 
@@ -43,6 +45,7 @@
 .app-header__right-part {
   position: relative;
   display: flex;
+  align-items: center;
   flex-grow: 1;
   justify-content: flex-end;
 }
