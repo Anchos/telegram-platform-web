@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import data from "../data_mocks";
 import { requestChannels, requestCategories, setChannelsFilters } from "../store/action-creators";
-
+import qs from "query-string";
 import { Banners } from "../ui/newdesign/banners/Banners";
-import { Channels } from "../ui/newdesign/channels/Channels";
-import Categories from '../components/categories';
+import Channels from "../ui/newdesign/channels/Channels";
+import Categories from "../components/categories";
 
 class MainPage extends React.Component {
   componentDidMount() {
@@ -36,5 +36,12 @@ export default connect(
     channels: state.main.channels.items,
     filters: state.main.filters,
   }),
-  { requestChannels, setChannelsFilters, requestCategories },
+  (dispatch, ownProps) => {
+    const category = qs.parse(ownProps.location.search).category || '';
+    return {
+      requestChannels: () => dispatch(requestChannels(category)),
+      setChannelsFilters: filters => dispatch(setChannelsFilters({...filters, category})),
+      requestCategories: () => dispatch(requestCategories()),
+    };
+  },
 )(MainPage);

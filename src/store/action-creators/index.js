@@ -9,7 +9,7 @@ export const setConnection = message => ({
   payload: { connection_id: message.connection_id },
 });
 
-export const requestChannels = () => ({type: "CHANNELS_FETCH_REQUESTED"});
+export const requestChannels = category => ({type: "CHANNELS_FETCH_REQUESTED", payload: category});
 
 export const requestCategories = () => ({type: 'CATEGORIES_FETCH_REQUESTED'});
 export const setCategories = items => ({type: 'CATEGORIES_FETCH_SUCCESS', payload: items})
