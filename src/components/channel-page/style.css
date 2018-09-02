@@ -88,6 +88,13 @@
   margin-right: 32px;
 }
 
+.channel-page__single-number-label--with-edit {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: baseline;
+  align-items: baseline;
+}
+
 .channel-page__single-number-label {
   font-size: 16px;
 }
@@ -96,6 +103,26 @@
   margin-bottom: 16px;
   font-size: 25px;
   font-weight: bold;
+}
+
+.channel-page__edit-btn {
+  font-size: 14px;
+  color: #0075ff;
+  text-decoration: underline;
+  margin-left: 4px;
+  cursor: pointer;
+  max-width: 59px;
+  width: 100%;
+}
+
+.channel-page__single-number-value--active {
+  width: 59px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #15ad56;
+  font-size: 20px;
+  color: #232825;
+  outline: none;
 }
 
 .channel-page__description-language-container {

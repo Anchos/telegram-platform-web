@@ -6,17 +6,25 @@ import style from "./style.css";
 
 import Loader from "../loader";
 import Error from "../error";
+import Ads from "./ads";
 
 export default class ChannelPage extends React.Component {
 
-  componentDidMount() {
-    this.props.requestChannel(this.props.match.params.username);
+  componentWillMount() {
+    const { description, tags, category, cost } = this.props;
+    this.setState({ description, tags, category, cost, isOwner: false });
   }
 
-  render() {
+  componentDidMount() {
+    const { requestChannel, match } = this.props;
+    requestChannel(match.params.username);
+  }
+
+  editAds = ({ target }) => this.setState({cost: target.value })
+
+  renderBody = () => {
     const {
       category,
-      cost,
       description,
       language,
       members,
@@ -29,11 +37,8 @@ export default class ChannelPage extends React.Component {
       fetching,
       error,
     } = this.props;
-    return fetching ? (
-      <Loader centered />
-    ) : error ? (
-      <Error text={`Can't find channel with username ${this.props.match.params.username}`}/>
-    ) : (
+    const { cost } = this.state;
+    return (
       <div className="channel-page__container">
         <div className="channel-page">
           <div className="channel-page__channel-section">
@@ -76,10 +81,11 @@ export default class ChannelPage extends React.Component {
                         {numberFormatter(likes)}
                       </div>
                     </div>
-                    <div className="channel-page__single-number">
-                      <div className="channel-page__single-number-label">Ads</div>
-                      <div className="channel-page__single-number-value">{cost}</div>
-                    </div>
+                    <Ads
+                      isOwner={this.state.isOwner}
+                      cost={cost}
+                      onChange={this.editAds}
+                    />
                   </div>
 
                   <div className="channel-page__description-language-container">
@@ -122,6 +128,16 @@ export default class ChannelPage extends React.Component {
         </div>
       </div>
     );
+
+  }
+
+  render() {
+    const { fetching, error } = this.props;
+    return fetching ? (
+      <Loader centered />
+    ) : error ? (
+      <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
+    ) : this.renderBody();
   }
 }
 
