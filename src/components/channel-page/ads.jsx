@@ -31,7 +31,7 @@ export default class Ads extends React.Component {
       <div className="channel-page__single-number">
         <div className="channel-page__single-number-label--with-edit">
           <div className="channel-page__single-number-label">Ads</div>
-          { !this.state.editIsPressed &&
+          { (!this.state.editIsPressed && this.props.isOwner)  &&
             <div className="channel-page__edit-btn" onClick={this.toggleEditBtn}>Edit</div>
           }
         </div>

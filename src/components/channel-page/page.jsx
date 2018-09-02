@@ -12,7 +12,7 @@ export default class ChannelPage extends React.Component {
 
   componentWillMount() {
     const { description, tags, category, cost } = this.props;
-    this.setState({ description, tags, category, cost, isOwner: false });
+    this.setState({ description, tags, category, cost, isOwner: true });
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ export default class ChannelPage extends React.Component {
     requestChannel(match.params.username);
   }
 
-  editAds = ({ target }) => this.setState({cost: target.value })
+  editAds = ({ target }, key) => this.setState({[key]: target.value })
 
   renderBody = () => {
     const {
@@ -84,7 +84,7 @@ export default class ChannelPage extends React.Component {
                     <Ads
                       isOwner={this.state.isOwner}
                       cost={cost}
-                      onChange={this.editAds}
+                      onChange={(e) => this.editAds(e, "cost")}
                     />
                   </div>
 
