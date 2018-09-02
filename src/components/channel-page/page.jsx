@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "class-names";
-import { numberFormatter, Button } from "biplane-uikit";
+import { numberFormatter, Button, Select } from "biplane-uikit";
 import style from "./style.css";
 
 import Loader from "../loader";
@@ -12,7 +12,7 @@ export default class ChannelPage extends React.Component {
 
   componentWillMount() {
     const { description, tags, category, cost } = this.props;
-    this.setState({ description, tags, category, cost, isOwner: true });
+    this.setState({ description, tags, category, cost, isOwner: true, language: "en" });
   }
 
   componentDidMount() {
@@ -20,13 +20,12 @@ export default class ChannelPage extends React.Component {
     requestChannel(match.params.username);
   }
 
-  editAds = ({ target }, key) => this.setState({[key]: target.value })
+  onChange = (value, key) => this.setState({[key]: value })
 
   renderBody = () => {
     const {
       category,
       description,
-      language,
       members,
       photo,
       title,
@@ -37,7 +36,7 @@ export default class ChannelPage extends React.Component {
       fetching,
       error,
     } = this.props;
-    const { cost } = this.state;
+    const { cost, language } = this.state;
     return (
       <div className="channel-page__container">
         <div className="channel-page">
@@ -84,13 +83,17 @@ export default class ChannelPage extends React.Component {
                     <Ads
                       isOwner={this.state.isOwner}
                       cost={cost}
-                      onChange={(e) => this.editAds(e, "cost")}
+                      onChange={(e) => this.onChange(e.target.value, "cost")}
                     />
                   </div>
 
                   <div className="channel-page__description-language-container">
                     <div className="channel-page__language-category">
-                      <span>{language}</span>
+                      <Select
+                        options={[{label: "1", value: "1"}]}
+                        onChange={value => this.onChange(value, "language")}
+                        value={this.state.value}
+                        />
                       <span>{category}</span>
                     </div>
                     <div className="channel-page__description">
