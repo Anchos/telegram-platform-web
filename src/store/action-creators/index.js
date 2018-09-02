@@ -34,3 +34,7 @@ export const requestUpdateChannel = username => ({type: 'UPDATE_CHANNEL_REQUEST'
 export const setUpdateChannelSuccess = () => ({type: 'UPDATE_CHANNEL_SUCCESS'});
 export const setUpdateChannelError = error => ({type: 'UPDATE_CHANNEL_FAIL', payload: error});
 export const resetSuggestion = () => ({type: 'UPDATE_CHANNEL_RESET'});
+
+export const requestChannelVerification = username => ({type: 'CHANNEL_VERIFICATION_REQUESTED', username});
+export const setChannelVerificationSuccess = () => ({type: "CHANNEL_VERIFICATION_SUCCESS"});
+export const setChannelVerificationError = error => ({type: "CHANNEL_VERIFICATION_FAIL", payload: error});

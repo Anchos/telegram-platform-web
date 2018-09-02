@@ -43,3 +43,8 @@
   color: #ff3333;
   font-weight: bold;
 }
+
+.suggest-modal__error {
+  color: var(--green-primary);
+  font-weight: bold;
+}

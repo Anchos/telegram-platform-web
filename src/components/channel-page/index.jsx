@@ -5,7 +5,7 @@ import classNames from "class-names";
 import { numberFormatter, Button } from "biplane-uikit";
 import style from "./style.css";
 
-import { requestChannel } from "../../store/action-creators";
+import { requestChannel, requestChannelVerification } from "../../store/action-creators";
 import Loader from "../loader";
 import Error from "../error";
 
@@ -13,6 +13,8 @@ class ChannelPage extends React.Component {
   componentDidMount() {
     this.props.requestChannel(this.props.match.params.username);
   }
+
+  verifyChannel = () => this.props.requestChannelVerification(this.props.username);
 
   render() {
     const {
@@ -29,11 +31,14 @@ class ChannelPage extends React.Component {
       likes,
       fetching,
       error,
+      verifying,
+      verificationConfirmed,
+      verificationError,
     } = this.props;
     return fetching ? (
       <Loader centered />
     ) : error ? (
-      <Error text={`Can't find channel with username ${this.props.match.params.username}`}/>
+      <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
     ) : (
       <div className="channel-page__container">
         <div className="channel-page">
@@ -48,10 +53,31 @@ class ChannelPage extends React.Component {
                 >
                   <img src={photo} alt={title} />
                 </div>
-                <Button>Join</Button>
+                <a href={`https://t.me/${username.split("@")[1]}`} target="_blank">
+                  <Button>Join</Button>
+                </a>
                 <div className="channel-page__channel-card-description">
                   <div>Are you an admin of this channel?</div>
-                  <a href="#">Confirm ownership</a>
+                  <div className="channel-page__channel-verification">
+                    {verifying ? (
+                      <Loader size="small" />
+                    ) : (
+                      <a href="#" onClick={this.verifyChannel}>
+                        Confirm ownership
+                      </a>
+                    )}
+                    {verificationError && (
+                      <div className="channel-page__channel-verification-error">
+                        Could not verify your account as an admin of this channel
+                      </div>
+                    )}
+
+                    {verificationConfirmed && (
+                      <div className="channel-page__channel-verification-confirmed">
+                        You are seeing this page as an adming of this channel
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="channel-page__channel-text-info">
@@ -89,7 +115,9 @@ class ChannelPage extends React.Component {
                       <span>{category}</span>
                     </div>
                     <div className="channel-page__description">
-                      {description.length > 255 ? `${description.substr(0, 252)}...` : description}
+                      {description && description.length > 255
+                        ? `${description.substr(0, 252)}...`
+                        : description}
                     </div>
                     {/*todo: channel categories tags go here, these tags are not implemented anywhere yet*/}
                     {/*todo: reserved for social media links (?)*/}
@@ -142,10 +170,9 @@ ChannelPage.propTypes = {
 };
 
 export default connect(
-  state => ({
-    ...state.channelPage,
-  }),
+  state => state.channelPage,
   dispatch => ({
     requestChannel: username => dispatch(requestChannel(username)),
+    requestChannelVerification: username => dispatch(requestChannelVerification(username)),
   }),
 )(ChannelPage);
