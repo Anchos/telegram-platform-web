@@ -16,14 +16,6 @@ import { initializeConnection, requestCategories, requestChannels } from "../sto
 import style from "./style.css";
 
 class App extends React.Component {
-  componentDidMount() {
-    setInterval(() => {
-      console.log("checking connection...");
-      if (!socket.isOpen) {
-        socket.connect();
-      }
-    }, 10000);
-  }
 
   componentWillUnmount() {
     closeConnection();

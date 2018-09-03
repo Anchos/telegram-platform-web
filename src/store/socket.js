@@ -25,6 +25,7 @@ export class Socket {
     this.socket = new WebSocket(SOCKET_HOST);
     this.socket.onopen = this.handleOpenSocket;
     this.socket.onmessage = this.handleHandleSocket;
+    this.socket.onclose = this.connect;
   }
 
   connect = () => {
@@ -33,6 +34,7 @@ export class Socket {
       this.socket.onmessage = this.handleHandleSocket;
       this.socket.onopen = this.handleOpenSocket;
       this.socket.onerror = reject;
+      this.socket.onclose = this.connect;
     });
   };
 
@@ -43,6 +45,7 @@ export class Socket {
   handleOpenSocket = () => {
     this.openQueue.forEach(callback => callback());
     this.messagesQueue.forEach(message => this.send(message));
+    this.messagesQueue.length = [];
   };
 
   handleHandleSocket = event => {
