@@ -17,7 +17,12 @@ export default class Ads extends React.Component {
         <input
           className="channel-page__single-number-value--active"
           value={cost}
-          onChange={onChange}
+          onChange={e => {
+            const isValid = (/^\d+$/.test(e.target.value) && e.target.value.length <= 4);
+            if(isValid) {
+              return onChange(e)
+            }
+          }}
           onBlur={() => this.setState({editIsPressed: false})}
           autoFocus
         />
