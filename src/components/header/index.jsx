@@ -12,7 +12,7 @@ import ChannelSearch from "../channel-search";
 import BotSearch from "../bot-search";
 import StickerSearch from "../sticker-search";
 import Loader from "../loader";
-import style from "./style.css";
+import style from "./style.scss";
 
 class Header extends React.Component {
   state = {

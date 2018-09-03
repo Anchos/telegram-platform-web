@@ -1,4 +1,4 @@
-@import 'biplane-uikit/lib/variables.css';
+@import '~biplane-uikit/lib/variables.css';
 html {
   height: 100%;
 }

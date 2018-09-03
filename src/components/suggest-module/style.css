@@ -1,5 +1,5 @@
-@import 'biplane-uikit/lib/colors.css';
-@import 'biplane-uikit/lib/variables.css';
+@import '~biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/variables.css';
 
 .suggest-modal {
   display: flex;

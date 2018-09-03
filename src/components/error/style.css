@@ -1,4 +1,4 @@
-@import 'biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/colors.css';
 
 .app-error {
   display: flex;

@@ -1,4 +1,4 @@
-@import 'biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/colors.css';
 
 .bot-card {
   width: 425px;

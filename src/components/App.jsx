@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { connect } from "react-redux";
 import data from "../data_mocks";
 import { closeConnection } from "../store/backend";
@@ -12,7 +13,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./footer";
 import { socket } from "../store/backend";
 import { initializeConnection, requestCategories, requestChannels } from "../store/action-creators";
-import style from './style.css';
+import style from "./style.css";
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,19 +32,19 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className='app-root'>
-        <Header />
-        <Switch>
-          <Route exact={true} path="/" component={MainPage} />
-          <Route path="/stickers" component={StickersPage} />
-          <Route path="/bots" component={BotsPage} />
-          <Route path="/channels/:username" component={ChannelPage} />
-        </Switch>
-        <Footer />
+        <div className="app-root">
+          <Header />
+          <Switch>
+            <Route exact={true} path="/" component={MainPage} />
+            <Route path="/stickers" component={StickersPage} />
+            <Route path="/bots" component={BotsPage} />
+            <Route path="/channels/:username" component={ChannelPage} />
+          </Switch>
+          <Footer />
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+export default hot(module)(App);
