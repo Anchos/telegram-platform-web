@@ -2,6 +2,7 @@ import ChangelPage from "./page";
 import { requestChannel, requestChannelVerification } from "../../store/action-creators";
 import { connect } from "react-redux";
 import React from "react";
+import "./index.scss";
 
 const ChangelPageContainer = ({ ...props }) => {
     return <ChangelPage {...props} />;

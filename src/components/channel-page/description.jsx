@@ -26,6 +26,7 @@ export default class Description extends React.Component {
                 </div>
             )
         }
+        console.log(description);
         return (
             <div className="channel-page__description" onClick={this.toggleEdit}>
                 {description.length > 255 ? `${description.substr(0, 252)}...` : description}

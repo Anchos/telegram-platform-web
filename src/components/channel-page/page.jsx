@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "class-names";
 import { numberFormatter, Button, Select } from "biplane-uikit";
-import style from "./style.css";
 
 import Loader from "../loader";
 import Error from "../error";
@@ -13,7 +12,8 @@ export default class ChannelPage extends React.Component {
 
   componentWillMount() {
     const { description, tags, category, cost } = this.props;
-    this.setState({ description, tags, category, cost, isOwner: true, language: "en" });
+    const txt = "Лучшая подборка горящих туров из Украины: - качественные и выгодные пакетные предложения; - скидки, акции на отели и перелеты; - полезные советы опытных турагентов и путешественников. Контакты для связи: @magicrest"
+    this.setState({ description: txt, tags, category, cost, isOwner: true, language: "en" });
   }
 
   componentDidMount() {
