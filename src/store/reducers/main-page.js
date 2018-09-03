@@ -3,7 +3,6 @@ const initialValues = {
     count: 20,
     offset: 0,
     title: "",
-    category: "",
     members: [0, 10000],
     cost: [0, 10000],
     likes: [0, 10000],

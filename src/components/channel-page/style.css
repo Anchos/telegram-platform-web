@@ -1,4 +1,5 @@
-@import 'biplane-uikit/lib/variables.css';
+@import '~biplane-uikit/lib/variables.css';
+@import '~biplane-uikit/lib/colors.css';
 
 .channel-page__container {
   font-family: var(--font-family);
@@ -27,9 +28,32 @@
   margin-right: 64px;
 }
 
+.channel-page__channel-verification {
+  line-height: 20px;
+  max-width: 260px;
+  min-height: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.channel-page__channel-verification-error {
+  font-size: 12px;
+  color: #ff3333;
+  font-weight: bold;
+}
+
+.channel-page__channel-verification-confirmed {
+  font-size: 12px;
+  color: var(--green-primary);
+  font-weight: bold;
+}
+
 .channel-page__channel-icon-container {
   overflow: hidden;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 240px;

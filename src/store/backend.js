@@ -53,6 +53,15 @@ export const verifyChannel = username =>
       ...message.data,
     }));
 
+export const ping = () =>
+  socket
+    .request({
+      action: "ping",
+    })
+    .then(message => ({
+      ...message.data,
+    }));
+
 export const updateChannel = username =>
   socket
     .request({

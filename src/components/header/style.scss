@@ -1,0 +1,129 @@
+@import '~biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/variables.css';
+
+.app-header {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 100px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 2px -2px var(--gray-shadow);
+
+  &__left-part {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__right-part {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+
+    &-link {
+      color: black;
+      font-size: 20px;
+      margin-right: 16px;
+      text-decoration: none;
+
+      transition: var(--transition-color);
+
+      &_active {
+        font-weight: bold;
+        color: var(--green-primary);
+      }
+
+      &:hover {
+        color: var(--green-light);
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__login {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
+
+  &__logging-out-spinner {
+    display: flex;
+    align-items: center;
+    height: 44px;
+  }
+
+  &__user-name {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  &__user-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+
+    & > img {
+      width: 100%;
+    }
+  }
+
+  &__search {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 44px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    transition: width 150ms linear;
+
+    &:focus {
+      width: 100%;
+      border-bottom: 1px solid black;
+    }
+
+    &_active {
+      width: 100%;
+      border-bottom: 1px solid black;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    pointer-events: none;
+    width: 26px;
+  }
+
+  &__delete-search {
+    position: absolute;
+    right: 5px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: var(--transition-color);
+
+    &:hover {
+      color: var(--green-primary);
+    }
+  }
+
+  .app-header__button {
+    margin-right: 10px;
+  }
+}

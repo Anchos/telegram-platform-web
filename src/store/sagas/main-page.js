@@ -2,9 +2,9 @@ import {call, takeLatest, put, select} from 'redux-saga/effects'
 import {getChannels, getCategories} from "../backend";
 import {setChannels, setCategories} from "../action-creators";
 
-function* fetchChannels() {
+function* fetchChannels(action) {
   const filters = yield select(state => state.main.filters);
-  const response = yield call(getChannels, filters);
+  const response = yield call(getChannels, {...filters, category: action.payload});
   yield put(setChannels(response));
 }
 

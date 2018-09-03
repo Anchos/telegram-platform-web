@@ -11,7 +11,10 @@ const initialValues = {
   language: "",
   views: 0,
   fetching: true,
-  error: ''
+  error: null,
+  verifying: false,
+  verificationError: null,
+  verificationConfirmed: false
 };
 
 const channelPage = (state = initialValues, action) => {
@@ -33,6 +36,26 @@ const channelPage = (state = initialValues, action) => {
         fetching: false,
         error: action.payload
       }
+    case "CHANNEL_VERIFICATION_REQUESTED":
+      return {
+        ...state,
+        verifying: true,
+      }
+    case "CHANNEL_VERIFICATION_SUCCESS":
+      return {
+        ...state,
+        verifying: false,
+        verificationError: null,
+        verificationConfirmed: true
+      }
+    case "CHANNEL_VERIFICATION_FAIL":
+      return {
+        ...state,
+        verifying: false,
+        verificationConfirmed: false,
+        verificationError: action.payload
+      }
+
     default:
       return state;
   }

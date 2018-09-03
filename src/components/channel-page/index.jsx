@@ -1,5 +1,5 @@
 import ChangelPage from "./page";
-import { requestChannel } from "../../store/action-creators";
+import { requestChannel, requestChannelVerification } from "../../store/action-creators";
 import { connect } from "react-redux";
 import React from "react";
 
@@ -9,6 +9,7 @@ const ChangelPageContainer = ({ ...props }) => {
 
 const dispatchToProps = dispatch => ({
   requestChannel: username => dispatch(requestChannel(username)),
+  requestChannelVerification: username => dispatch(requestChannelVerification(username)),
 });
 
 export default connect(
