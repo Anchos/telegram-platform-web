@@ -19,7 +19,7 @@ export default class Ads extends React.Component {
           value={cost}
           onChange={e => {
             const isValid = (/^\d+$/.test(e.target.value) && e.target.value.length <= 4);
-            if(isValid) {
+            if (isValid) {
               return onChange(e)
             }
           }}

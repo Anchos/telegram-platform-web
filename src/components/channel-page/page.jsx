@@ -7,6 +7,7 @@ import style from "./style.css";
 import Loader from "../loader";
 import Error from "../error";
 import Ads from "./ads";
+import Description from "./description";
 
 export default class ChannelPage extends React.Component {
 
@@ -25,7 +26,6 @@ export default class ChannelPage extends React.Component {
   renderBody = () => {
     const {
       category,
-      description,
       members,
       photo,
       title,
@@ -36,7 +36,7 @@ export default class ChannelPage extends React.Component {
       fetching,
       error,
     } = this.props;
-    const { cost, language } = this.state;
+    const { cost, language, description } = this.state;
     return (
       <div className="channel-page__container">
         <div className="channel-page">
@@ -93,12 +93,14 @@ export default class ChannelPage extends React.Component {
                         options={[{label: "1", value: "1"}]}
                         onChange={value => this.onChange(value, "language")}
                         value={this.state.value}
-                        />
+                      />
                       <span>{category}</span>
                     </div>
-                    <div className="channel-page__description">
-                      {description.length > 255 ? `${description.substr(0, 252)}...` : description}
-                    </div>
+                    <Description
+                      isOwner={this.state.isOwner}
+                      description={description}
+                      onChange={(e) => this.onChange(e.target.value, "description")}
+                    />
                     {/*todo: channel categories tags go here, these tags are not implemented anywhere yet*/}
                     {/*todo: reserved for social media links (?)*/}
                   </div>
