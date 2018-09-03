@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./footer";
 import { socket } from "../store/backend";
 import { initializeConnection, requestCategories, requestChannels } from "../store/action-creators";
-import style from "./style.css";
+import style from "../style.css";
 
 class App extends React.Component {
   componentDidMount() {
