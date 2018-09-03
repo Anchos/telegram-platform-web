@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import React from 'react'
 import {
   TableRow,
@@ -17,6 +18,7 @@ export const Row = ({
   members
 }) => (
   <TableRow className='row align-items-center'>
+    <Link to={`channels/${username}`}>
     <div className='col-2'>
       <div className='row no-gutters align-items-center no-gutters'>
         <Type>s</Type>
@@ -41,5 +43,6 @@ export const Row = ({
         </div>
       </div>
     </div>
+    </Link>
   </TableRow>
 )

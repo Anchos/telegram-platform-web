@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [new HtmlWebpackPlugin({
     template: 'index.html'
@@ -16,7 +17,8 @@ module.exports = {
     compress: true,
     hot: true,
     inline: true,
-    port: 9001
+    historyApiFallback: true,
+    port: 9001,
   },
   module: {
     rules: [
