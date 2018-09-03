@@ -61,7 +61,7 @@ export default class ChannelPage extends React.Component {
                 <div
                   className={classNames(
                     "channel-page__title",
-                    verified && "channel-page__title_verified",
+                    verified && "channel-page__title-verified",
                   )}
                 >
                   {title}
