@@ -20,7 +20,7 @@ export default class Ads extends React.Component {
           onChange={e => {
             const isValid = (/^\d+$/.test(e.target.value) && e.target.value.length <= 4);
             if (isValid) {
-              return onChange(e)
+              return onChange(e);
             }
           }}
           onBlur={() => this.setState({editIsPressed: false})}

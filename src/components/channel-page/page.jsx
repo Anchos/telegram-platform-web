@@ -138,11 +138,12 @@ export default class ChannelPage extends React.Component {
 
   render() {
     const { fetching, error } = this.props;
-    return fetching ? (
-      <Loader centered />
-    ) : error ? (
-      <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
-    ) : this.renderBody();
+    return this.renderBody();
+    // return fetching ? (
+    //   <Loader centered />
+    // ) : error ? (
+    //   <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
+    // ) : this.renderBody();
   }
 }
 

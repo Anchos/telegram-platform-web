@@ -8,7 +8,7 @@ export default class Description extends React.Component {
 
   toggleEdit = () => {
     if (this.props.isOwner) {
-      //    return this.setState({isEditing: !this.state.isEditing});
+      return this.setState({isEditing: !this.state.isEditing});
     }
   };
 
@@ -21,7 +21,7 @@ export default class Description extends React.Component {
           onChange={onChange}
           className="channel-page__textarea"
           autoFocus
-          onBlur={() => this.setState({ isEditing: true })}
+          onBlur={() => this.setState({ isEditing: false })}
         />
       );
     }
