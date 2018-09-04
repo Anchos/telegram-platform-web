@@ -14,14 +14,13 @@ export default class Description extends React.Component {
 
   renderDescription = () => {
     const { description, onChange } = this.props;
-    if (this.state.isEditing) {
+    if (this.props.isOwner) {
       return (
         <textarea
           value={description}
           onChange={onChange}
           className="channel-page__textarea"
-          autoFocus
-          onBlur={() => this.setState({ isEditing: false })}
+          onBlur={() => this.setState({ isEditing: false})}
         />
       );
     }

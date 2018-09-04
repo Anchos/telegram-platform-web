@@ -144,11 +144,11 @@
   &__description {
     font-size: 18px;
     max-width: 540px;
-    width: 100%;
     position: relative;
+    outline: none;
 
     &--isowner {
-      width: 100%;
+      height: 100%;
       @include df(row nowrap, center, center);
       border-radius: 2px;
       border: solid 1px $white;
@@ -189,10 +189,28 @@
   }
 
   &__textarea {
-    width: 100vw;
-    height: 100vh;
     font-size: 18px;
-    max-width: 535px;
+    border: 1px solid $white;
+    border-radius: 2px;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    height: 100vh;
+    width: 100vh;
+    max-width: 540px;
+    max-height: 127px;
+    padding: 3px 4px;
+    border-right: none;
+
+    &:focus {
+      border-color: $green-15;
+
+      ~ .channel-page__right-edit-label {
+        border-color: $green-15;
+        display: block;
+        min-height: 100%;
+      }
+    }
   }
 
   &__related-channels-container {
