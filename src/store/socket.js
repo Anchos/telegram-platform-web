@@ -19,16 +19,17 @@ export class Socket {
   continuations = new Map();
   subscribers = new Set();
   socketHost = "";
+  connectionThrottling = false;
 
   constructor(SOCKET_HOST) {
     this.socketHost = SOCKET_HOST;
-    this.socket = new WebSocket(SOCKET_HOST);
-    this.socket.onopen = this.handleOpenSocket;
-    this.socket.onmessage = this.handleHandleSocket;
-    this.socket.onclose = this.connect;
   }
 
   connect = () => {
+    if(this.connectionThrottling)
+      return setTimeout(() => this.connect(), 10000);
+    this.connectionThrottling = true;
+    setTimeout(() => this.connectionThrottling = false, 10000);
     return new Promise((resolve, reject) => {
       this.socket = new WebSocket(this.socketHost);
       this.socket.onmessage = this.handleHandleSocket;
