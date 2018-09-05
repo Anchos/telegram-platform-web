@@ -19,24 +19,30 @@ export class Socket {
   continuations = new Map();
   subscribers = new Set();
   socketHost = "";
-  connectionThrottling = false;
+  throttlingConnection = false;
+  connectionQueue = false;
 
   constructor(SOCKET_HOST) {
     this.socketHost = SOCKET_HOST;
   }
 
   connect = () => {
-    if(this.connectionThrottling)
-      return setTimeout(() => this.connect(), 10000);
-    this.connectionThrottling = true;
-    setTimeout(() => this.connectionThrottling = false, 10000);
-    return new Promise((resolve, reject) => {
-      this.socket = new WebSocket(this.socketHost);
-      this.socket.onmessage = this.handleHandleSocket;
-      this.socket.onopen = this.handleOpenSocket;
-      this.socket.onerror = reject;
-      this.socket.onclose = this.connect;
-    });
+    if(this.throttlingConnection)
+      return this.connectionQueue = true;
+
+    this.throttlingConnection = true;
+    this.connectionQueue = false;
+
+    this.socket = new WebSocket(this.socketHost);
+    this.socket.onmessage = this.handleHandleSocket;
+    this.socket.onopen = this.handleOpenSocket;
+    this.socket.onclose = this.connect;
+
+    setTimeout(() => {
+      this.throttlingConnection = false;
+      if(this.connectionQueue)
+        this.connect();
+    },10000)
   };
 
   onOpen = callback => {

@@ -1,46 +1,49 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import Loader from "../loader";
 import qs from "query-string";
 import classNames from "class-names";
 import PropTypes from "prop-types";
-import style from "./style.css";
+import style from "./style.scss";
 
 const categories = [
-  { label: "All categories", address: "" },
-  { label: "Science and Technology", address: "science" },
-  { label: "Telegram", address: "telegram" },
-  { label: "Work and Career", address: "career" },
-  { label: "Pictures and Photos", address: "photos" },
-  { label: "Cryptocurrencies", address: "crypto" },
-  { label: "Cinema and TV", address: "cinema" },
-  { label: "18+", address: "pron" },
-  { label: "Marketing", address: "marketing" },
-  { label: "Entertainment", address: "entertainment" },
-  { label: "Culture and Art", address: "culture" },
-  { label: "Blogging", address: "blogging" },
-  { label: "Games and Apps", address: "games" },
-  { label: "News and Media", address: "news" },
-  { label: "Tourism", address: "tourism" },
-  { label: "Politics", address: "politics" },
-  { label: "Design", address: "design" },
-  { label: "Fashion and Beauty", address: "fashion" },
-  { label: "Health and Sport", address: "health" },
-  { label: "Music", address: "music" },
-  { label: "Business and Startups", address: "business" },
-  { label: "Food and Cooking", address: "food" },
-  { label: "Cars and Motorcycles", address: "cars" },
-  { label: "Other", address: "other" },
+  { label: "All categories", id: 0 },
+  { label: "Science and Technology", id: 1 },
+  { label: "Telegram", id: 2 },
+  { label: "Cryptocurrencies", id: 3 },
+  { label: "Cars and Motorcycles", id: 4 },
+  { label: "Business and Startups", id: 5 },
+  { label: "Blogging", id: 6 },
+  { label: "18+", id: 7 },
+  { label: "Health and Sport", id: 8 },
+  { label: "Games and Apps", id: 9 },
+  { label: "Pictures and Photos", id: 10 },
+  { label: "Cinema and TV", id: 11 },
+  { label: "Culture and Art", id: 12 },
+  { label: "Fashion and Beauty", id: 13 },
+  { label: "Music", id: 14 },
+  { label: "News and Media", id: 15 },
+  { label: "Education", id: 16 },
+  { label: "Politics", id: 17 },
+  { label: "Tourism", id: 18 },
+  { label: "Work and Career", id: 19 },
+  { label: "Marketing", id: 20 },
+  { label: "Quotes", id: 21 },
+  { label: "Entertainment", id: 22 },
+  { label: "Design", id: 23 },
+  { label: "Food and Cooking", id: 24 },
+  { label: "Other", id: 25 },
 ];
 
 class Category extends React.Component {
   shouldComponentUpdate = newProps => newProps.current !== this.props.current;
 
   handleClick = () => {
-    this.props.onClick(this.props.address);
+    this.props.onClick(this.props.id);
   };
 
   render() {
-    const { label, address, current } = this.props;
+    const { label, current } = this.props;
     return (
       <div
         onClick={this.handleClick}
@@ -62,22 +65,19 @@ Category.propTypes = {
 };
 
 class Categories extends React.Component {
-  shouldComponentUpdate = newProps => newProps.location.search !== this.props.location.props;
-
-  handleCategoryClick = address => {
-    this.props.history.push({ search: `?category=${address}` });
+  handleCategoryClick = categoryId => {
+    this.props.onCategoryChange(categoryId);
   };
 
   render() {
-    console.log(qs.parse(this.props.location.search));
-    const currentAddress = qs.parse(this.props.location.search).category || "";
+    const {currentCategory} = this.props;
     return (
       <div className="channel-categories">
         {categories.map(category => (
           <Category
             onClick={this.handleCategoryClick}
-            current={category.address === currentAddress}
-            key={category.address}
+            current={category.id === currentCategory}
+            key={category.id}
             {...category}
           />
         ))}
@@ -89,6 +89,8 @@ class Categories extends React.Component {
 Categories.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
+  onCategoryChange: PropTypes.func,
+  currentCategory: PropTypes.number
 };
 
-export default withRouter(Categories);
+export default Categories;

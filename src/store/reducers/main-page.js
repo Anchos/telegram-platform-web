@@ -18,8 +18,8 @@ const initialValues = {
   },
   categories: {
     items: [],
-    fetching: false
-  }
+    fetching: false,
+  },
 };
 
 const mainPageReducer = (state = initialValues, action) => {
@@ -43,24 +43,24 @@ const mainPageReducer = (state = initialValues, action) => {
     case "CHANNELS_SET_FILTERS":
       return {
         ...state,
-        filters: action.payload
+        filters: action.payload,
       };
     case "CATEGORIES_FETCH_START":
       return {
         ...state,
         categories: {
           ...state.categories,
-          fetching: true
-        }
-      }
+          fetching: true,
+        },
+      };
     case "CATEGORIES_FETCH_SUCCESS":
       return {
         ...state,
         categories: {
-          items: action.payload,
-          fetching: true
-        }
-      }
+          items: Object.values(action.payload).map(value => value),
+          fetching: false,
+        },
+      };
     default:
       return state;
   }
