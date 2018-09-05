@@ -1,6 +1,7 @@
 import { Socket } from "./socket";
 
 export const socket = new Socket("wss://ws.recursion.ga/client");
+socket.connect();
 
 export const getSession = session_id =>
   socket.request({
@@ -48,6 +49,15 @@ export const verifyChannel = username =>
     .request({
       action: "VERIFY_CHANNEL",
       username,
+    })
+    .then(message => ({
+      ...message.data,
+    }));
+
+export const ping = () =>
+  socket
+    .request({
+      action: "ping",
     })
     .then(message => ({
       ...message.data,

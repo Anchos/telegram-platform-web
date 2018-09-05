@@ -1,4 +1,4 @@
-@import 'biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/colors.css';
 
 .app-footer {
   margin-top: 10px;

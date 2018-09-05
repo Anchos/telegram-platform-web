@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Wrapper, Title, RowMarginBottom, WrapperCheckboxes, WrapperFilter } from "./styles";
-
 import { NumericFilter } from "../numericFilter/NumericFilter";
 import { Checkbox } from "../checkbox/Checkbox";
 import { ChannelTable } from "../channelTable/ChannelTable";
 import { Button } from "../button/Button";
 
-export class Channels extends React.Component {
+class Channels extends React.Component {
   onMembersChange = ({ max, min }) => {
     this.props.onFiltersChange({
       ...this.props.filters,
@@ -31,6 +30,7 @@ export class Channels extends React.Component {
         members: [fromMembers, toMembers],
         cost: [fromCost, toCost]
       },
+      location
     } = this.props;
 
     return (
@@ -77,3 +77,5 @@ Channels.propTypes = {
   filters: PropTypes.object,
   channels: PropTypes.array,
 };
+
+export default Channels;

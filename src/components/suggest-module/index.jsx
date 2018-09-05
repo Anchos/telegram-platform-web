@@ -35,7 +35,7 @@ class Authorization extends React.Component {
 
   render() {
     const { modalOpen, inputValue } = this.state;
-    const { error, fetching } = this.props;
+    const { error, success, fetching } = this.props;
 
     return (
       <React.Fragment>
@@ -54,6 +54,10 @@ class Authorization extends React.Component {
                   <Loader />
                 ) : error ? (
                   <div className="suggest-modal__error">{processErrorCode(error.code)}</div>
+                ) : success ? (
+                  <div className="suggest-modal__success">
+                    Channel successfully added
+                  </div>
                 ) : (
                   <div />
                 )}
@@ -71,10 +75,12 @@ Authorization.propTypes = {
   requestUpdateChannel: PropTypes.func,
   resetSuggestion: PropTypes.func,
   error: PropTypes.object,
+  success: PropTypes.bool,
+  fetching: PropTypes.bool,
 };
 
 export default connect(
-  state => ({ error: state.channelSuggest.error, fetching: state.channelSuggest.fetching }),
+  state => state.channelSuggest,
   dispatch => ({
     requestUpdateChannel: username => dispatch(requestUpdateChannel(username)),
     resetSuggestion: () => dispatch(resetSuggestion()),
