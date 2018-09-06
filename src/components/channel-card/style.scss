@@ -1,0 +1,85 @@
+@import '~biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/variables.css';
+
+.channel-card {
+  display: flex;
+  flex-shrink: 0;
+  height: 100px;
+  border: 2px solid #f2f2f2;
+  border-radius: 3px;
+
+  & + & {
+    margin-top: 10px;
+  }
+
+  &__status {
+    width: 70px;
+  }
+
+  &__channel-link {
+    color: #212529;
+    transition: var(--transition-color);
+  }
+
+  &__channel-link:hover {
+    text-decoration: none;
+    color: var(--green-primary);
+  }
+
+  &__image-container {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
+    border-radius: 1000px;
+  }
+
+  &__name-info {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 16px;
+  }
+
+  &__title {
+    margin-right: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+
+    &_verified::after {
+      display: inline-block;
+      content: '';
+      width: 8px;
+      height: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      border-bottom: 2px solid #000;
+      border-left: 2px solid #000;
+      border-radius: 1px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__username {
+    text-decoration: none;
+  }
+
+  &__numbers {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 70px;
+    height: auto;
+  }
+
+}
