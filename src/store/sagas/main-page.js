@@ -1,12 +1,16 @@
 import { call, takeLatest, put, select } from "redux-saga/effects";
+import { delay } from "redux-saga";
 import { getChannels, getCategories } from "../backend";
 import { setChannels, setCategories } from "../action-creators";
 
 function* fetchChannels(action) {
+  yield delay(1000);
   const filters = yield select(state => state.main.filters);
   const response = yield call(
     getChannels,
-    action.type === "CHANNELS_FETCH_REQUESTED" ? { ...filters, category: action.payload } : filters,
+    action.type === "CHANNELS_FETCH_REQUESTED"
+      ? { ...filters, category_id: action.payload > 0 ? action.payload : undefined }
+      : filters,
   );
   yield put(setChannels(response));
 }

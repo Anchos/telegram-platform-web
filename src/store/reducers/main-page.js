@@ -6,6 +6,9 @@ const initialValues = {
     members: [0, 10000],
     cost: [0, 10000],
     likes: [0, 10000],
+    mut_promo: false,
+    verified: false,
+    partner: false,
   },
   channels: {
     items: [],
@@ -43,6 +46,10 @@ const mainPageReducer = (state = initialValues, action) => {
     case "CHANNELS_SET_FILTERS":
       return {
         ...state,
+        channels: {
+          ...state.channels,
+          fetching: true,
+        },
         filters: action.payload,
       };
     case "CATEGORIES_FETCH_START":

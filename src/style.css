@@ -3,6 +3,7 @@
 html {
   height: 100%;
 }
+
 body {
   font-family: var(--font-family);
   height: 100%;
@@ -14,7 +15,6 @@ body {
   min-height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: stretch;
 }

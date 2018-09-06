@@ -2,31 +2,50 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
-import RangeSlider from '../range-slider';
+import RangeSlider from "../range-slider";
 import style from "./style.scss";
 
 const selectOptionsMOCK = [{ label: "option1", value: "1" }, { label: "option2", value: "2" }];
 
 class ChannelFilters extends React.Component {
-  onMembersChange = ({ max, min }) => {
+  onMembersChange = ({ max, min }) =>
     this.props.onFiltersChange({
       ...this.props.filters,
       members: [min, max],
     });
-  };
 
-  onCostChange = ({ max, min }) => {
+  onCostChange = ({ max, min }) =>
     this.props.onFiltersChange({
       ...this.props.filters,
       cost: [min, max],
     });
-  };
+
+  onPartneredChange = ({ target: { checked } }) =>
+    this.props.onFiltersChange({
+      ...this.props.filters,
+      partner: checked,
+    });
+
+  onVerifiedChange = ({ target: { checked } }) =>
+    this.props.onFiltersChange({
+      ...this.props.filters,
+      verified: checked,
+    });
+
+  onMutualPromotionChange = ({ target: { checked } }) =>
+    this.props.onFiltersChange({
+      ...this.props.filters,
+      mut_promo: checked,
+    });
 
   render() {
     const {
       filters: {
         members: [fromMembers, toMembers],
         cost: [fromCost, toCost],
+        partner,
+        verified,
+        mut_promo,
       },
       categoriesEnabled,
     } = this.props;
@@ -53,9 +72,13 @@ class ChannelFilters extends React.Component {
           onChange={this.onCostChange}
         />
         <div className="channel-filters__checkboxes">
-          <Checkbox label="Partners" />
-          <Checkbox label="Verified" />
-          <Checkbox label="Mutual Promotion" />
+          <Checkbox label="Partners" checked={partner} onChange={this.onPartneredChange} />
+          <Checkbox label="Verified" checked={verified} onChange={this.onVerifiedChange} />
+          <Checkbox
+            label="Mutual Promotion"
+            checked={mut_promo}
+            onChange={this.onMutualPromotionChange}
+          />
         </div>
       </div>
     );

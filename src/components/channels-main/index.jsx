@@ -29,7 +29,9 @@ class ChannelsMain extends React.Component {
           onFiltersChange={setChannelsFilters}
         />
         {channelsFetching ? (
-          <Loader centered size="large" />
+          <div className="channels-main__empty">
+            <Loader centered size="large" />
+          </div>
         ) : channels.length > 0 ? (
           <React.Fragment>
             <div className="channels-main__table-header">
