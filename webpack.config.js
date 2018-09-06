@@ -54,5 +54,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false
 }

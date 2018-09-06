@@ -23,9 +23,9 @@ const ChannelCard = ({ photo, title, username, verified, members, likes, cost })
       </div>
       <div className="channel-card__username">{username}</div>
     </div>
-    <span className="channel-card__followers">{numberFormatter(members)}</span>
-    <span className="channel-card__likes">{numberFormatter(likes)}</span>
-    <span className="channel-card__cost">{numberFormatter(cost)}</span>
+    <div className="channel-card__numbers">{numberFormatter(members)}</div>
+    <div className="channel-card__numbers">{numberFormatter(likes)}</div>
+    <div className="channel-card__numbers">{numberFormatter(cost)}</div>
   </div>
 );
 
