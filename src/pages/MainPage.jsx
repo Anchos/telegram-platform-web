@@ -4,9 +4,8 @@ import { withRouter } from "react-router";
 import data from "../data_mocks";
 import { requestChannels, requestCategories, setChannelsFilters } from "../store/action-creators";
 import qs from "query-string";
-import { Banners } from "../ui/newdesign/banners/Banners";
+import ChannelsMain from "../components/channels-main";
 import FeaturedChannels from "../components/featured-channels";
-import Channels from "../ui/newdesign/channels/Channels";
 import Categories from "../components/categories";
 
 class MainPage extends React.Component {
@@ -15,7 +14,7 @@ class MainPage extends React.Component {
   }
 
   handleCategoryChange = categoryId => {
-    this.props.history.push({ search: `?category=${categoryId}` });
+    this.props.history.push({ search: categoryId ? `?category=${categoryId}` : "" });
     this.props.requestChannels(categoryId);
   };
 
@@ -29,13 +28,7 @@ class MainPage extends React.Component {
           currentCategory={currentCategory}
         />
         <FeaturedChannels channels={channels.slice(0, 3)} />
-        <Channels
-          channels={channels}
-          onFiltersChange={setChannelsFilters}
-          filters={filters}
-          maxMembers={20000}
-          maxCost={20000}
-        />
+        <ChannelsMain />
       </React.Fragment>
     );
   }

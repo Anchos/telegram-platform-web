@@ -5,7 +5,7 @@ import SearchOverlay from "../search-overlay";
 import { setSearchStickersFilters } from "../../store/action-creators";
 import StickerCard from "../sticker-card";
 import Loader from "../loader";
-import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
+import RangeSlider from '../range-slider'
 import style from "./style.css";
 
 class StickerSearch extends React.Component {
@@ -38,7 +38,7 @@ class StickerSearch extends React.Component {
       <SearchOverlay open={open}>
         <div className="sticker-search">
           <div className="sticker-search__filters">
-            <NumericFilter
+            <RangeSlider
               label="Number of installs"
               from={fromInstalls}
               to={toInstalls}

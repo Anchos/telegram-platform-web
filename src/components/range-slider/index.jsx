@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-import { Label, Wrapper } from "./styles";
-import "./styles.css";
+import "./styles.scss";
 
-export class NumericFilter extends React.Component {
+class RangeSlider extends React.Component {
   state = {
     min: this.props.from,
     max: this.props.to,
@@ -22,8 +21,8 @@ export class NumericFilter extends React.Component {
   render() {
     const { label, maxValue } = this.props;
     return (
-      <Wrapper>
-        <Label>{label}</Label>
+      <div className="input-range-container">
+        <div className="input-range-container__label">{label}</div>
         <InputRange
           maxValue={maxValue}
           minValue={0}
@@ -31,11 +30,16 @@ export class NumericFilter extends React.Component {
           onChange={this.onRangeChange}
           onChangeComplete={this.completeChange}
         />
-      </Wrapper>
+      </div>
     );
   }
 }
 
-NumericFilter.propTypes = {
+RangeSlider.propTypes = {
   onChange: PropTypes.func,
+  maxValue: PropTypes.number,
+  from: PropTypes.number,
+  to: PropTypes.number,
 };
+
+export default RangeSlider;

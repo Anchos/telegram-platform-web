@@ -5,7 +5,7 @@ import SearchOverlay from "../search-overlay";
 import { setSearchBotsFilters } from "../../store/action-creators";
 import BotCard from "../bot-card";
 import Loader from "../loader";
-import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
+import RangeSlider from '../range-slider';
 import style from "./style.css";
 
 class BotSearch extends React.Component {
@@ -38,7 +38,7 @@ class BotSearch extends React.Component {
       <SearchOverlay open={open}>
         <div className="bot-search">
           <div className="bot-search__filters">
-            <NumericFilter
+            <RangeSlider
               label="Number of installs"
               from={fromInstalls}
               to={toInstalls}
