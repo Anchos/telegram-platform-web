@@ -53,6 +53,7 @@ export class Socket {
     this.openQueue.forEach(callback => callback());
     this.messagesQueue.forEach(message => this.send(message));
     this.messagesQueue.length = [];
+    setInterval(() => this.request({action: 'PING'}), 50000);
   };
 
   handleHandleSocket = event => {
