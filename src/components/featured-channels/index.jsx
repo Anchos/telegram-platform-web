@@ -8,8 +8,13 @@ import "./style.scss";
 const FeaturedChannelCard = ({ title, description, members, likes, cost, photo, username }) => (
   <div className="featured-channel-card">
     <div className="featured-channel-card__header">
-      <div className="featured-channel-card__image">
-        <img src={photo} alt={username} />
+      <div
+        className={classNames(
+          "featured-channel-card__image",
+          !photo && "featured-channel-card__image_empty",
+        )}
+      >
+        {photo && <img src={photo} alt={username} />}
       </div>
       <div className="featured-channel-card__controls">
         <div className="featured-channel-card__stats">
