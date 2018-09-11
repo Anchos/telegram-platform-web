@@ -32,7 +32,7 @@ const boundConnectionInitializer = bindActionCreators(initializeConnection, stor
 socket.onOpen(boundConnectionInitializer);
 
 const boundAuth = bindActionCreators(authorize, store.dispatch);
-socket.subscribe(message => {
+socket.onMessage(message => {
   const { action, ...rest } = message;
   if (action === "AUTH") boundAuth(rest);
 });

@@ -18,6 +18,7 @@
 
   &__channel-link {
     color: #212529;
+    text-decoration: none;
     transition: var(--transition-color);
   }
 
@@ -35,6 +36,7 @@
     overflow: hidden;
     width: 70px;
     height: 70px;
+    box-shadow: var(--shadow-medium);
     border-radius: 1000px;
   }
 

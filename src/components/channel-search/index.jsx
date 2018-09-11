@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
 import SearchOverlay from "../search-overlay";
@@ -35,6 +36,7 @@ class ChannelSearch extends React.Component {
       pageCount,
       filters,
       setSearchChannelsFilters,
+      intl,
     } = this.props;
     return (
       <SearchOverlay open={open}>
@@ -49,10 +51,10 @@ class ChannelSearch extends React.Component {
           ) : channels.length > 0 ? (
             <React.Fragment>
               <div className="channel-search__table-header">
-                <div className="channel-search__name">Name</div>
-                <div className="channel-search__numbers">Followers</div>
-                <div className="channel-search__numbers">Likes</div>
-                <div className="channel-search__numbers">Ads</div>
+                <div className="channel-search__name">{intl.messages["channel.name"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.followers"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.likes"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.cost"]}</div>
               </div>
               {channels.map(channel => (
                 <ChannelCard key={channel.id} {...channel} />
@@ -66,7 +68,7 @@ class ChannelSearch extends React.Component {
               )}
             </React.Fragment>
           ) : (
-            <div className="channel-search__empty">No channels match your search</div>
+            <div className="channel-search__empty">{intl.messages["channels.search.notFound"]}</div>
           )}
         </div>
       </SearchOverlay>
@@ -80,14 +82,17 @@ ChannelSearch.propTypes = {
   channels: PropTypes.array,
   filters: PropTypes.object,
   setSearchChannelsFilters: PropTypes.func,
+  intl: intlShape,
 };
 
-export default connect(
-  state => ({
-    channelsFetching: state.channelSearch.channels.fetching,
-    channels: state.channelSearch.channels.items,
-    pageCount: Math.ceil(state.channelSearch.channels.total / state.channelSearch.filters.count),
-    filters: state.channelSearch.filters,
-  }),
-  { setSearchChannelsFilters },
-)(ChannelSearch);
+export default injectIntl(
+  connect(
+    state => ({
+      channelsFetching: state.channelSearch.channels.fetching,
+      channels: state.channelSearch.channels.items,
+      pageCount: Math.ceil(state.channelSearch.channels.total / state.channelSearch.filters.count),
+      filters: state.channelSearch.filters,
+    }),
+    { setSearchChannelsFilters },
+  )(ChannelSearch),
+);
