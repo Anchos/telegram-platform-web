@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
 import SearchOverlay from "../search-overlay";
@@ -19,10 +20,18 @@ class ChannelsMain extends React.Component {
   };
 
   render() {
-    const { open, channels, channelsFetching, pageCount, filters, setChannelsFilters } = this.props;
+    const {
+      open,
+      channels,
+      channelsFetching,
+      pageCount,
+      filters,
+      setChannelsFilters,
+      intl,
+    } = this.props;
     return (
       <div className="channels-main">
-        <div className="channels-main__header">Channels</div>
+        <div className="channels-main__header">{intl.messages["channels.title"]}</div>
         <ChannelFilters
           categoriesEnabled={false}
           filters={filters}
@@ -35,10 +44,10 @@ class ChannelsMain extends React.Component {
         ) : channels.length > 0 ? (
           <React.Fragment>
             <div className="channels-main__table-header">
-              <div className="channels-main__name">Name</div>
-              <div className="channels-main__numbers">Followers</div>
-              <div className="channels-main__numbers">Likes</div>
-              <div className="channels-main__numbers">Ads</div>
+              <div className="channels-main__name">{intl.messages["channel.name"]}</div>
+              <div className="channels-main__numbers">{intl.messages["channel.followers"]}</div>
+              <div className="channels-main__numbers">{intl.messages["channel.likes"]}</div>
+              <div className="channels-main__numbers">{intl.messages["channel.cost"]}</div>
             </div>
             {channels.map(channel => (
               <ChannelCard key={channel.id} {...channel} />
@@ -52,7 +61,7 @@ class ChannelsMain extends React.Component {
             )}
           </React.Fragment>
         ) : (
-          <div className="channels-main__empty">No channels match your search</div>
+          <div className="channels-main__empty">{intl.messages["channels.search.notFound"]}</div>
         )}
       </div>
     );
@@ -63,14 +72,17 @@ ChannelsMain.propTypes = {
   channels: PropTypes.array,
   filters: PropTypes.object,
   setChannelsFilters: PropTypes.func,
+  intl: intlShape,
 };
 
-export default connect(
-  state => ({
-    channelsFetching: state.main.channels.fetching,
-    channels: state.main.channels.items,
-    pageCount: Math.ceil(state.main.channels.total / state.main.filters.count),
-    filters: state.main.filters,
-  }),
-  { setChannelsFilters },
-)(ChannelsMain);
+export default injectIntl(
+  connect(
+    state => ({
+      channelsFetching: state.main.channels.fetching,
+      channels: state.main.channels.items,
+      pageCount: Math.ceil(state.main.channels.total / state.main.filters.count),
+      filters: state.main.filters,
+    }),
+    { setChannelsFilters },
+  )(ChannelsMain),
+);

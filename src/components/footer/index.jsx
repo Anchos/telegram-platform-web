@@ -1,9 +1,10 @@
 import React from "react";
+import {injectIntl, intlShape} from 'react-intl';
 import {NavLink} from 'react-router-dom';
 import PropTypes from "prop-types";
 import style from "./style.css";
 
-const Footer = () => (
+const Footer = ({intl}) => (
   <div className='app-footer'>
     <div className='app-footer__left'>
       <span className='app-footer__branding'>Biplane</span>
@@ -15,31 +16,35 @@ const Footer = () => (
         activeClassName="app-footer__navigation-link_active"
         to="/landing"
       >
-        Surprise
+        {intl.messages['header.landing']}
       </NavLink>
       <NavLink
         className="app-footer__navigation-link"
         activeClassName="app-footer__navigation-link_active"
         to="/contacts"
       >
-        Contact us
+        {intl.messages['footer.contacts']}
       </NavLink>
       <NavLink
         className="app-footer__navigation-link"
         activeClassName="app-footer__navigation-link_active"
         to="/privacy"
       >
-        Privacy policy
+        {intl.messages['footer.privacy']}
       </NavLink>
       <NavLink
         className="app-footer__navigation-link"
         activeClassName="app-footer__navigation-link_active"
         to="/terms"
       >
-        Terms and conditions
+        {intl.messages['footer.terms']}
       </NavLink>
     </div>
   </div>
 );
 
-export default Footer;
+Footer.propTypes = {
+  intl: intlShape
+};
+
+export default injectIntl(Footer);

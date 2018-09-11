@@ -1,39 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
 import Loader from "../loader";
 import qs from "query-string";
 import classNames from "class-names";
 import PropTypes from "prop-types";
 import style from "./style.scss";
-
-const categories = [
-  { label: "All categories", id: 0 },
-  { label: "Science and Technology", id: 1 },
-  { label: "Telegram", id: 2 },
-  { label: "Cryptocurrencies", id: 3 },
-  { label: "Cars and Motorcycles", id: 4 },
-  { label: "Business and Startups", id: 5 },
-  { label: "Blogging", id: 6 },
-  { label: "18+", id: 7 },
-  { label: "Health and Sport", id: 8 },
-  { label: "Games and Apps", id: 9 },
-  { label: "Pictures and Photos", id: 10 },
-  { label: "Cinema and TV", id: 11 },
-  { label: "Culture and Art", id: 12 },
-  { label: "Fashion and Beauty", id: 13 },
-  { label: "Music", id: 14 },
-  { label: "News and Media", id: 15 },
-  { label: "Education", id: 16 },
-  { label: "Politics", id: 17 },
-  { label: "Tourism", id: 18 },
-  { label: "Work and Career", id: 19 },
-  { label: "Marketing", id: 20 },
-  { label: "Quotes", id: 21 },
-  { label: "Entertainment", id: 22 },
-  { label: "Design", id: 23 },
-  { label: "Food and Cooking", id: 24 },
-  { label: "Other", id: 25 },
-];
 
 class Category extends React.Component {
   shouldComponentUpdate = newProps => newProps.current !== this.props.current;
@@ -65,15 +37,44 @@ Category.propTypes = {
 };
 
 class Categories extends React.Component {
+  categories = [
+    { label: this.props.intl.messages["category.all"], id: 0 },
+    { label: this.props.intl.messages["category.science"], id: 1 },
+    { label: this.props.intl.messages["category.telegram"], id: 2 },
+    { label: this.props.intl.messages["category.crypto"], id: 3 },
+    { label: this.props.intl.messages["category.cars"], id: 4 },
+    { label: this.props.intl.messages["category.business"], id: 5 },
+    { label: this.props.intl.messages["category.blogging"], id: 6 },
+    { label: this.props.intl.messages["category.porn"], id: 7 },
+    { label: this.props.intl.messages["category.health"], id: 8 },
+    { label: this.props.intl.messages["category.games"], id: 9 },
+    { label: this.props.intl.messages["category.pictures"], id: 10 },
+    { label: this.props.intl.messages["category.cinema"], id: 11 },
+    { label: this.props.intl.messages["category.culture"], id: 12 },
+    { label: this.props.intl.messages["category.fashion"], id: 13 },
+    { label: this.props.intl.messages["category.music"], id: 14 },
+    { label: this.props.intl.messages["category.news"], id: 15 },
+    { label: this.props.intl.messages["category.education"], id: 16 },
+    { label: this.props.intl.messages["category.politics"], id: 17 },
+    { label: this.props.intl.messages["category.tourism"], id: 18 },
+    { label: this.props.intl.messages["category.work"], id: 19 },
+    { label: this.props.intl.messages["category.marketing"], id: 20 },
+    { label: this.props.intl.messages["category.quotes"], id: 21 },
+    { label: this.props.intl.messages["category.entertainment"], id: 22 },
+    { label: this.props.intl.messages["category.design"], id: 23 },
+    { label: this.props.intl.messages["category.food"], id: 24 },
+    { label: this.props.intl.messages["category.other"], id: 25 },
+  ];
+
   handleCategoryClick = categoryId => {
     this.props.onCategoryChange(categoryId);
   };
 
   render() {
-    const {currentCategory} = this.props;
+    const { currentCategory } = this.props;
     return (
       <div className="channel-categories">
-        {categories.map(category => (
+        {this.categories.map(category => (
           <Category
             onClick={this.handleCategoryClick}
             current={category.id === currentCategory}
@@ -90,7 +91,8 @@ Categories.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
   onCategoryChange: PropTypes.func,
-  currentCategory: PropTypes.number
+  currentCategory: PropTypes.number,
+  intl: intlShape,
 };
 
-export default Categories;
+export default injectIntl(Categories);

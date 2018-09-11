@@ -48,7 +48,7 @@ class Authorization extends React.Component {
                 ) : (
                   <React.Fragment>
                     <div className="authorization-modal__instruction-point">
-                      1.
+                      1.{" "}
                       <FormattedMessage
                         id="auth-bot-caption"
                         defaultMessage={intl.messages["auth.botAction"]}
@@ -69,7 +69,7 @@ class Authorization extends React.Component {
                       />
                     </div>
                     <div className="authorization-modal__instruction-point">
-                      2.
+                      2.{" "}
                       <FormattedMessage
                         id="auth-bot-start"
                         defaultMessage={intl.messages["auth.pressStart"]}
@@ -77,7 +77,7 @@ class Authorization extends React.Component {
                       />
                     </div>
                     <div className="authorization-modal__instruction-point">
-                      3.
+                      3.{" "}
                       {intl.messages["auth.goBack"]}
                     </div>
                   </React.Fragment>

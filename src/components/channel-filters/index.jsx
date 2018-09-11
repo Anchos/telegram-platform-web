@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
 import RangeSlider from "../range-slider";
@@ -48,34 +49,45 @@ class ChannelFilters extends React.Component {
         mut_promo,
       },
       categoriesEnabled,
+      intl,
     } = this.props;
     return (
       <div className="channel-filters">
         {categoriesEnabled && (
           <div>
-            <span className="channel-filters__title">Category</span>
+            <span className="channel-filters__title">
+              {intl.messages["channels.filters.category"]}
+            </span>
             <Select options={selectOptionsMOCK} />
           </div>
         )}
         <RangeSlider
-          label="Number of subscribers"
+          label={intl.messages["channels.filters.subscribers"]}
           from={fromMembers}
           to={toMembers}
           maxValue={10000}
           onChange={this.onMembersChange}
         />
         <RangeSlider
-          label="Advertising cost"
+          label={intl.messages["channels.filters.cost"]}
           from={fromCost}
           to={toCost}
           maxValue={10000}
           onChange={this.onCostChange}
         />
         <div className="channel-filters__checkboxes">
-          <Checkbox label="Partners" checked={partner} onChange={this.onPartneredChange} />
-          <Checkbox label="Verified" checked={verified} onChange={this.onVerifiedChange} />
           <Checkbox
-            label="Mutual Promotion"
+            label={intl.messages["channels.filters.partnered"]}
+            checked={partner}
+            onChange={this.onPartneredChange}
+          />
+          <Checkbox
+            label={intl.messages["channels.filters.verified"]}
+            checked={verified}
+            onChange={this.onVerifiedChange}
+          />
+          <Checkbox
+            label={intl.messages["channels.filters.mutualPromo"]}
             checked={mut_promo}
             onChange={this.onMutualPromotionChange}
           />
@@ -89,6 +101,7 @@ ChannelFilters.propTypes = {
   filters: PropTypes.object,
   categoriesEnabled: PropTypes.bool,
   onFiltersChange: PropTypes.func,
+  intl: intlShape,
 };
 
-export default ChannelFilters;
+export default injectIntl(ChannelFilters);
