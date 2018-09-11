@@ -1,0 +1,23 @@
+{
+  "locale": "en",
+  "header.channels": "Channels",
+  "header.supergroups": "Supergroups",
+  "header.bots": "Bots",
+  "header.stickers": "Stickers",
+  "header.faq": "FAQ",
+  "header.landing": "Surprise",
+  "header.logout": "Log out",
+  "auth.signIn": "Sign in",
+  "auth.logIn": "Log in",
+  "auth.botAction": "{open} bot in Telegram",
+  "auth.botAction.button": "Open",
+  "auth.pressStart": "Press {start}, wait for response",
+  "auth.pressStart.start": "Start",
+  "auth.goBack": "Go back to Biplane website",
+  "suggest.open": "Suggest",
+  "suggest.title": "Suggest channel",
+  "suggest.addButton": "Add channel",
+  "suggest.success": "Channel successfully added",
+  "suggest.error.notFound": "Channel not found",
+  "suggest.error.default": "Unknown error"
+}

@@ -1,0 +1,23 @@
+{
+  "locale": "ru",
+  "header.channels": "Каналы",
+  "header.supergroups": "Супергруппы",
+  "header.bots": "Боты",
+  "header.stickers": "Стикеры",
+  "header.faq": "FAQ",
+  "header.landing": "Surprise",
+  "header.logout": "Выйти",
+  "auth.signIn": "Вход",
+  "auth.logIn": "Авторизация",
+  "auth.botAction": "{open} бота в Телеграме",
+  "auth.botAction.button": "Откройте",
+  "auth.pressStart": "Нажмите {start}",
+  "auth.pressStart.start": "Start",
+  "auth.goBack": "Возвращайтесь на сайт Biplane",
+  "suggest.open": "Предложить",
+  "suggest.title": "Предложить канал",
+  "suggest.addButton": "Добавить",
+  "suggest.success": "Канал успешно добавлен",
+  "suggest.error.notFound": "Канал не найден",
+  "suggest.error.default": "Неизвестная ошибка"
+}

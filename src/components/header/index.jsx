@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { injectIntl, intlShape } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
 import classNames from "class-names";
 import { Button } from "biplane-uikit";
@@ -23,7 +25,7 @@ class Header extends React.Component {
   clearInput = () => this.setState({ searchValue: "" });
 
   render() {
-    const { photo, username, fetching, requestLogout, location } = this.props;
+    const { photo, username, fetching, requestLogout, location, intl } = this.props;
     const { searchValue } = this.state;
     const currentPage = location.pathname.split("/")[1];
     return (
@@ -41,28 +43,28 @@ class Header extends React.Component {
               to="/"
               exact={true}
             >
-              Channels
+              {intl.messages["header.channels"]}
             </NavLink>
             <NavLink
               className="app-header__navigation-link"
               activeClassName="app-header__navigation-link_active"
               to="/supergroups"
             >
-              Supergroups
+              {intl.messages["header.supergroups"]}
             </NavLink>
             <NavLink
               className="app-header__navigation-link"
               activeClassName="app-header__navigation-link_active"
               to="/bots"
             >
-              Bots
+              {intl.messages["header.bots"]}
             </NavLink>
             <NavLink
               className="app-header__navigation-link"
               activeClassName="app-header__navigation-link_active"
               to="/stickers"
             >
-              Stickers
+              {intl.messages["header.stickers"]}
             </NavLink>
           </div>
           <SuggestModule />
@@ -74,7 +76,7 @@ class Header extends React.Component {
               activeClassName="app-header__navigation-link_active"
               to="/faq"
             >
-              FAQ
+              {intl.messages["header.faq"]}
             </NavLink>
             {fetching ? (
               <div className="app-header__logging-out-spinner">
@@ -82,7 +84,7 @@ class Header extends React.Component {
               </div>
             ) : username ? (
               <React.Fragment>
-                <Dropdown options={[{ label: "Log out", onClick: requestLogout }]}>
+                <Dropdown options={[{ label: intl.messages['header.logout'], onClick: requestLogout }]}>
                   <div className="app-header__user-name">{username}</div>
                 </Dropdown>
                 <div
@@ -97,7 +99,7 @@ class Header extends React.Component {
             ) : (
               <React.Fragment>
                 <div className="app-header__button">
-                  <Button>Surprise</Button>
+                  <Button>{intl.messages["header.landing"]}</Button>
                 </div>
                 <div className="app-header__button">
                   <AuthorizationModule />
@@ -135,15 +137,24 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+  photo: PropTypes.string,
+  username: PropTypes.string,
+  fetching: PropTypes.bool,
+  requestLogout: PropTypes.func,
+  location: PropTypes.object,
+  intl: intlShape,
+};
 
-export default withRouter(
-  connect(
-    state => ({
-      ...state.authorization,
-    }),
-    {
-      requestLogout,
-    },
-  )(Header),
+export default injectIntl(
+  withRouter(
+    connect(
+      state => ({
+        ...state.authorization,
+      }),
+      {
+        requestLogout,
+      },
+    )(Header),
+  ),
 );
