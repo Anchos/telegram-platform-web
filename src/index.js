@@ -1,19 +1,14 @@
 import * as React from "react";
 import { render } from "react-dom";
+import { connect } from "react-redux";
 import { Provider } from "react-redux";
 import { IntlProvider } from "react-intl";
 import { getLocaleMessages } from "./translation/utils";
 import App from "./components/App";
-import store from "./store/store";
+import store, { boundSetStoreLocale } from "./store/store";
 import "./style.css";
 
-let locale = localStorage.getItem("locale");
-
-if (!locale) {
-  locale = "en";
-  localStorage.setItem("locale", locale);
-}
-
+//manually set vh vw trick for mobile devices
 let vh = window.innerHeight * 0.01;
 let vw = window.innerWidth * 0.01;
 
@@ -28,11 +23,26 @@ window.addEventListener("resize", () => {
   document.documentElement.style.setProperty("--vw", `${vw}px`);
 });
 
+//localization
+let storageLocale = localStorage.getItem("locale");
+if (!storageLocale) {
+  storageLocale = "en";
+  localStorage.setItem("locale", storageLocale);
+}
+boundSetStoreLocale(storageLocale);
+
+//intl provider connected to redux to get locale from redux store
+const ConnectedIntlProvider = connect(state => ({ locale: state.configuration.locale }))(
+  ({ locale, ...props }) => (
+    <IntlProvider locale={locale} messages={getLocaleMessages(locale)} {...props} />
+  ),
+);
+
 render(
   <Provider store={store}>
-    <IntlProvider locale={locale} messages={getLocaleMessages(locale)}>
+    <ConnectedIntlProvider>
       <App />
-    </IntlProvider>
+    </ConnectedIntlProvider>
   </Provider>,
   document.getElementById("root"),
 );

@@ -6,3 +6,4 @@ export {default as stickerSearch} from './sticker-search';
 export {default as channelPage} from './channel-page';
 export {default as authorization} from './authorization';
 export {default as channelSuggest} from './channel-suggest';
+export {default as configuration} from './configuration';
