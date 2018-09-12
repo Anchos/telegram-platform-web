@@ -19,12 +19,12 @@
   border-radius: 4px;
   transform: scaleY(1);
   animation: openAnimation 150ms linear;
-  transition: top 150ms linear, transform 150ms linear;
+  transition: max-height 150ms linear;
 }
 
 .bui-dropdown_closing {
   top: 0;
-  transform: scaleY(0);
+  max-height: 0;
 }
 
 .bui-dropdown__option {
@@ -43,6 +43,6 @@
 }
 
 @keyframes openAnimation {
-  from {transform: scaleY(0); top: 0;}
-  to {transform: scaleY(1); top: calc(100% + 5px);}
+  from {max-height: 0}
+  to {max-height: 300px}
 }
