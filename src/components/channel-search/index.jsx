@@ -9,7 +9,7 @@ import Paginator from "../paginator";
 import Loader from "../loader";
 import { setSearchChannelsFilters } from "../../store/action-creators";
 import ChannelFilters from "../channel-filters";
-import style from "./style.css";
+import style from "./style.scss";
 
 class ChannelSearch extends React.Component {
   onPageChange = page => {

@@ -17,7 +17,6 @@
   box-shadow: var(--shadow-medium);
   border: 1px solid var(--gray-border);
   border-radius: 4px;
-  transform: scaleY(1);
   animation: openAnimation 150ms linear;
   transition: max-height 150ms linear;
 }
