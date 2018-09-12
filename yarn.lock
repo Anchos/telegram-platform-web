@@ -1039,9 +1039,9 @@ binary-extensions@^1.0.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.11.0.tgz#46aa1751fb6a2f93ee5e689bb1087d4b14c6c205"
 
-biplane-uikit@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.3.1.tgz#9496ecfaac15c08eb4014db05db976bac3e3d49a"
+biplane-uikit@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/biplane-uikit/-/biplane-uikit-0.3.3.tgz#f86766d4e1adf7ad8e535c301fa3806bc27dcc8a"
   dependencies:
     class-names "^1.0.0"
     prop-types "^15.6.2"

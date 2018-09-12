@@ -1,12 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
-import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
+import { getLocalizedCategories } from "../../static-data/categories";
 import RangeSlider from "../range-slider";
 import style from "./style.scss";
-
-const selectOptionsMOCK = [{ label: "option1", value: "1" }, { label: "option2", value: "2" }];
 
 class ChannelFilters extends React.Component {
   onMembersChange = ({ max, min }) =>
@@ -39,6 +38,12 @@ class ChannelFilters extends React.Component {
       mut_promo: checked,
     });
 
+  onCategoryIdChange = id =>
+    this.props.onFiltersChange({
+      ...this.props.filters,
+      category_id: +id || undefined,
+    });
+
   render() {
     const {
       filters: {
@@ -47,6 +52,7 @@ class ChannelFilters extends React.Component {
         partner,
         verified,
         mut_promo,
+        category_id = 0,
       },
       categoriesEnabled,
       intl,
@@ -58,7 +64,11 @@ class ChannelFilters extends React.Component {
             <span className="channel-filters__title">
               {intl.messages["channels.filters.category"]}
             </span>
-            <Select options={selectOptionsMOCK} />
+            <Select
+              options={getLocalizedCategories(intl)}
+              value={category_id}
+              onChange={this.onCategoryIdChange}
+            />
           </div>
         )}
         <RangeSlider
