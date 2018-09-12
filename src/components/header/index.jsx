@@ -24,7 +24,7 @@ class Header extends React.Component {
 
   onLocaleChange = locale => {
     this.props.setLocale(locale);
-    localStorage.setItem('locale', locale);
+    localStorage.setItem("locale", locale);
   };
 
   onInputChange = e => this.setState({ searchValue: e.target.value });

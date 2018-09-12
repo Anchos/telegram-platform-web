@@ -40,7 +40,7 @@
     "webpack-dev-server": "^3.1.7"
   },
   "dependencies": {
-    "biplane-uikit": "^0.3.1",
+    "biplane-uikit": "^0.3.3",
     "class-names": "^1.0.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",

@@ -12,6 +12,11 @@ import ChannelFilters from "../channel-filters";
 import style from "./style.scss";
 
 class ChannelsMain extends React.Component {
+  componentWillUpdate(newProps) {
+    if (newProps.intl.locale !== this.props.intl.locale)
+      this.props.setChannelsFilters(this.props.filters);
+  }
+
   onPageChange = page => {
     this.props.setChannelsFilters({
       ...this.props.filters,
