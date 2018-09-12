@@ -63,6 +63,17 @@ export const ping = () =>
       ...message.data,
     }));
 
+export const getTags = (name, language) =>
+  socket
+    .request({
+      action: "GET_TAGS",
+      name,
+      language
+    })
+    .then(message => ({
+      ...message.data,
+    }));
+
 export const updateChannel = username =>
   socket
     .request({
