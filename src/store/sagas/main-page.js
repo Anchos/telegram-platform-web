@@ -5,7 +5,11 @@ import { setChannels, setCategories } from "../action-creators";
 
 function* fetchChannels(action) {
   yield delay(1000);
-  const filters = yield select(state => state.main.filters);
+
+  const state = yield select();
+  const language = state.configuration.locale;
+  const filters = {...state.main.filters, language};
+
   const response = yield call(
     getChannels,
     action.type === "CHANNELS_FETCH_REQUESTED"
