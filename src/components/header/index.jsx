@@ -5,8 +5,9 @@ import { withRouter } from "react-router";
 import { injectIntl, intlShape } from "react-intl";
 import { Link, NavLink } from "react-router-dom";
 import classNames from "class-names";
-import { Button } from "biplane-uikit";
-import { requestLogout } from "../../store/action-creators";
+import { Button, Select } from "biplane-uikit";
+import { requestLogout, setLocale } from "../../store/action-creators";
+import { setStorageLocale } from "../../store/store";
 import AuthorizationModule from "../authorization-module";
 import SuggestModule from "../suggest-module";
 import Dropdown from "../dropdown";
@@ -21,11 +22,16 @@ class Header extends React.Component {
     searchValue: "",
   };
 
+  onLocaleChange = locale => {
+    this.props.setLocale(locale);
+    localStorage.setItem('locale', locale);
+  };
+
   onInputChange = e => this.setState({ searchValue: e.target.value });
   clearInput = () => this.setState({ searchValue: "" });
 
   render() {
-    const { photo, username, fetching, requestLogout, location, intl } = this.props;
+    const { photo, username, fetching, requestLogout, location, setLocale, intl } = this.props;
     const { searchValue } = this.state;
     const currentPage = location.pathname.split("/")[1];
     return (
@@ -78,13 +84,22 @@ class Header extends React.Component {
             >
               {intl.messages["header.faq"]}
             </NavLink>
+            <div className="app-header__locale-selector">
+              <Select
+                options={[{ label: "EN", value: "en" }, { label: "RU", value: "ru" }]}
+                value={intl.locale}
+                onChange={this.onLocaleChange}
+              />
+            </div>
             {fetching ? (
               <div className="app-header__logging-out-spinner">
                 <Loader size="small" />
               </div>
             ) : username ? (
               <React.Fragment>
-                <Dropdown options={[{ label: intl.messages['header.logout'], onClick: requestLogout }]}>
+                <Dropdown
+                  options={[{ label: intl.messages["header.logout"], onClick: requestLogout }]}
+                >
                   <div className="app-header__user-name">{username}</div>
                 </Dropdown>
                 <div
@@ -98,9 +113,6 @@ class Header extends React.Component {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <div className="app-header__button">
-                  <Button>{intl.messages["header.landing"]}</Button>
-                </div>
                 <div className="app-header__button">
                   <AuthorizationModule />
                 </div>
@@ -143,6 +155,7 @@ Header.propTypes = {
   fetching: PropTypes.bool,
   requestLogout: PropTypes.func,
   location: PropTypes.object,
+  setLocale: PropTypes.func,
   intl: intlShape,
 };
 
@@ -154,6 +167,7 @@ export default injectIntl(
       }),
       {
         requestLogout,
+        setLocale,
       },
     )(Header),
   ),
