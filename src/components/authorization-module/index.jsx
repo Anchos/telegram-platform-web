@@ -46,9 +46,8 @@ class Authorization extends React.Component {
                     <Loader centered size="xxlarge" />
                   )
                 ) : (
-                  <React.Fragment>
-                    <div className="authorization-modal__instruction-point">
-                      1.{" "}
+                  <ol style={{margin: 0}}>
+                    <li className="authorization-modal__instruction-point">
                       <FormattedMessage
                         id="auth-bot-caption"
                         defaultMessage={intl.messages["auth.botAction"]}
@@ -67,20 +66,18 @@ class Authorization extends React.Component {
                           ),
                         }}
                       />
-                    </div>
-                    <div className="authorization-modal__instruction-point">
-                      2.{" "}
+                    </li>
+                    <li className="authorization-modal__instruction-point">
                       <FormattedMessage
                         id="auth-bot-start"
                         defaultMessage={intl.messages["auth.pressStart"]}
                         values={{ start: <b>{intl.messages["auth.pressStart.start"]}</b> }}
                       />
-                    </div>
-                    <div className="authorization-modal__instruction-point">
-                      3.{" "}
+                    </li>
+                    <li className="authorization-modal__instruction-point">
                       {intl.messages["auth.goBack"]}
-                    </div>
-                  </React.Fragment>
+                    </li>
+                  </ol>
                 )}
               </div>
             </div>
