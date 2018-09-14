@@ -1,19 +1,22 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
-  entry: './src/index.js',
+  mode: process.env.NODE_ENV || "development",
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+    chunkFilename: "[name].js",
+    publicPath: "/",
   },
-  plugins: [new HtmlWebpackPlugin({
-    template: 'index.html'
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html",
+    }),
+  ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     hot: true,
     inline: true,
@@ -25,38 +28,29 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
-        ]
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
       {
-        test: /\.(svg|png|jpg|woff|woff2)$/,
-        use: ['file-loader']
+        test: /\.(svg|png|jpg)$/,
+        use: ["file-loader"],
       },
       {
         test: /\.html$/,
-        use: ['html-loader']
-      }
-    ]
+        use: ["html-loader"],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"],
   },
-  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : false
-}
+  devtool: process.env.NODE_ENV !== "production" ? "source-map" : false,
+};

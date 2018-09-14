@@ -28,7 +28,7 @@ class MainPage extends React.Component {
           currentCategory={currentCategory}
         />
         <FeaturedChannels channels={channels.slice(0, 3)} />
-        <ChannelsMain />
+        <ChannelsMain onFiltersChange={setChannelsFilters}/>
       </React.Fragment>
     );
   }
@@ -46,7 +46,7 @@ export default withRouter(
         requestChannels: category =>
           dispatch(requestChannels(category === undefined ? currentCategory : category)),
         setChannelsFilters: filters =>
-          dispatch(setChannelsFilters({ ...filters, category: currentCategory })),
+          dispatch(setChannelsFilters({ ...filters, category_id: currentCategory || undefined })),
         requestCategories: () => dispatch(requestCategories()),
         currentCategory,
       };
