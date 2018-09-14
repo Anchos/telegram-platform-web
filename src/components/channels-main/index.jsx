@@ -14,11 +14,11 @@ import style from "./style.scss";
 class ChannelsMain extends React.Component {
   componentWillUpdate(newProps) {
     if (newProps.intl.locale !== this.props.intl.locale)
-      this.props.setChannelsFilters(this.props.filters);
+      this.props.onFiltersChange(this.props.filters);
   }
 
   onPageChange = page => {
-    this.props.setChannelsFilters({
+    this.props.onFiltersChange({
       ...this.props.filters,
       offset: page * this.props.filters.count,
     });
@@ -31,7 +31,7 @@ class ChannelsMain extends React.Component {
       channelsFetching,
       pageCount,
       filters,
-      setChannelsFilters,
+      onFiltersChange,
       intl,
     } = this.props;
     return (
@@ -40,7 +40,7 @@ class ChannelsMain extends React.Component {
         <ChannelFilters
           categoriesEnabled={false}
           filters={filters}
-          onFiltersChange={setChannelsFilters}
+          onFiltersChange={onFiltersChange}
         />
         {channelsFetching ? (
           <div className="channels-main__empty">
@@ -76,18 +76,15 @@ class ChannelsMain extends React.Component {
 ChannelsMain.propTypes = {
   channels: PropTypes.array,
   filters: PropTypes.object,
-  setChannelsFilters: PropTypes.func,
+  onFiltersChange: PropTypes.func,
   intl: intlShape,
 };
 
 export default injectIntl(
-  connect(
-    state => ({
-      channelsFetching: state.main.channels.fetching,
-      channels: state.main.channels.items,
-      pageCount: Math.ceil(state.main.channels.total / state.main.filters.count),
-      filters: state.main.filters,
-    }),
-    { setChannelsFilters },
-  )(ChannelsMain),
+  connect(state => ({
+    channelsFetching: state.main.channels.fetching,
+    channels: state.main.channels.items,
+    pageCount: Math.ceil(state.main.channels.total / state.main.filters.count),
+    filters: state.main.filters,
+  }))(ChannelsMain),
 );

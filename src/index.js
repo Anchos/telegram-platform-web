@@ -31,11 +31,53 @@ if (!storageLocale) {
 }
 boundSetStoreLocale(storageLocale);
 
+//loading current locale from webpack chunk
+class LocaleLoader extends React.Component {
+  state = {
+    localeMessages: null,
+    initialLocaleLoaded: false,
+    loadingLocaleError: null,
+    newLocaleLoading: false,
+    fallbackLocale: this.props.locale,
+  };
+
+  async componentDidMount() {
+    try {
+      const localeMessages = await getLocaleMessages(this.props.locale);
+      this.setState({ localeMessages, initialLocaleLoaded: true });
+    } catch (e) {
+      this.setState({ loadingLocaleError: e });
+    }
+  }
+
+  async componentWillUpdate(newProps) {
+    if (newProps.locale !== this.props.locale)
+      try {
+        const localeMessages = await getLocaleMessages(newProps.locale);
+        this.setState({ localeMessages });
+      } catch (e) {
+        this.setState({ loadingLocaleError: e });
+      }
+  }
+
+  render() {
+    const { locale, ...props } = this.props;
+    const { initialLocaleLoaded, localeMessages } = this.state;
+    return (
+      initialLocaleLoaded && (
+        <IntlProvider
+          locale={locale}
+          messages={localeMessages}
+          {...props}
+        />
+      )
+    );
+  }
+}
+
 //intl provider connected to redux to get locale from redux store
 const ConnectedIntlProvider = connect(state => ({ locale: state.configuration.locale }))(
-  ({ locale, ...props }) => (
-    <IntlProvider locale={locale} messages={getLocaleMessages(locale)} {...props} />
-  ),
+  LocaleLoader,
 );
 
 render(
