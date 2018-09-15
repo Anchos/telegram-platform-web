@@ -156,14 +156,14 @@
       &:hover {
         border-color: $gray-cc;
 
-        .channel-page__right-edit-label {
+        .channel-page__right-edit-label--description {
           display: block;
         }
       }
     }
   }
 
-  &__right-edit-label {
+  &__right-edit-label-description, &__right-edit-label-tags {
     display: none;
     position: absolute;
     border-radius: 2px;
@@ -204,13 +204,29 @@
 
     &:focus {
       border-color: $green-15;
+      outline: none;
 
-      ~ .channel-page__right-edit-label {
+      ~ .channel-page__right-edit-label-description {
         border-color: $green-15;
         display: block;
         min-height: 100%;
       }
     }
+  }
+
+  &__tags-container {
+    overflow-y: scroll;
+    width: 100%;
+    max-height: 70px;
+    height: 100%;
+  }
+
+  &__tag-item {
+    background-color: $rgba-green-05;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+    color: $green-15;
   }
 
   &__related-channels-container {

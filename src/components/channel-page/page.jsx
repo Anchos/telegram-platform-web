@@ -11,9 +11,9 @@ import Description from "./description";
 export default class ChannelPage extends React.Component {
 
   componentWillMount() {
-    const { description, tags, category, cost } = this.props;
+    const { description, tags, category, cost, language } = this.props;
     const txt = "Лучшая подборка горящих туров из Украины: - качественные и выгодные пакетные предложения; - скидки, акции на отели и перелеты; - полезные советы опытных турагентов и путешественников. Контакты для связи: @magicrest"
-    this.setState({ description: txt, tags, category, cost, isOwner: true, language: "en" });
+    this.setState({ description: txt, tags, category, cost, isOwner: true, language });
   }
 
   componentDidMount() {
@@ -21,7 +21,7 @@ export default class ChannelPage extends React.Component {
     requestChannel(match.params.username);
   }
 
-  onChange = (value, key) => this.setState({[key]: value })
+  onChange = (value, key) => this.setState({ [key]: value })
 
   renderBody = () => {
     const {
@@ -86,15 +86,18 @@ export default class ChannelPage extends React.Component {
                       onChange={(e) => this.onChange(e.target.value, "cost")}
                     />
                   </div>
-
                   <div className="channel-page__description-language-container">
                     <div className="channel-page__language-category">
                       <Select
-                        options={[{label: "1", value: "1"}]}
+                        options={[{label: "en", value: "en"}]}
                         onChange={value => this.onChange(value, "language")}
-                        value={this.state.value}
+                        // value={this.state.language}
                       />
-                      <span>{category}</span>
+                      <Select
+                        options={[{label: "1", value: "1"}]}
+                        onChange={value => this.onChange(value, "category")}
+                        // value={this.state.language}
+                      />
                     </div>
                     <Description
                       isOwner={this.state.isOwner}
@@ -157,7 +160,7 @@ ChannelPage.propTypes = {
   cost: PropTypes.number,
   category: PropTypes.string,
   description: PropTypes.string,
-  language: PropTypes.string,
+  language: PropTypes.object,
   views: PropTypes.number,
   requestChannel: PropTypes.func,
 };

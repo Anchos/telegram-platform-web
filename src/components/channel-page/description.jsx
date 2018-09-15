@@ -8,7 +8,7 @@ export default class Description extends React.Component {
 
   toggleEdit = () => {
     if (this.props.isOwner) {
-      return this.setState({isEditing: !this.state.isEditing});
+      return this.setState({ isEditing: !this.state.isEditing });
     }
   };
 
@@ -20,7 +20,7 @@ export default class Description extends React.Component {
           value={description}
           onChange={onChange}
           className="channel-page__textarea"
-          onBlur={() => this.setState({ isEditing: false})}
+          onBlur={() => this.setState({ isEditing: false })}
         />
       );
     }
@@ -32,7 +32,7 @@ export default class Description extends React.Component {
     return (
       <div className={cname} onClick={this.toggleEdit}>
         {this.renderDescription()}
-        { this.props.isOwner && <div className="channel-page__right-edit-label" />}
+        {this.props.isOwner && <div className="channel-page__right-edit-label-description" />}
       </div>
     );
   }
