@@ -1,5 +1,20 @@
 .cp-promotion {
-    &__title {
+    @include df(column nowrap);
 
+    &__offer {
+        @include df(column nowrap);
+    }
+
+    &__title {
+        font-size: 20px;
+        color: $black-23;
+    }
+
+    &__premium {
+        @include df(row nowrap);
+    }
+
+    &__premium-option {
+        @include df(column nowrap);
     }
 }
