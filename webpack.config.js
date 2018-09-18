@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = {
+const config = {
   mode: process.env.NODE_ENV || "development",
   entry: "./src/index.js",
   output: {
@@ -13,7 +14,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
-    }),
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),
@@ -54,3 +55,9 @@ module.exports = {
   },
   devtool: process.env.NODE_ENV !== "production" ? "source-map" : false,
 };
+
+if(process.env.ANALYZE_MODE === 'analyze') {
+  config.plugins.push(new BundleAnalyzerPlugin())
+};
+
+module.exports = config;
