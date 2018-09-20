@@ -2,7 +2,9 @@ import * as React from "react";
 import { render } from "react-dom";
 import { connect } from "react-redux";
 import { Provider } from "react-redux";
-import { IntlProvider } from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
+import en from "react-intl/locale-data/en";
+import ru from "react-intl/locale-data/ru";
 import { getLocaleMessages } from "./translation/utils";
 import App from "./components/App";
 import store, { boundSetStoreLocale } from "./store/store";
@@ -24,6 +26,7 @@ window.addEventListener("resize", () => {
 });
 
 //localization
+addLocaleData([...ru, ...en]);
 let storageLocale = localStorage.getItem("locale");
 if (!storageLocale) {
   storageLocale = "en";
