@@ -10,11 +10,9 @@ import Description from "./description";
 import Premium from "./premium";
 
 export default class ChannelPage extends React.Component {
-
   componentWillMount() {
     const { description, tags, category, cost, language } = this.props;
-    const txt = "Лучшая подборка горящих туров из Украины: - качественные и выгодные пакетные предложения; - скидки, акции на отели и перелеты; - полезные советы опытных турагентов и путешественников. Контакты для связи: @magicrest"
-    this.setState({ description: txt, tags, category, cost, isOwner: true, language });
+    this.setState({ description, tags, category, cost, isOwner: true, language });
   }
 
   componentDidMount() {
@@ -26,22 +24,22 @@ export default class ChannelPage extends React.Component {
 
   renderRightBlock = () => {
     if (this.state.isOwner) {
-      return <Premium />
+      return <Premium />;
     }
 
     return (
       <div>
         <div className="channel-page__latest-posts-title">Latest posts</div>
-          <div className="channel-page__latest-posts-cards">
-            <div />
-            <div />
-            <div />
-            <div />
-            {/*todo: latest posts go here, not implemented on backend or frontend yet, could replace with a mock later*/}
-          </div>
+        <div className="channel-page__latest-posts-cards">
+          <div />
+          <div />
+          <div />
+          <div />
+          {/*todo: latest posts go here, not implemented on backend or frontend yet, could replace with a mock later*/}
+        </div>
       </div>
     );
-  }
+  };
 
   renderBody = () => {
     const {
@@ -103,18 +101,18 @@ export default class ChannelPage extends React.Component {
                     <Ads
                       isOwner={this.state.isOwner}
                       cost={cost}
-                      onChange={(e) => this.onChange(e.target.value, "cost")}
+                      onChange={e => this.onChange(e.target.value, "cost")}
                     />
                   </div>
                   <div className="channel-page__description-language-container">
                     <div className="channel-page__language-category">
                       <Select
-                        options={[{label: "en", value: "en"}]}
+                        options={[{ label: "en", value: "en" }]}
                         onChange={value => this.onChange(value, "language")}
                         // value={this.state.language}
                       />
                       <Select
-                        options={[{label: "1", value: "1"}]}
+                        options={[{ label: "1", value: "1" }]}
                         onChange={value => this.onChange(value, "category")}
                         // value={this.state.language}
                       />
@@ -122,7 +120,7 @@ export default class ChannelPage extends React.Component {
                     <Description
                       isOwner={this.state.isOwner}
                       description={description}
-                      onChange={(e) => this.onChange(e.target.value, "description")}
+                      onChange={e => this.onChange(e.target.value, "description")}
                     />
                     {/*todo: channel categories tags go here, these tags are not implemented anywhere yet*/}
                     {/*todo: reserved for social media links (?)*/}
@@ -144,23 +142,22 @@ export default class ChannelPage extends React.Component {
             <div className="channel-page__section-title">Channel Statistics</div>
           </div>
         </div>
-        <div className="channel-page__latest-posts-container">
-          {this.renderRightBlock()}
-        </div>
+        <div className="channel-page__latest-posts-container">{this.renderRightBlock()}</div>
       </div>
     );
-
-  }
+  };
 
   render() {
     const { fetching, error } = this.props;
-    return this.renderBody();
-    // return fetching ? (
-    //   <Loader centered />
-    // ) : error ? (
-    //   <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
-    // ) : this.renderBody();
+    return fetching ? (
+      <Loader centered />
+    ) : error ? (
+      <Error text={`Can't find channel with username ${this.props.match.params.username}`} />
+    ) : (
+      this.renderBody()
+    );
   }
+  z;
 }
 
 ChannelPage.propTypes = {
