@@ -7,7 +7,6 @@ import Loader from "../loader";
 import Error from "../error";
 import Ads from "./ads";
 import Description from "./description";
-import Premium from "./premium";
 
 export default class ChannelPage extends React.Component {
   componentWillMount() {
@@ -21,25 +20,6 @@ export default class ChannelPage extends React.Component {
   }
 
   onChange = (value, key) => this.setState({ [key]: value });
-
-  renderRightBlock = () => {
-    if (this.state.isOwner) {
-      return <Premium />;
-    }
-
-    return (
-      <div>
-        <div className="channel-page__latest-posts-title">Latest posts</div>
-        <div className="channel-page__latest-posts-cards">
-          <div />
-          <div />
-          <div />
-          <div />
-          {/*todo: latest posts go here, not implemented on backend or frontend yet, could replace with a mock later*/}
-        </div>
-      </div>
-    );
-  };
 
   renderBody = () => {
     const {
@@ -141,8 +121,19 @@ export default class ChannelPage extends React.Component {
           <div className="channel-page__statistics-section">
             <div className="channel-page__section-title">Channel Statistics</div>
           </div>
+        </div>ß
+        <div className="channel-page__latest-posts-container">
+          <div>
+            <div className="channel-page__latest-posts-title">Latest posts</div>
+            <div className="channel-page__latest-posts-cards">
+              <div />
+              <div />
+              <div />
+              <div />
+              {/*todo: latest posts go here, not implemented on backend or frontend yet, could replace with a mock later*/}
+            </div>
+          </div>
         </div>
-        <div className="channel-page__latest-posts-container">{this.renderRightBlock()}</div>
       </div>
     );
   };
