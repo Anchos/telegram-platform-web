@@ -22,6 +22,7 @@
 .paginator__input {
   border: 1px solid var(--gray-border);
   border-radius: 3px;
+  font-size: 18px;
   width: 59px;
   height: 40px;
   padding: 6px;

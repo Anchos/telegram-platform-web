@@ -1,0 +1,37 @@
+@import '~biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/variables.css';
+
+.channel-categories {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding: 7px 100px;
+  margin-bottom: 35px;
+  box-shadow: 0 4px 2px -2px var(--gray-shadow);
+
+  &__category {
+    padding: 9px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--gray-border);
+    transition: var(--transition-color);
+    user-select: none;
+
+    &_current {
+      color: var(--black-text);
+    }
+
+    &:hover {
+      color: var(--gray-dark);
+    }
+  }
+
+  &__loader-container {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+}

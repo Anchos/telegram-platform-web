@@ -1,34 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
-import { NumericFilter } from "../../ui/newdesign/numericFilter/NumericFilter";
 import SearchOverlay from "../search-overlay";
 import ChannelCard from "../channel-card";
 import Paginator from "../paginator";
 import Loader from "../loader";
 import { setSearchChannelsFilters } from "../../store/action-creators";
-import style from "./style.css";
-
-const selectOptionsMOCK = [{ label: "option1", value: "1" }, { label: "option2", value: "2" }];
+import ChannelFilters from "../channel-filters";
+import style from "./style.scss";
 
 class ChannelSearch extends React.Component {
-  onMembersChange = ({ max, min }) => {
-    this.props.setSearchChannelsFilters({
-      ...this.props.filters,
-      title: this.props.searchQuery,
-      members: [min, max],
-    });
-  };
-
-  onCostChange = ({ max, min }) => {
-    this.props.setSearchChannelsFilters({
-      ...this.props.filters,
-      title: this.props.searchQuery,
-      cost: [min, max],
-    });
-  };
-
   onPageChange = page => {
     this.props.setSearchChannelsFilters({
       ...this.props.filters,
@@ -51,62 +34,41 @@ class ChannelSearch extends React.Component {
       channels,
       channelsFetching,
       pageCount,
-      filters: {
-        members: [fromMembers, toMembers],
-        cost: [fromCost, toCost],
-        offset,
-        count,
-      },
+      filters,
+      setSearchChannelsFilters,
+      intl,
     } = this.props;
     return (
       <SearchOverlay open={open}>
         <div className="channel-search">
-          <div className="channel-search__filters">
-            <div>
-              <span className="channel-search__filter-title">Category</span>
-              <Select options={selectOptionsMOCK} />
-            </div>
-            <NumericFilter
-              label="Number of subscribers"
-              from={fromMembers}
-              to={toMembers}
-              maxValue={10000}
-              onChange={this.onMembersChange}
-            />
-            <NumericFilter
-              label="Advertising cost"
-              from={fromCost}
-              to={toCost}
-              maxValue={10000}
-              onChange={this.onCostChange}
-            />
-            <div className="channel-search__checkboxes">
-              <Checkbox label="Partners" />
-              <Checkbox label="Verified" />
-              <Checkbox label="Mutual Promotion" />
-            </div>
-          </div>
+          <ChannelFilters
+            categoriesEnabled={true}
+            filters={filters}
+            onFiltersChange={setSearchChannelsFilters}
+          />
           {channelsFetching ? (
             <Loader centered size="large" />
           ) : channels.length > 0 ? (
             <React.Fragment>
               <div className="channel-search__table-header">
-                <div className="channel-search__name">Name</div>
-                <div className="channel-search__followers">Followers</div>
-                <div className="channel-search__likes">Likes</div>
-                <div className="channel-search__cost">Ads</div>
+                <div className="channel-search__name">{intl.messages["channel.name"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.followers"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.likes"]}</div>
+                <div className="channel-search__numbers">{intl.messages["channel.cost"]}</div>
               </div>
-              {channels.map(channel => <ChannelCard key={channel.id} {...channel} />)}
+              {channels.map(channel => (
+                <ChannelCard key={channel.id} {...channel} />
+              ))}
               {pageCount > 1 && (
                 <Paginator
                   pageCount={pageCount}
-                  currentPage={offset / count}
+                  currentPage={filters.offset / filters.count}
                   onChange={this.onPageChange}
                 />
               )}
             </React.Fragment>
           ) : (
-            <div className="channel-search__empty">No channels match your search</div>
+            <div className="channel-search__empty">{intl.messages["channels.search.notFound"]}</div>
           )}
         </div>
       </SearchOverlay>
@@ -120,14 +82,17 @@ ChannelSearch.propTypes = {
   channels: PropTypes.array,
   filters: PropTypes.object,
   setSearchChannelsFilters: PropTypes.func,
+  intl: intlShape,
 };
 
-export default connect(
-  state => ({
-    channelsFetching: state.channelSearch.channels.fetching,
-    channels: state.channelSearch.channels.items,
-    pageCount: Math.ceil(state.channelSearch.channels.total / state.channelSearch.filters.count),
-    filters: state.channelSearch.filters,
-  }),
-  { setSearchChannelsFilters },
-)(ChannelSearch);
+export default injectIntl(
+  connect(
+    state => ({
+      channelsFetching: state.channelSearch.channels.fetching,
+      channels: state.channelSearch.channels.items,
+      pageCount: Math.ceil(state.channelSearch.channels.total / state.channelSearch.filters.count),
+      filters: state.channelSearch.filters,
+    }),
+    { setSearchChannelsFilters },
+  )(ChannelSearch),
+);

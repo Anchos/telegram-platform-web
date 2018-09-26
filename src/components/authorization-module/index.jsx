@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { injectIntl, intlShape, FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import classNames from "class-names";
 import { Button, Modal } from "biplane-uikit";
@@ -20,22 +21,21 @@ class Authorization extends React.Component {
   componentWillUpdate(newProps) {
     if (newProps.isAuthorizedYet === true && this.props.isAuthorizedYet === false) {
       this.setState({ authorizeConfirmed: true });
-      setTimeout(() => this.setState({ modalOpen: false }), 3000);
     }
   }
 
   render() {
-    const { connection_id } = this.props;
+    const { connection_id, intl } = this.props;
     const { modalOpen, clickedBotPage, authorizeConfirmed } = this.state;
     return (
       <React.Fragment>
         <Button appearance="secondary" onClick={this.openModal}>
-          Sign in
+          {intl.messages["auth.signIn"]}
         </Button>
         {modalOpen && (
           <Modal onClose={this.closeModal} size="medium">
             <div className="authorization-modal">
-              <div className="authorization-modal__header">Log In</div>
+              <div className="authorization-modal__header">{intl.messages["auth.logIn"]}</div>
               <div className="authorization-modal__instructions">
                 {clickedBotPage ? (
                   authorizeConfirmed ? (
@@ -46,28 +46,38 @@ class Authorization extends React.Component {
                     <Loader centered size="xxlarge" />
                   )
                 ) : (
-                  <React.Fragment>
-                    <div className="authorization-modal__instruction-point">
-                      1.
-                      <span className="authorization-modal__open-button-container">
-                        <Button
-                          onClick={() => {
-                            this.setState({ clickedBotPage: true });
-                            window.open(`https://t.me/medev_bot?start=${connection_id}`);
-                          }}
-                        >
-                          Open
-                        </Button>
-                      </span>
-                      bot in Telegram
-                    </div>
-                    <div className="authorization-modal__instruction-point">
-                      2. Press <b>Start</b>, wait for response
-                    </div>
-                    <div className="authorization-modal__instruction-point">
-                      3. Go back to Biplane website
-                    </div>
-                  </React.Fragment>
+                  <ol style={{margin: 0}}>
+                    <li className="authorization-modal__instruction-point">
+                      <FormattedMessage
+                        id="auth-bot-caption"
+                        defaultMessage={intl.messages["auth.botAction"]}
+                        values={{
+                          open: (
+                            <span className="authorization-modal__open-button-container">
+                              <Button
+                                onClick={() => {
+                                  this.setState({ clickedBotPage: true });
+                                  window.open(`https://t.me/medev_bot?start=${connection_id}`);
+                                }}
+                              >
+                                {intl.messages["auth.botAction.button"]}
+                              </Button>
+                            </span>
+                          ),
+                        }}
+                      />
+                    </li>
+                    <li className="authorization-modal__instruction-point">
+                      <FormattedMessage
+                        id="auth-bot-start"
+                        defaultMessage={intl.messages["auth.pressStart"]}
+                        values={{ start: <b>{intl.messages["auth.pressStart.start"]}</b> }}
+                      />
+                    </li>
+                    <li className="authorization-modal__instruction-point">
+                      {intl.messages["auth.goBack"]}
+                    </li>
+                  </ol>
                 )}
               </div>
             </div>
@@ -81,9 +91,12 @@ class Authorization extends React.Component {
 Authorization.propTypes = {
   isAuthorizedYet: PropTypes.bool,
   connection_id: PropTypes.string,
+  intl: intlShape,
 };
 
-export default connect(state => ({
-  isAuthorizedYet: !!state.authorization.user_id,
-  connection_id: state.connection.connection_id,
-}))(Authorization);
+export default injectIntl(
+  connect(state => ({
+    isAuthorizedYet: !!state.authorization.user_id,
+    connection_id: state.connection.connection_id,
+  }))(Authorization),
+);

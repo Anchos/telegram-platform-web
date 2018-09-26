@@ -1,7 +1,6 @@
 .authorization-modal {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .authorization-modal__header {
@@ -20,7 +19,7 @@
 }
 
 .authorization-modal__open-button-container {
-  margin: 0 8px;
+  margin: 0 5px;
 }
 
 .authorization-modal__success-image-container {

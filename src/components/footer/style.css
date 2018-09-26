@@ -1,6 +1,7 @@
 @import '~biplane-uikit/lib/colors.css';
 
 .app-footer {
+  flex-shrink: 0;
   margin-top: 10px;
   display: flex;
   justify-content: space-between;

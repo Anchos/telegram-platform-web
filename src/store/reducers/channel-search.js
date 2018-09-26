@@ -7,6 +7,9 @@ const initialValues = {
     members: [0, 10000],
     cost: [0, 10000],
     likes: [0, 10000],
+    mut_promo: false,
+    verified: false,
+    partner: false
   },
   channels: {
     items: [],

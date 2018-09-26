@@ -1,70 +1,57 @@
-const LSPrevMessageId = "prevMessageId";
+const localStorageMessageKey = "socket:lastMessageId";
 
 function getNextMessageId() {
-  if (!localStorage.getItem(LSPrevMessageId)) {
-    localStorage.setItem(LSPrevMessageId, 0);
+  if (!localStorage.getItem(localStorageMessageKey)) {
+    localStorage.setItem(localStorageMessageKey, 0);
+    return 0;
   }
 
-  const prevId = parseInt(localStorage.getItem(LSPrevMessageId), 10);
-  const nextId = prevId > 1000 ? 0 : prevId + 1;
+  const prevId = parseInt(localStorage.getItem(localStorageMessageKey), 10);
+  const nextId = prevId < 1000 ? prevId + 1 : 0;
 
-  localStorage.setItem(LSPrevMessageId, nextId);
+  localStorage.setItem(localStorageMessageKey, nextId);
 
-  return prevId;
+  return nextId;
 }
 
 export class Socket {
+  //messages sent before the socket was opened
   messagesQueue = [];
-  openQueue = [];
-  continuations = new Map();
-  subscribers = new Set();
+  //map that matches sent messages with received using their ids
+  unansweredMessages = new Map();
+  //socket's "onmessage" subscribers
+  onMessageSubscribers = new Set();
+  //socket's "onopen" subscribers
+  onOpenSubscribers = [];
+  //host set in constructor
   socketHost = "";
 
-  constructor(SOCKET_HOST) {
-    this.socketHost = SOCKET_HOST;
-    this.socket = new WebSocket(SOCKET_HOST);
-    this.socket.onopen = this.handleOpenSocket;
-    this.socket.onmessage = this.handleHandleSocket;
+  //how often should client ping server to avoid idle socket timeout
+  pingInterval = 50000;
+  //how often socket should try to reconnect
+  connectionThrottlingTimeout = 10000;
+  throttlingConnection = false;
+  connectionQueue = false;
+
+  constructor(socketHost) {
+    this.socketHost = socketHost;
   }
 
   connect = () => {
-    return new Promise((resolve, reject) => {
-      this.socket = new WebSocket(this.socketHost);
-      this.socket.onmessage = this.handleHandleSocket;
-      this.socket.onopen = this.handleOpenSocket;
-      this.socket.onerror = reject;
-    });
-  };
+    if (this.throttlingConnection) return (this.connectionQueue = true);
 
-  onOpen = callback => {
-    this.openQueue.push(callback);
-  };
+    this.throttlingConnection = true;
+    this.connectionQueue = false;
 
-  handleOpenSocket = () => {
-    this.openQueue.forEach(callback => callback());
-    this.messagesQueue.forEach(message => this.send(message));
-  };
+    this.socket = new WebSocket(this.socketHost);
+    this.socket.onmessage = this.__handleIncomingMessage;
+    this.socket.onopen = this.__handleOpenSocket;
+    this.socket.onclose = this.connect;
 
-  handleHandleSocket = event => {
-    const message = JSON.parse(event.data);
-
-    if (this.continuations.has(message.id)) {
-      if (message.code) this.continuations.get(message.id).reject(message);
-      else this.continuations.get(message.id).resolve(message);
-      this.continuations.delete(message.id);
-    }
-
-    for (const subscriber of this.subscribers) {
-      subscriber(message);
-    }
-  };
-
-  send = message => {
-    if (this.isOpen) {
-      this.socket.send(JSON.stringify(message));
-    } else {
-      this.messagesQueue.push(message);
-    }
+    setTimeout(() => {
+      this.throttlingConnection = false;
+      if (this.connectionQueue) this.connect();
+    }, this.connectionThrottlingTimeout);
   };
 
   request = data => {
@@ -72,34 +59,59 @@ export class Socket {
     const message = { ...data, id: messageId };
 
     return new Promise((resolve, reject) => {
-      this.send(message);
-      this.continuations.set(messageId, { reject, resolve });
+      this.__send(message);
+      this.unansweredMessages.set(messageId, { reject, resolve });
     });
   };
 
-  subscribe = subscriber => {
-    this.subscribers.add(subscriber);
+  close = () => {
+    this.messagesQueue.length = 0;
+    this.unansweredMessages.clear();
+    this.socket.close();
+  };
+
+  onOpen = callback => {
+    this.onOpenSubscribers.push(callback);
+  };
+
+  onMessage = subscriber => {
+    this.onMessageSubscribers.add(subscriber);
   };
 
   unsubscribe = subscriber => {
-    this.subscribers.delete(subscriber);
+    this.onMessageSubscribers.delete(subscriber);
   };
 
-  once = isValid =>
-    new Promise(resolve => {
-      const handler = message => {
-        if (isValid(message)) {
-          resolve(message);
-          this.unsubscribe(handler);
-        }
-      };
-
-      this.subscribe(handler);
-    });
-
-  close = () => this.socket.close();
-
   get isOpen() {
-    return this.socket.readyState === this.socket.OPEN;
+    return this.socket.readyState === 1;
   }
+
+  __handleOpenSocket = () => {
+    this.onOpenSubscribers.forEach(callback => callback());
+    this.messagesQueue.forEach(message => this.request(message));
+    this.messagesQueue.length = [];
+    setInterval(() => this.request({ action: "PING" }), this.pingInterval);
+  };
+
+  __handleIncomingMessage = event => {
+    const message = JSON.parse(event.data);
+
+    if (message.id !== undefined && this.unansweredMessages.has(message.id)) {
+      if (message.code) this.unansweredMessages.get(message.id).reject(message);
+      else this.unansweredMessages.get(message.id).resolve(message);
+      this.unansweredMessages.delete(message.id);
+    }
+
+    for (const subscriber of this.onMessageSubscribers) {
+      subscriber(message);
+    }
+  };
+
+  __send = message => {
+    if (this.isOpen) {
+      this.socket.send(JSON.stringify(message));
+    } else {
+      this.messagesQueue.push(message);
+    }
+  };
 }

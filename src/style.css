@@ -1,2 +1,24 @@
 @import '~biplane-uikit/lib/variables.css';
 @import '/style/all.scss';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  height: 100%;
+  min-width: 1265px;
+  max-width: 2000px;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}

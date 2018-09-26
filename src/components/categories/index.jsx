@@ -1,46 +1,20 @@
 import React from "react";
-import { withRouter } from "react-router";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { injectIntl, intlShape } from "react-intl";
+import Loader from "../loader";
 import qs from "query-string";
 import classNames from "class-names";
-import PropTypes from "prop-types";
-import style from "./style.css";
-
-const categories = [
-  { label: "All categories", address: "" },
-  { label: "Science and Technology", address: "science" },
-  { label: "Telegram", address: "telegram" },
-  { label: "Work and Career", address: "career" },
-  { label: "Pictures and Photos", address: "photos" },
-  { label: "Cryptocurrencies", address: "crypto" },
-  { label: "Cinema and TV", address: "cinema" },
-  { label: "18+", address: "pron" },
-  { label: "Marketing", address: "marketing" },
-  { label: "Entertainment", address: "entertainment" },
-  { label: "Culture and Art", address: "culture" },
-  { label: "Blogging", address: "blogging" },
-  { label: "Games and Apps", address: "games" },
-  { label: "News and Media", address: "news" },
-  { label: "Tourism", address: "tourism" },
-  { label: "Politics", address: "politics" },
-  { label: "Design", address: "design" },
-  { label: "Fashion and Beauty", address: "fashion" },
-  { label: "Health and Sport", address: "health" },
-  { label: "Music", address: "music" },
-  { label: "Business and Startups", address: "business" },
-  { label: "Food and Cooking", address: "food" },
-  { label: "Cars and Motorcycles", address: "cars" },
-  { label: "Other", address: "other" },
-];
+import { getLocalizedCategories } from "../../static-data/categories";
+import style from "./style.scss";
 
 class Category extends React.Component {
-  shouldComponentUpdate = newProps => newProps.current !== this.props.current;
-
   handleClick = () => {
-    this.props.onClick(this.props.address);
+    this.props.onClick(this.props.value);
   };
 
   render() {
-    const { label, address, current } = this.props;
+    const { label, current } = this.props;
     return (
       <div
         onClick={this.handleClick}
@@ -62,22 +36,26 @@ Category.propTypes = {
 };
 
 class Categories extends React.Component {
-  shouldComponentUpdate = newProps => newProps.location.search !== this.props.location.props;
+  categories = getLocalizedCategories(this.props.intl);
 
-  handleCategoryClick = address => {
-    this.props.history.push({ search: `?category=${address}` });
+  componentWillUpdate(newProps) {
+    if (newProps.intl.messages !== this.props.messages)
+      this.categories = getLocalizedCategories(newProps.intl);
+  }
+
+  handleCategoryClick = categoryId => {
+    this.props.onCategoryChange(categoryId);
   };
 
   render() {
-    console.log(qs.parse(this.props.location.search));
-    const currentAddress = qs.parse(this.props.location.search).category || "";
+    const { currentCategory } = this.props;
     return (
       <div className="channel-categories">
-        {categories.map(category => (
+        {this.categories.map(category => (
           <Category
             onClick={this.handleCategoryClick}
-            current={category.address === currentAddress}
-            key={category.address}
+            current={category.value === currentCategory}
+            key={category.value}
             {...category}
           />
         ))}
@@ -89,6 +67,9 @@ class Categories extends React.Component {
 Categories.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
+  onCategoryChange: PropTypes.func,
+  currentCategory: PropTypes.number,
+  intl: intlShape,
 };
 
-export default withRouter(Categories);
+export default injectIntl(Categories);

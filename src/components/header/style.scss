@@ -33,7 +33,7 @@
     &-link {
       color: black;
       font-size: 20px;
-      margin-right: 16px;
+      margin: 0 8px;
       text-decoration: none;
 
       transition: var(--transition-color);
@@ -48,6 +48,10 @@
         text-decoration: none;
       }
     }
+  }
+
+  &__locale-selector {
+    margin: 0 8px;
   }
 
   &__login {

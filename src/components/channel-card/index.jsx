@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "class-names";
+import { Link } from "react-router-dom";
 import { numberFormatter } from "biplane-uikit";
-import style from "./style.css";
+import style from "./style.scss";
 
 const ChannelCard = ({ photo, title, username, verified, members, likes, cost }) => (
   <div className="channel-card">
@@ -16,16 +17,18 @@ const ChannelCard = ({ photo, title, username, verified, members, likes, cost })
       {photo && <img src={photo} className="channel-card__image" />}
     </div>
     <div className="channel-card__name-info">
-      <div
-        className={classNames("channel-card__title", verified && "channel-card__title_verified")}
-      >
-        {title}
-      </div>
-      <div className="channel-card__username">{username}</div>
+      <Link to={`/channels/${username}`} className="channel-card__channel-link">
+        <div
+          className={classNames("channel-card__title", verified && "channel-card__title_verified")}
+        >
+          {title}
+        </div>
+        <div className="channel-card__username">{username}</div>
+      </Link>
     </div>
-    <span className="channel-card__followers">{numberFormatter(members)}</span>
-    <span className="channel-card__likes">{numberFormatter(likes)}</span>
-    <span className="channel-card__cost">{numberFormatter(cost)}</span>
+    <div className="channel-card__numbers">{numberFormatter(members)}</div>
+    <div className="channel-card__numbers">{numberFormatter(likes)}</div>
+    <div className="channel-card__numbers">{numberFormatter(cost)}</div>
   </div>
 );
 

@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, bindActionCreators } fro
 import createSagaMiddleware from "redux-saga";
 import reduxLogger from "redux-logger";
 import { all } from "redux-saga/effects";
-import { initializeConnection, authorize } from "./action-creators";
+import { initializeConnection, authorize, setLocale } from "./action-creators";
 import { socket } from "./backend";
 import * as sagas from "./sagas";
 import * as reducers from "./reducers";
@@ -23,7 +23,8 @@ const store = createStore(
     stickerSearch: reducers.stickerSearch,
     channelPage: reducers.channelPage,
     authorization: reducers.authorization,
-    channelSuggest: reducers.channelSuggest
+    channelSuggest: reducers.channelSuggest,
+    configuration: reducers.configuration,
   }),
   applyMiddleware(...middlewares),
 );
@@ -32,10 +33,12 @@ const boundConnectionInitializer = bindActionCreators(initializeConnection, stor
 socket.onOpen(boundConnectionInitializer);
 
 const boundAuth = bindActionCreators(authorize, store.dispatch);
-socket.subscribe(message => {
+socket.onMessage(message => {
   const { action, ...rest } = message;
   if (action === "AUTH") boundAuth(rest);
 });
+
+export const boundSetStoreLocale = bindActionCreators(setLocale, store.dispatch);
 
 saga.run(function*() {
   yield all([
@@ -47,7 +50,7 @@ saga.run(function*() {
     sagas.channelPage(),
     sagas.logout(),
     sagas.channelSuggest(),
-    sagas.channelVerify()
+    sagas.channelVerify(),
   ]);
 });
 export default store;

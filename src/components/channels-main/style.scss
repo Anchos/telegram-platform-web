@@ -1,0 +1,43 @@
+.channels-main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 100px 5px;
+  height: 100%;
+
+  &__header {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  &__empty {
+    min-height: 350px;
+    font-size: 25px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__checkboxes > label + label {
+    margin-left: 20px;
+  }
+
+  &__table-header {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    margin-left: 140px;
+    padding-left: 16px;
+    width: 60%;
+  }
+
+  &__numbers {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
