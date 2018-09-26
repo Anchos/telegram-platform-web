@@ -1,0 +1,282 @@
+@import "../../style/all.scss";
+@import "style/all.scss";
+
+.channel-page {
+  @include df(column nowrap);
+
+  &__container {
+    font-family: var(--font-family);
+    @include df(row nowrap, baseline, center);
+    padding-top: 40px;
+  }
+
+  &__channel-section, &__channel-info {
+    @include df();
+  }
+
+  &__channel-card {
+    @include df(column nowrap, center);
+    margin-right: 64px;
+  }
+
+  &__channel-verification {
+    line-height: 20px;
+    max-width: 260px;
+    min-height: 20px;
+    @include df(column nowrap, center, center);
+  }
+
+  &__channel-verification-error {
+    font-size: 12px;
+    color: $red-ff;
+    font-weight: bold;
+  }
+
+  &__channel-verification-confirmed {
+    font-size: 12px;
+    color: var(--green-primary);
+    font-weight: bold;
+  }
+
+  &__channel-icon-container {
+    overflow: hidden;
+    @include df(row nowrap, center, center);
+    flex-shrink: 0;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  &__channel-icon-container > img {
+    width: 100%;
+    height: auto;
+  }
+
+  &__channel-card-description {
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  &__channel-text-info {
+    @include df(column nowrap)
+  }
+
+  &__title {
+    overflow: hidden;
+    line-height: 89px;
+    max-height: 89px;
+    max-width: 647px;
+    margin-bottom: 24px;
+    white-space: nowrap;
+    font-size: 59px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+  }
+
+  &__title-verified {
+
+    &::after {
+      display: inline-block;
+      content: ' ';
+      width: 25px;
+      height: 16px;
+      border-bottom: 5px solid $black;
+      border-left: 5px solid $black;
+      transform: rotate(-45deg);
+      margin-left: 16px;
+      margin-bottom: 15px;
+      border-radius: 2px;
+    }
+  }
+
+  &__channel-extended-info {
+    @include df();
+  }
+
+  &__numbers {
+    @include df(column nowrap);
+    margin-right: 32px;
+  }
+
+  &__single-number-label--with-edit {
+    @include df(row nowrap)
+  }
+
+  &__single-number-label {
+    font-size: 16px;
+  }
+
+  &__single-number-value {
+    margin-bottom: 16px;
+    font-size: 25px;
+    font-weight: bold;
+
+    &--active {
+      max-width: 71px;
+      width: 100%;
+      border-radius: 3px;
+      background-color: $white;
+      border: solid 1px $green-15;
+      font-size: 20px;
+      color: $black-23;
+      outline: none;
+    }
+  }
+
+  &__edit-btn {
+    font-size: 14px;
+    color: $blue-00;
+    text-decoration: underline;
+    margin-left: 4px;
+    cursor: pointer;
+    max-width: 59px;
+    width: 100%;
+  }
+
+  &__description-language-container {
+    @include df(column nowrap)
+  }
+
+  &__language-category > span {
+    margin-right: 24px;
+  }
+
+  &__description {
+    font-size: 18px;
+    max-width: 540px;
+    position: relative;
+    outline: none;
+
+    &--isowner {
+      height: 100%;
+      @include df(row nowrap, center, center);
+      border-radius: 2px;
+      border: solid 1px $white;
+
+      &:hover {
+        border-color: $gray-cc;
+
+        .channel-page__right-edit-label--description {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__right-edit-label-description, &__right-edit-label-tags {
+    display: none;
+    position: absolute;
+    border-radius: 2px;
+    border: solid 1px $gray-cc;
+    max-width: 27px;
+    min-height: 127px;
+    width: 100%;
+    right: -27px;
+    min-height: 101%;
+    background-color: $gray-f5;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 6px;
+      top: 4px;
+      width: 13px;
+      height: 13px;
+      background-image: url("../../images/icon-button-edit.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &__textarea {
+    font-size: 18px;
+    border: 1px solid $white;
+    border-radius: 2px;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    height: 100vh;
+    width: 100vh;
+    max-width: 540px;
+    max-height: 127px;
+    padding: 3px 4px;
+    border-right: none;
+
+    &:focus {
+      border-color: $green-15;
+      outline: none;
+
+      ~ .channel-page__right-edit-label-description {
+        border-color: $green-15;
+        display: block;
+        min-height: 100%;
+      }
+    }
+  }
+
+  &__tags-container {
+    overflow-y: scroll;
+    width: 100%;
+    max-height: 70px;
+    height: 100%;
+  }
+
+  &__tag-item {
+    background-color: $rgba-green-05;
+    border-radius: 3px;
+    font-size: 15px;
+    text-align: center;
+    color: $green-15;
+  }
+
+  &__related-channels-container {
+    margin-top: 108px;
+    @include df(column nowrap);
+  }
+
+  &__section-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  &__related-channels-cards {
+    @include df(row nowrap, center, space-between);
+    margin-bottom: 60px;
+  }
+
+  &__related-channels-cards > div {
+    width: 30%;
+    height: 104px;
+    background-color: $gray-ed;
+    box-shadow: var(--shadow-medium);
+  }
+
+  &__latest-posts-container {
+    @include df(column nowrap);
+    max-height: 400px;
+    margin-top: 112px;
+    padding-left: 32px;
+    margin-left: 32px;
+    border-left: 1px solid var(--gray-border);
+  }
+
+  &__latest-posts-title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__latest-posts-cards > div {
+    width: 360px;
+    min-height: 70px;
+    background-color: $gray-ed;
+    box-shadow: var(--shadow-medium);
+  }
+
+  &__latest-posts-cards > div + div {
+    margin-top: 10px;
+  }
+
+}

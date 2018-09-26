@@ -1,0 +1,16 @@
+@import '~biplane-uikit/lib/variables.css';
+@import '~biplane-uikit/lib/colors.css';
+
+html, body, #root {
+    min-height: 100vh;
+}
+
+body {
+    font-family: var(--font-family);;
+    min-width: 1265px;
+    box-sizing: border-box;
+}
+
+#root {
+    @include df(column nowrap, stretch, space-between)
+}
