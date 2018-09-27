@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { numberFormatter } from "biplane-uikit";
 import style from "./style.scss";
 
-const ChannelCard = ({ photo, title, username, verified, members, likes, cost }) => (
+const ChannelCard = ({ photo, title, username, verified, members, likes, cost, tags }) => (
   <div className="channel-card">
     <div className="channel-card__status" />
     <div
@@ -25,6 +25,11 @@ const ChannelCard = ({ photo, title, username, verified, members, likes, cost })
         </div>
         <div className="channel-card__username">{username}</div>
       </Link>
+      <div className="channel-card__tags">
+        {tags.map(tag => (
+          <div className="channel-card__tag">{tag}</div>
+        ))}
+      </div>
     </div>
     <div className="channel-card__numbers">{numberFormatter(members)}</div>
     <div className="channel-card__numbers">{numberFormatter(likes)}</div>
