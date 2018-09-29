@@ -8,16 +8,16 @@ import RangeSlider from "../range-slider";
 import style from "./style.scss";
 
 class ChannelFilters extends React.Component {
-  onMembersChange = ({ max, min }) =>
+  onMembersChange = values =>
     this.props.onFiltersChange({
       ...this.props.filters,
-      members: [min, max],
+      members: values,
     });
 
-  onCostChange = ({ max, min }) =>
+  onCostChange = values =>
     this.props.onFiltersChange({
       ...this.props.filters,
-      cost: [min, max],
+      cost: values,
     });
 
   onPartneredChange = ({ target: { checked } }) =>
@@ -75,14 +75,14 @@ class ChannelFilters extends React.Component {
           label={intl.messages["channels.filters.subscribers"]}
           from={fromMembers}
           to={toMembers}
-          maxValue={10000}
+          maxValue={1000000}
           onChange={this.onMembersChange}
         />
         <RangeSlider
           label={intl.messages["channels.filters.cost"]}
           from={fromCost}
           to={toCost}
-          maxValue={10000}
+          maxValue={200000}
           onChange={this.onCostChange}
         />
         <div className="channel-filters__checkboxes">

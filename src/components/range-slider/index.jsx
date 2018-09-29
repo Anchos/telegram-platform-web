@@ -1,34 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InputRange from "react-input-range";
-import "react-input-range/lib/css/index.css";
+import { Range, Handle } from "rc-slider";
 import "./styles.scss";
+
+const Hand = ({ value, index, offset }) => (
+  <div className="rc-slider-handle-container" key={index} style={{ left: `${offset}%` }}>
+    <div className="rc-slider-handle-value">{value}</div>
+    <div className="rc-slider-handle" />
+  </div>
+);
 
 class RangeSlider extends React.Component {
   state = {
-    min: this.props.from,
-    max: this.props.to,
+    value: [this.props.from, this.props.to],
   };
 
-  completeChange = () => {
-    this.props.onChange(this.state);
-  };
+  completeChange = ([from, to]) =>
+    (this.props.from !== from || this.props.to !== to) && this.props.onChange([from, to]);
 
   onRangeChange = value => {
-    this.setState(value);
+    this.setState({ value });
   };
 
   render() {
-    const { label, maxValue } = this.props;
+    const { label, maxValue, from, to } = this.props;
+    const rangeValue = [from, to];
     return (
       <div className="input-range-container">
         <div className="input-range-container__label">{label}</div>
-        <InputRange
-          maxValue={maxValue}
-          minValue={0}
-          value={this.state}
-          onChange={this.onRangeChange}
-          onChangeComplete={this.completeChange}
+        <Range
+          max={maxValue}
+          min={0}
+          defaultValue={rangeValue}
+          onAfterChange={this.completeChange}
+          handle={Hand}
         />
       </div>
     );

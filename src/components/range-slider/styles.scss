@@ -1,3 +1,5 @@
+@import '~biplane-uikit/lib/colors.css';
+
 .input-range-container {
   flex-grow: 1;
   flex-shrink: 1;
@@ -8,54 +10,61 @@
   }
 }
 
-.input-range {
-  &__track {
-    &--background {
-      height: 2px;
-      background-color: #bababa;
-    }
-    &--active {
-      height: 2px;
-      background-color: #15ad56;
-    }
+.rc-slider {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  position: relative;
+  height: 30px;
+
+  &-rail {
+    height: 2px;
+    width: 100%;
+    background-color: var(--gray-border);
   }
 
-  &__slider {
-    width: 20px;
-    height: 20px;
-    background-color: rgba(21, 173, 86, 0.2);
-    border: solid 1px #0e9548;
-    border-radius: 50%;
-    position: relative;
-    transition: 0.3s all linear;
+  &-track {
+    position: absolute;
+    height: 2px;
+    background-color: var(--green-primary);
+  }
 
-    &:hover {
-      background-color: rgba(21, 173, 86, 0.3);
-    }
+  &-handle {
+    position: relative;
+    top: -12px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: rgba(21, 173, 86, 0.2);
+    margin-left: -8px;
+    border: 1px solid var(--green-primary);
+    outline: none;
+    cursor: pointer;
 
     &::after {
-      content: '';
-      display: block;
-      border-radius: 50%;
-      width: 6px;
-      height: 6px;
-      background-color: #15ad56;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  &__label {
-    &--value {
-      top: auto;
-      bottom: -1.8rem;
-      color: black;
+      top: 6px;
+      right: 6px;
+      content: ' ';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--green-primary);
     }
 
-    &--min, &--max {
-      display: none;
+    &-value {
+      position: relative;
+      bottom: -30px;
+      left: -50%;
+      background-color: #fff;
+      user-select: none;
+    }
+
+    &-container {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
+
