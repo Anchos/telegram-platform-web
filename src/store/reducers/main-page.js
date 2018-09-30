@@ -9,6 +9,7 @@ const initialValues = {
     mut_promo: false,
     verified: false,
     partner: false,
+    order: '-members'
   },
   channels: {
     items: [],

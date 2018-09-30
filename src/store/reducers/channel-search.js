@@ -9,7 +9,8 @@ const initialValues = {
     likes: [0, 10000],
     mut_promo: false,
     verified: false,
-    partner: false
+    partner: false,
+    order: '-members'
   },
   channels: {
     items: [],

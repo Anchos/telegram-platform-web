@@ -96,12 +96,7 @@
     outline: none;
     transition: width 150ms linear;
 
-    &:focus {
-      width: 100%;
-      border-bottom: 1px solid black;
-    }
-
-    &_active {
+    &:focus, &_active {
       width: 100%;
       border-bottom: 1px solid black;
     }

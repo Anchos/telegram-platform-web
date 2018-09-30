@@ -20,4 +20,22 @@
       margin-left: 20px;
     }
   }
+
+  &__table-header {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  &__order-name {
+    margin-left: 140px;
+    padding-left: 16px;
+    width: 60%;
+  }
+
+  &__order-numbers {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

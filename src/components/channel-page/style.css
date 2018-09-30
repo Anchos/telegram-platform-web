@@ -2,7 +2,6 @@
 @import '~biplane-uikit/lib/colors.css';
 
 .channel-page__container {
-  font-family: var(--font-family);
   display: flex;
   justify-content: center;
   padding-top: 40px;

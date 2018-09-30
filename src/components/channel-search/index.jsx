@@ -50,12 +50,6 @@ class ChannelSearch extends React.Component {
             <Loader centered size="large" />
           ) : channels.length > 0 ? (
             <React.Fragment>
-              <div className="channel-search__table-header">
-                <div className="channel-search__name">{intl.messages["channel.name"]}</div>
-                <div className="channel-search__numbers">{intl.messages["channel.followers"]}</div>
-                <div className="channel-search__numbers">{intl.messages["channel.likes"]}</div>
-                <div className="channel-search__numbers">{intl.messages["channel.cost"]}</div>
-              </div>
               {channels.map(channel => (
                 <ChannelCard key={channel.id} {...channel} />
               ))}

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { injectIntl, intlShape } from "react-intl";
 import PropTypes from "prop-types";
 import { Select, Checkbox } from "biplane-uikit";
-import SearchOverlay from "../search-overlay";
 import ChannelCard from "../channel-card";
 import Paginator from "../paginator";
 import Loader from "../loader";
@@ -48,12 +47,6 @@ class ChannelsMain extends React.Component {
           </div>
         ) : channels.length > 0 ? (
           <React.Fragment>
-            <div className="channels-main__table-header">
-              <div className="channels-main__name">{intl.messages["channel.name"]}</div>
-              <div className="channels-main__numbers">{intl.messages["channel.followers"]}</div>
-              <div className="channels-main__numbers">{intl.messages["channel.likes"]}</div>
-              <div className="channels-main__numbers">{intl.messages["channel.cost"]}</div>
-            </div>
             {channels.map(channel => (
               <ChannelCard key={channel.id} {...channel} />
             ))}

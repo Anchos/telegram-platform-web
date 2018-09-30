@@ -1,0 +1,37 @@
+@import '~biplane-uikit/lib/colors.css';
+@import '~biplane-uikit/lib/variables.css';
+
+.sort-order-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-color);
+
+  &:hover {
+    color: var(--green-primary);
+  }
+
+  &_active {
+    color: var(--green-primary);
+  }
+
+  &__indicator {
+    position: absolute;
+    left: -15px;
+    top: 9px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    &_asc {
+      border-bottom: 7px solid var(--green-primary);
+    }
+
+    &_desc {
+      border-top: 7px solid var(--green-primary);
+    }
+  }
+}
