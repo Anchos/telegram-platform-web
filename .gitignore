@@ -131,3 +131,4 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 .cache
+.env

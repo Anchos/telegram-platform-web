@@ -5,6 +5,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
     "build": "cross-env rimraf dist && NODE_ENV=production webpack",
     "build:analyze": "cross-env rimraf dist && NODE_ENV=production ANALYZE_MODE=analyze webpack"
@@ -45,6 +46,7 @@
   "dependencies": {
     "biplane-uikit": "^0.3.4",
     "class-names": "^1.0.0",
+    "dotenv-webpack": "^1.5.7",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",
     "rc-slider": "^8.6.3",

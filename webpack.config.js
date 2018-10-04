@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   mode: process.env.NODE_ENV || "development",
@@ -14,7 +15,8 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
-    })
+    }),
+    new Dotenv({ systemvars: true }),
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),

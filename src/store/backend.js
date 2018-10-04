@@ -1,6 +1,6 @@
 import { Socket } from "./socket";
 
-export const socket = new Socket("wss://ws.recursion.ga/client");
+export const socket = new Socket(process.env.SOCKET_ENDPOINT);
 socket.connect();
 
 export const getSession = session_id =>
